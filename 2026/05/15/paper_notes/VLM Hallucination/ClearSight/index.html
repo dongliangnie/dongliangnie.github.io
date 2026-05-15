@@ -23,7 +23,7 @@
 
 <!--end mete-->
 <!--begin keywords-->
-<meta name="keywords" content="VLM Hallucination"/>
+<meta name="keywords" content="VLM Hallucination,VLM Pruner"/>
 <!--end keywords-->
 <!--begin rss-->
 
@@ -196,7 +196,7 @@
                         <i class="fh fh-cubes" aria-hidden="true"></i> Category
                     </dt>
                     <dd class="menu-content-content animated zoomIn">
-                        <ul class="menu-cate-list"><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/paper-notes/"><i class="fh fh-cube" aria-hidden="true"></i> paper_notes</a><span class="menu-cate-list-count">3</span><ul class="menu-cate-list-child"><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/paper-notes/vlm-llm/"><i class="fh fh-cube" aria-hidden="true"></i> VLM/LLM</a><span class="menu-cate-list-count">3</span></li></ul></li></ul>
+                        <ul class="menu-cate-list"><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/paper-notes/"><i class="fh fh-cube" aria-hidden="true"></i> paper_notes</a><span class="menu-cate-list-count">4</span><ul class="menu-cate-list-child"><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/paper-notes/vlm-llm/"><i class="fh fh-cube" aria-hidden="true"></i> VLM/LLM</a><span class="menu-cate-list-count">4</span></li></ul></li></ul>
                     </dd>
                 </dl>
                 <dl class="col-md-6 col-xs-6 menu-content-item">
@@ -204,7 +204,7 @@
                         <i class="fh fh-tag" aria-hidden="true"></i> Tags
                     </dt>
                     <dd class="menu-content-content animated zoomIn">
-                        <ul class="menu-tag-list" itemprop="keywords"><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/vlm-hallucination/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> VLM Hallucination</a><span class="menu-tag-list-count">3</span></li></ul>
+                        <ul class="menu-tag-list" itemprop="keywords"><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/vlm-hallucination/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> VLM Hallucination</a><span class="menu-tag-list-count">3</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/vlm-pruner/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> VLM Pruner</a><span class="menu-tag-list-count">1</span></li></ul>
                     </dd>
                 </dl>
             </div>
@@ -240,7 +240,7 @@
     <input placeholder="Search ..." onkeyup="searchFunc(this,event,'/search.xml')"
            class="input-search animated fadeInRight"/>
     <div class="search-result animated fadeInRight">
-        <a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/paper_notes/ONLY/">ONLY: One-Layer Intervention Sufficiently Mitigates Hallucinations in  Large Vision-Language Models</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/paper_notes/Self-Aug-Query-and-Entropy-Adaptive-Decoding-for-Large-Vision-Language-Models/">Self-Aug: Query and Entropy Adaptive Decoding for Large Vision-Language Models</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/paper_notes/ClearSight/">ClearSight: Visual Signal Enhancement for Object Hallucination Mitigation in  Multimodal Large Language Models</a>
+        <a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/paper_notes/VLM%20Hallucination/Self-Aug/">Self-Aug: Query and Entropy Adaptive Decoding for Large Vision-Language Models</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/paper_notes/VLM%20Hallucination/ONLY/">ONLY: One-Layer Intervention Sufficiently Mitigates Hallucinations in  Large Vision-Language Models</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/paper_notes/VLM%20Hallucination/ClearSight/">ClearSight: Visual Signal Enhancement for Object Hallucination Mitigation in  Multimodal Large Language Models</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/paper_notes/VLM%20Pruner/V2Drop/">Variation-aware Vision Token Dropping for Faster Large Vision-Language Models </a><a class="animated tada col-lg-12 search-result-item result-link" href="/1970/01/01/paper_notes/VLM%20Hallucination/VACoDe/">paper_notes/VLM Hallucination/VACoDe</a>
     </div>
 </div>
     </div>
@@ -288,20 +288,20 @@
 <li>发表：CVPR 2025</li>
 </ul>
 </blockquote>
-<h3 id="一段话"><a class="markdownIt-Anchor" href="#一段话"></a> 一段话</h3>
+<h1 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h1>
 <p>该研究指出，现有用于缓解对象幻觉的对比解码方法虽然能够通过削弱语言先验来提升生成内容对视觉输入的依赖，但也存在两个明显问题：一是容易牺牲生成内容的连贯性与准确性，二是需要额外处理对比输入，显著拖慢推理速度。为此，作者提出了一种无需额外训练、可即插即用的推理阶段方法Visual Amplification Fusion（VAF）。不同于直接压制语言先验，VAF从多模态融合机制出发，发现幻觉的根源并非语言信号过强，而是模型在中间融合层对视觉信息关注不足，因此通过在中间层增强视觉信号，引导模型更充分地捕捉关键视觉特征，从而减少错误描述。实验结果表明，VAF能在多个对象幻觉评测基准上显著降低幻觉，同时基本不影响推理速度，并保持生成内容的连贯性和准确性，展现出较强的实用价值与推广潜力。</p>
-<h3 id="现有方法的问题"><a class="markdownIt-Anchor" href="#现有方法的问题"></a> 现有方法的问题</h3>
+<h2 id="现有方法的问题"><a class="markdownIt-Anchor" href="#现有方法的问题"></a> 现有方法的问题</h2>
 <p>现有用于缓解对象幻觉的对比解码方法(VCD,ICD)虽然能够通过削弱语言先验来提升生成内容对视觉输入的依赖，但也存在两个明显问题：</p>
 <ul>
 <li>是容易牺牲生成内容的连贯性与准确性</li>
 <li>是需要额外处理对比输入，显著拖慢推理速度</li>
 </ul>
-<h3 id="动机"><a class="markdownIt-Anchor" href="#动机"></a> 动机</h3>
+<h1 id="动机"><a class="markdownIt-Anchor" href="#动机"></a> 动机</h1>
 <ul>
 <li>模型在中间层执行视觉和文本模态的关键融合，创建驱动最终预测的跨模态语义表示。</li>
 <li>在这一关键融合过程中，模型对视觉模态的关注不足。这些发现表明，模型未能充分利用视觉信息，导致过度依赖语言先验，从而产生幻觉现象。</li>
 </ul>
-<h3 id="qa"><a class="markdownIt-Anchor" href="#qa"></a> QA</h3>
+<h1 id="qa"><a class="markdownIt-Anchor" href="#qa"></a> QA</h1>
 <blockquote>
 <p>Attention map和Saliency map在数学上的区别是显而易见的，但是Saliency真正的内涵是什么呢?为什么Saliency不直接是Loss Function对注意力矩阵的导数，而是还要乘上一个Attention Matrix?</p>
 <p>Saliency Map 的内涵：为什么是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>⋅</mo><mfrac><mrow><mi mathvariant="normal">∂</mi><mi>L</mi></mrow><mrow><mi mathvariant="normal">∂</mi><mi>A</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">A \cdot \frac{\partial L}{\partial A}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.2251079999999999em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8801079999999999em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight" style="margin-right:0.05556em;">∂</span><span class="mord mathnormal mtight">A</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight" style="margin-right:0.05556em;">∂</span><span class="mord mathnormal mtight">L</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>？</p>
@@ -350,26 +350,30 @@ Saliency 的内涵就是：<strong>在当前模型状态下，每个注意力连
 </blockquote>
 
 </article>
-<ol class="animated rollIn hannah-toc"><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-3"><a class="animated rollIn hannah-toc-link" href="#%E4%B8%80%E6%AE%B5%E8%AF%9D"><span class="animated rollIn hannah-toc-text"> 一段话</span></a></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-3"><a class="animated rollIn hannah-toc-link" href="#%E7%8E%B0%E6%9C%89%E6%96%B9%E6%B3%95%E7%9A%84%E9%97%AE%E9%A2%98"><span class="animated rollIn hannah-toc-text"> 现有方法的问题</span></a></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-3"><a class="animated rollIn hannah-toc-link" href="#%E5%8A%A8%E6%9C%BA"><span class="animated rollIn hannah-toc-text"> 动机</span></a></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-3"><a class="animated rollIn hannah-toc-link" href="#qa"><span class="animated rollIn hannah-toc-text"> QA</span></a></li></ol>
+<ol class="animated rollIn hannah-toc"><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-1"><a class="animated rollIn hannah-toc-link" href="#%E6%80%BB%E7%BB%93"><span class="animated rollIn hannah-toc-text"> 总结</span></a><ol class="animated rollIn hannah-toc-child"><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-2"><a class="animated rollIn hannah-toc-link" href="#%E7%8E%B0%E6%9C%89%E6%96%B9%E6%B3%95%E7%9A%84%E9%97%AE%E9%A2%98"><span class="animated rollIn hannah-toc-text"> 现有方法的问题</span></a></li></ol></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-1"><a class="animated rollIn hannah-toc-link" href="#%E5%8A%A8%E6%9C%BA"><span class="animated rollIn hannah-toc-text"> 动机</span></a></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-1"><a class="animated rollIn hannah-toc-link" href="#qa"><span class="animated rollIn hannah-toc-text"> QA</span></a></li></ol>
 <div class="animated bounceInDown paginations">
     <div class="col-md-8 col-md-push-2 col-xs-12">
         <nav>
             
-            <a href="/2026/05/15/paper_notes/Self-Aug-Query-and-Entropy-Adaptive-Decoding-for-Large-Vision-Language-Models/" class="prev col-md-2 col-xs-4 text-left">&larr; Prev</a>
+            <a href="/2026/05/15/paper_notes/VLM%20Hallucination/ONLY/" class="prev col-md-2 col-xs-4 text-left">&larr; Prev</a>
             
             <span
                 class="page-content col-md-8  col-xs-4 text-center">
                 
             </span>
             
+            <a href="/2026/05/15/paper_notes/VLM%20Pruner/V2Drop/" class="next col-md-2 col-xs-4 text-right">Next &rarr;</a>
+            
         </nav>
         <div>
             <div class="col-md-6 col-xs-6 text-left">
                 
-                Self-Aug: Query and Entropy Adaptive Decoding for Large Vision-Language Models
+                ONLY: One-Layer Intervention Sufficiently Mitigates Hallucinations in  Large Vision-Language Models
                 
             </div>
             <div class="col-md-6 col-xs-6 text-right">
+                
+                Variation-aware Vision Token Dropping for Faster Large Vision-Language Models 
                 
             </div>
         </div>
