@@ -1,0 +1,378 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!--begin head-->
+
+<head>
+    <meta charset="utf-8">
+<!--begin title-->
+
+<title>
+    
+    Reproduce Seeing Clearly by Layer Two: Enhancing Attention Heads to Alleviate  Hallucination in LVLMs |
+    
+    纸笔</title>
+<!--end title-->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<!--begin mete-->
+
+<meta name="description" content="个人学习笔记与思考"/>
+
+<meta name="author" content="dongliangnie"/>
+
+<!--end mete-->
+<!--begin keywords-->
+<meta name="keywords" content="Hexo,Pytorch,VLM Hallucination,VLM Pruner"/>
+<!--end keywords-->
+<!--begin rss-->
+
+<link rel="alternate" href="/atom.xml" title="纸笔" type="application/atom+xml">
+
+<!--end rss-->
+<!--begin favicon-->
+
+<link rel="icon" href="/favicon.ico">
+
+<!--end favicon-->
+<!--begin style-->
+
+<!-- stylesheets list from config.yml -->
+
+<link rel="stylesheet" href="/css/hannah.css">
+
+
+<!--end style-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<meta name="generator" content="Hexo 8.1.2"></head>
+<!--end head-->
+<!--begin body-->
+
+<body class="container-fluid">
+
+    <!--begin menu-->
+    <div class="hannah-menu">
+    <i class="fh fh-ravelry fa-2x btn fixed-menu animated bounce" id="btn_menu" aria-hidden="true"></i>
+    <div class="menu-outer container-fluid hide animated" id="div_menu">
+        <div class="row" style="margin-bottom: 5px;">
+            
+            <div class="col-md-offset-2 col-md-3 col-xs-4 text-center left-social">
+                
+                <a target="_blank" href="https://github.com/dongliangnie" title="GitHub"><i class="fh fh-github"></i></a>
+                
+                <style>
+                    .left-social {
+                        height: 132px;
+                        line-height: 132px;
+                        font-size: 66px;
+                    }
+
+                    .left-social * {
+                        color: #f1ce8e;
+                    }
+
+                    @media (max-width: 767px) {
+                        .left-social {
+                            line-height: 132px;
+                            font-size: 33px;
+                        }
+                    }
+                </style>
+            </div>
+            <!--begin handImg-->
+            <div class="col-md-2 col-xs-4 text-center">
+                
+                <img src="/img/kapibala.jpg" alt="Head Image" class="img-circle">
+                
+            </div>
+            <!--end handImg-->
+            <div class="col-md-3 col-xs-4 text-center right-social">
+                
+                <style>
+                    .right-social {
+                        height: 132px;
+                        line-height: 132px;
+                        font-size: 66px;
+                    }
+
+                    @media (max-width: 767px) {
+                        .right-social {
+                            line-height: 132px;
+                            font-size: 33px;
+                        }
+                    }
+
+                    .right-social * {
+                        color: #f1ce8e;
+                    }
+                </style>
+            </div>
+        </div>
+        <div class="row">
+            <div class="menu-content col-md-8 col-md-push-2 col-xs-12 ">
+                <dl class="menu-content-item">
+                    <dt class="menu-content-title">
+                        <i class="fh fh-bars" aria-hidden="true"></i> Menu
+                    </dt>
+                    <dd class="menu-content-content">
+                        
+                        <div class="col-md-4 col-xs-6 col-sm-4 text-center animated tada">
+                            <a href="/" class="btn btn-block">
+                                
+                                <i class="fh fh-ravelry"></i>
+                                Home
+                            </a>
+                        </div>
+                        
+                        <div class="col-md-4 col-xs-6 col-sm-4 text-center animated tada">
+                            <a href="/categories" class="btn btn-block">
+                                
+                                <i class="fh fh-cubes"></i>
+                                Category
+                            </a>
+                        </div>
+                        
+                        <div class="col-md-4 col-xs-6 col-sm-4 text-center animated tada">
+                            <a href="/tags" class="btn btn-block">
+                                
+                                <i class="fh fh-tags"></i>
+                                Tag
+                            </a>
+                        </div>
+                        
+                        <div class="col-md-4 col-xs-6 col-sm-4 text-center animated tada">
+                            <a href="/archives" class="btn btn-block">
+                                
+                                <i class="fh fh-archive"></i>
+                                Archives
+                            </a>
+                        </div>
+                        
+                        <div class="col-md-4 col-xs-6 col-sm-4 text-center animated tada">
+                            <a href="/about" class="btn btn-block">
+                                
+                                <i class="fh fh-about"></i>
+                                About
+                            </a>
+                        </div>
+                        
+                        <div class="col-md-4 col-xs-6 col-sm-4 text-center animated tada">
+                            <a href="/doc" class="btn btn-block">
+                                
+                                <i class="fh fh-document"></i>
+                                Doc
+                            </a>
+                        </div>
+                        
+                        <div class="col-md-4 col-xs-6 col-sm-4 text-center animated tada">
+                            <a href="/plug" class="btn btn-block">
+                                
+                                <i class="fh fh-plug"></i>
+                                Plug
+                            </a>
+                        </div>
+                        
+                        <div class="col-md-4 col-xs-6 col-sm-4 text-center animated tada">
+                            <a href="/sitemap" class="btn btn-block">
+                                
+                                <i class="fh fh-sitemap"></i>
+                                SiteMap
+                            </a>
+                        </div>
+                        
+                        <div class="col-md-4 col-xs-6 col-sm-4 text-center animated tada">
+                            <a href="/atom.xml" class="btn btn-block">
+                                <i class="fh fh-rss" aria-hidden="true"></i> RSS
+                            </a>
+                        </div>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <div class="row">
+            <div class="menu-content col-md-8 col-md-offset-2 col-xs-12 ">
+                <dl class="col-md-6 col-xs-6 menu-content-item">
+                    <dt class="menu-content-title">
+                        <i class="fh fh-cubes" aria-hidden="true"></i> Category
+                    </dt>
+                    <dd class="menu-content-content animated zoomIn">
+                        <ul class="menu-cate-list"><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/paper-notes/"><i class="fh fh-cube" aria-hidden="true"></i> paper_notes</a><span class="menu-cate-list-count">5</span><ul class="menu-cate-list-child"><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/paper-notes/vlm-llm/"><i class="fh fh-cube" aria-hidden="true"></i> VLM/LLM</a><span class="menu-cate-list-count">5</span></li></ul></li><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/reproduce/"><i class="fh fh-cube" aria-hidden="true"></i> reproduce</a><span class="menu-cate-list-count">1</span><ul class="menu-cate-list-child"><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/reproduce/vlm-llm/"><i class="fh fh-cube" aria-hidden="true"></i> VLM/LLM</a><span class="menu-cate-list-count">1</span></li></ul></li><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/tools/"><i class="fh fh-cube" aria-hidden="true"></i> tools</a><span class="menu-cate-list-count">2</span></li></ul>
+                    </dd>
+                </dl>
+                <dl class="col-md-6 col-xs-6 menu-content-item">
+                    <dt class="menu-content-title">
+                        <i class="fh fh-tag" aria-hidden="true"></i> Tags
+                    </dt>
+                    <dd class="menu-content-content animated zoomIn">
+                        <ul class="menu-tag-list" itemprop="keywords"><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/Hexo/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> Hexo</a><span class="menu-tag-list-count">1</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/Pytorch/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> Pytorch</a><span class="menu-tag-list-count">1</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/vlm-hallucination/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> VLM Hallucination</a><span class="menu-tag-list-count">5</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/vlm-pruner/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> VLM Pruner</a><span class="menu-tag-list-count">1</span></li></ul>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
+    <!--end menu-->
+
+    <div class="row hannah-body">
+        <div class="col-md-8 col-md-push-2 col-xs-12">
+            <!--begin breadcrumb-->
+            <div class="bread-crumb">
+    <ul class="bread-crumb-menu animated rubberBand">
+        <li><a href="/"><i class="fh fh-ravelry" aria-hidden="true"></i> Home</a></li>
+        
+        <li><a href="/categories/reproduce/"><i class="fh fh-cube" aria-hidden="true"></i> reproduce</a>
+        </li>
+        
+        <li><a href="/categories/reproduce/vlm-llm/"><i class="fh fh-cube" aria-hidden="true"></i> VLM/LLM</a>
+        </li>
+        
+        <li>
+            
+            <i class="fh fh-newspaper-o" aria-hidden="true"></i>
+            
+            Reproduce Seeing Clearly by Layer Two: Enhancing Attention Heads to Alleviate  Hallucination in LVLMs
+        </li>
+        
+    </ul>
+    <div class="bread-crumb-search">
+        <div class="search">
+    <i class="fh fh-search icon-search"></i>
+    <input placeholder="Search ..." onkeyup="searchFunc(this,event,'/search.xml')"
+           class="input-search animated fadeInRight"/>
+    <div class="search-result animated fadeInRight">
+        <a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/reproduct/EAH/">Reproduce Seeing Clearly by Layer Two: Enhancing Attention Heads to Alleviate  Hallucination in LVLMs</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/tools/hexo/">Hexo</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/paper_notes/VLM%20Hallucination/ClearSight/">ClearSight: Visual Signal Enhancement for Object Hallucination Mitigation in  Multimodal Large Language Models</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/tools/pytorch/">Pytorch 常用API</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/paper_notes/VLM%20Hallucination/EAH/">Seeing Clearly by Layer Two: Enhancing Attention Heads to Alleviate  Hallucination in LVLMs</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/paper_notes/VLM%20Pruner/V2Drop/">Variation-aware Vision Token Dropping for Faster Large Vision-Language Models </a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/paper_notes/VLM%20Hallucination/ONLY/">ONLY: One-Layer Intervention Sufficiently Mitigates Hallucinations in  Large Vision-Language Models</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/paper_notes/VLM%20Hallucination/Self-Aug/">Self-Aug: Query and Entropy Adaptive Decoding for Large Vision-Language Models</a>
+    </div>
+</div>
+    </div>
+</div>
+            <!--end breadcrumb-->
+            <!--begin body-->
+            <article class="post animated rollIn">
+    <h1 class="post-title">Reproduce Seeing Clearly by Layer Two: Enhancing Attention Heads to Alleviate  Hallucination in LVLMs</h1>
+    <div class="post-subtitle">
+        
+        <time datetime="2026-05-14T16:00:00.000Z" class="item">
+            <i class="fh fh-calendar" aria-hidden="true"></i>&nbsp;&nbsp;2026-05-15
+        </time>
+        
+        
+        <span class="item">
+      <i class="fh fh-cubes" aria-hidden="true"></i>&nbsp;
+            
+            <a class="label label-primary tags" href="/categories/reproduce/">
+           <i class="fh fh-cube" aria-hidden="true"></i>&nbsp;reproduce
+        </a>
+            
+            <a class="label label-primary tags" href="/categories/reproduce/vlm-llm/">
+           <i class="fh fh-cube" aria-hidden="true"></i>&nbsp;VLM/LLM
+        </a>
+            
+        </span>
+        
+        
+        <span class="item">
+        <i class="fh fh-tags" aria-hidden="true"></i>&nbsp;
+            
+            <a class="label label-info tags" href="/tags/vlm-hallucination/">
+            <i class="fh fh-tag" aria-hidden="true"></i>&nbsp;VLM Hallucination
+            </a>
+            
+        </span>
+        
+    </div>
+    
+    <h1 id="环境配置"><a class="markdownIt-Anchor" href="#环境配置"></a> 环境配置</h1>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda <span class="built_in">env</span> create -f environment.yml</span><br><span class="line">conda activate eah</span><br><span class="line">python -m pip install -e transformers-4.29.2</span><br></pre></td></tr></table></figure>
+<p>注意修改environment.yml尤其是<code>sklearn</code></p>
+<h1 id="数据集权重下载"><a class="markdownIt-Anchor" href="#数据集权重下载"></a> 数据集/权重下载</h1>
+<p>下载<code>MSCOCO 2014 dataset</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">wget http://images.cocodataset.org/zips/train2014.zip</span><br><span class="line">wget http://images.cocodataset.org/zips/val2014.zip</span><br><span class="line">wget http://images.cocodataset.org/annotations/annotations_trainval2014.zip</span><br><span class="line">unzip train2014.zip</span><br><span class="line">unzip val2014.zip</span><br><span class="line">unzip annotations_trainval2014.zip</span><br><span class="line"><span class="comment"># 创建软链接</span></span><br><span class="line"><span class="built_in">ln</span> -s /data/intern/ndl/MSCOCO2014 ./coco_2014</span><br></pre></td></tr></table></figure>
+<p>下载<code>llava-v1.5-7b</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> HF_ENDPOINT=https://hf-mirror.com</span><br><span class="line">python -c <span class="string">&quot;from huggingface_hub import snapshot_download; snapshot_download(repo_id=&#x27;liuhaotian/llava-v1.5-7b&#x27;, local_dir=&#x27;llava-v1.5-7b&#x27;, local_dir_use_symlinks=False, resume_download=True)&quot;</span></span><br></pre></td></tr></table></figure>
+<p>注意修改<code>llava-v1.5-7b</code>权重路径</p>
+<p>在<code>eval_config\llava-1.5_eval.yml</code></p>
+<h1 id="复现结果"><a class="markdownIt-Anchor" href="#复现结果"></a> 复现结果</h1>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">python pope_eval.py --model llava-<span class="number">1.5</span> --data_path ./coco_2014/val2014 --pope-<span class="built_in">type</span> random --gpu-<span class="built_in">id</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">TP      FP      TN      FN</span><br><span class="line"><span class="number">1332</span>    <span class="number">141</span>     <span class="number">1269</span>    <span class="number">168</span></span><br><span class="line">Accuracy: <span class="number">0.8938144329896908</span></span><br><span class="line">Precision: <span class="number">0.9042769857433809</span></span><br><span class="line">Recall: <span class="number">0.888</span></span><br><span class="line">F1 score: <span class="number">0.8960645812310797</span></span><br><span class="line">Yes ratio: <span class="number">0.5061855670103093</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">python pope_eval.py --model llava-1.5 --data_path ./coco_2014/val2014 --pope-type popular --gpu-id 0</span><br><span class="line"></span><br><span class="line">TP      FP      TN      FN</span><br><span class="line">1333    256     1244    167</span><br><span class="line">Accuracy: 0.859</span><br><span class="line">Precision: 0.8388923851478918</span><br><span class="line">Recall: 0.8886666666666667</span><br><span class="line">F1 score: 0.8630624797669149</span><br><span class="line">Yes ratio: 0.5296666666666666</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">python pope_eval.py --model llava-1.5 --data_path ./coco_2014/val2014 --pope-type adversarial --gpu-id 1</span><br><span class="line"></span><br><span class="line">TP      FP      TN      FN</span><br><span class="line">1333    463     1037    167</span><br><span class="line">Accuracy: 0.79</span><br><span class="line">Precision: 0.7422048997772829</span><br><span class="line">Recall: 0.8886666666666667</span><br><span class="line">F1 score: 0.8088592233009709</span><br><span class="line">Yes ratio: 0.5986666666666667</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python chair_eval.py --model llava-1.5 --data_path ./COCO_2014/val2014 --gpu-id 0 --beam 5 </span><br></pre></td></tr></table></figure>
+<h1 id="主要源码解读"><a class="markdownIt-Anchor" href="#主要源码解读"></a> 主要源码解读</h1>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">atten_process_cal</span>(<span class="params">attention_map</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    输入尺度: attention_map [Batch_Size, Head_Num, Total_Tokens, Total_Tokens]</span></span><br><span class="line"><span class="string">    在 Llama-7B/LLaVA 中，尺度通常为: [1, 32, 611, 611]</span></span><br><span class="line"><span class="string">    - 611 = 35 (System Prompt + Instruction) + 576 (Image Tokens)</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># --- 超参数设定 ---</span></span><br><span class="line">    <span class="comment"># THRES: 判定“视觉汇聚(Vision Sink)”的阈值。若某头对某图像Token的关注度超过此值，视为强特征头。</span></span><br><span class="line">    threshod = THRES </span><br><span class="line">    k = <span class="number">0</span>  <span class="comment"># 记录表现最好的 Head 索引 (0-31)</span></span><br><span class="line">    n = <span class="number">0</span>  <span class="comment"># 记录该 Head 触发阈值的次数（即它关注了多少个关键图像区域）</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 1. 遍历所有注意力头 (Head-wise Scanning)</span></span><br><span class="line">    <span class="keyword">for</span> HEAD_NUM <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">32</span>):</span><br><span class="line">        <span class="comment"># modified_head 尺度: [Total_Tokens, Total_Tokens] -&gt; [611, 611]</span></span><br><span class="line">        modified_head = attention_map[<span class="number">0</span>][HEAD_NUM]</span><br><span class="line">        device = modified_head.device</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># --- 尺度/索引定义 ---</span></span><br><span class="line">        <span class="comment"># LLaVA 1.5 默认使用 336x336 图片，经过 CLIP 后生成 24x24=576 个 Patch。</span></span><br><span class="line">        <span class="comment"># 加上前面的文本 Token（约35-36个），图像 Token 的起始位置大约在 36。</span></span><br><span class="line">        image_token_start_index = <span class="number">36</span> <span class="comment"># 图像特征在序列中的起点</span></span><br><span class="line">        image_token_end_index = <span class="number">611</span>  <span class="comment"># 图像特征在序列中的终点 (35 + 576)</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># torch.eye用于生成单位矩阵</span></span><br><span class="line">        <span class="comment"># 生成一个对角线全为 0 的掩码，排除“自注意力”（Token 对自己的关注），只看对其他 Token 的分配</span></span><br><span class="line">        mask = ~torch.eye(modified_head.size(<span class="number">0</span>), dtype=<span class="built_in">bool</span>).to(device)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># --- 核心判定逻辑 ---</span></span><br><span class="line">        <span class="comment"># 1. modified_head * mask: 消除对角线值。</span></span><br><span class="line">        <span class="comment"># 2. torch.sum(..., dim=0): 计算每个列（即每个被关注的 Token）收到的总权重。</span></span><br><span class="line">        <span class="comment"># 3. [image_token_start_index:image_token_end_index]: 只截取图像 Token 的部分 (576个)。</span></span><br><span class="line">        <span class="comment"># 4. / torch.arange(...): 归一化处理（防止因序列长度导致的权重偏置）。</span></span><br><span class="line">        <span class="comment"># 5. torch.where(... &gt; threshod): 找出关注度极高的“热点”区域。</span></span><br><span class="line">        indices = torch.nonzero(torch.where(</span><br><span class="line">            torch.<span class="built_in">sum</span>(modified_head * mask, dim=<span class="number">0</span>)[image_token_start_index:image_token_end_index] / </span><br><span class="line">            torch.arange(image_token_end_index, image_token_start_index, -<span class="number">1</span>).to(device) &gt; threshod, <span class="number">1</span>, <span class="number">0</span></span><br><span class="line">        ))</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 2. 优胜劣汰：寻找“最清醒”的头</span></span><br><span class="line">        <span class="comment"># 谁捕捉到的热点(indices)最多，说明谁对图像内容的感知最敏锐。</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(indices) &gt; n:</span><br><span class="line">            n = <span class="built_in">len</span>(indices)</span><br><span class="line">            k = HEAD_NUM</span><br><span class="line">            <span class="comment"># 拷贝这个最强头的注意力图副本 [611, 611]</span></span><br><span class="line">            copied_attention_map = copy.deepcopy(modified_head.detach())</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 容错处理：如果全都没有触发阈值，初始化一个全零图（虽然这会导致后续信号消失）</span></span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;copied_attention_map&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> <span class="built_in">locals</span>():</span><br><span class="line">            copied_attention_map = torch.zeros_like(attention_map[<span class="number">0</span>][<span class="number">0</span>]).to(device)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 3. 广播机制 (Broadcasting)</span></span><br><span class="line">    <span class="comment"># 如果找到了显著有效的头 (k &gt; 0)</span></span><br><span class="line">    <span class="keyword">if</span> k &gt; <span class="number">0</span>:</span><br><span class="line">        <span class="comment"># 将这一层所有的 32 个头，全部替换为第 k 个头的注意力分布。</span></span><br><span class="line">        <span class="keyword">for</span> HEAD_NUM <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">32</span>):</span><br><span class="line">            attention_map[<span class="number">0</span>][HEAD_NUM] = copied_attention_map</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> attention_map</span><br></pre></td></tr></table></figure>
+
+</article>
+<ol class="animated rollIn hannah-toc"><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-1"><a class="animated rollIn hannah-toc-link" href="#%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="animated rollIn hannah-toc-text"> 环境配置</span></a></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-1"><a class="animated rollIn hannah-toc-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E6%9D%83%E9%87%8D%E4%B8%8B%E8%BD%BD"><span class="animated rollIn hannah-toc-text"> 数据集&#x2F;权重下载</span></a></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-1"><a class="animated rollIn hannah-toc-link" href="#%E5%A4%8D%E7%8E%B0%E7%BB%93%E6%9E%9C"><span class="animated rollIn hannah-toc-text"> 复现结果</span></a></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-1"><a class="animated rollIn hannah-toc-link" href="#%E4%B8%BB%E8%A6%81%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB"><span class="animated rollIn hannah-toc-text"> 主要源码解读</span></a></li></ol>
+<div class="animated bounceInDown paginations">
+    <div class="col-md-8 col-md-push-2 col-xs-12">
+        <nav>
+            
+            <span
+                class="page-content col-md-8 col-md-offset-2 col-xs-offset-4 col-xs-4 text-center">
+                
+            </span>
+            
+            <a href="/2026/05/15/tools/hexo/" class="next col-md-2 col-xs-4 text-right">Next &rarr;</a>
+            
+        </nav>
+        <div>
+            <div class="col-md-6 col-xs-6 text-left">
+                
+            </div>
+            <div class="col-md-6 col-xs-6 text-right">
+                
+                Hexo
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!--end body-->
+            <!--begin comments-->
+            
+<div class="comments">
+    
+
+    
+    
+</div>
+
+
+            <!--end comments-->
+        </div>
+    </div>
+
+    <!--begin footer-->
+    <footer id="footer" class="footer animated fadeInUp hide">
+    <p><i class="copy">&copy;</i> 2026 <a href="https://dongliangnie.github.io">dongliangnie</a> All Right Reserved.</p>
+    <p>Powered by <a target="_blank" href="http://hexo.io" rel="external nofollow noopener">Hexo</a>. Theme by <a target="_blank" href="https://github.com/objectyan/hexo-theme-hannah" rel="external nofollow noopener">hannah</a></p>
+</footer>
+    <!--end footer-->
+
+    
+    <!-- scripts list from theme config.yml -->
+    
+    <script src="/js/hannah.js"></script>
+    
+    
+    <!--begin analytics-->
+    
+
+    <!--end analytics-->
+</body>
+<!--end body-->
+<!--begin canvas-nest-->
+<script>
+    var nesturl = "https://unpkg.com/canvas-nest.js/dist/canvas-nest.js";
+    var c = document.getElementsByTagName("body")[0] || document.body || document.documentElement;
+    var b = document.createElement("script");
+    b.setAttribute("type", "text/javascript");
+    b.setAttribute("src", nesturl);
+    b.setAttribute("color",
+        `${ Math.floor(Math.random()*256)},${ Math.floor(Math.random()*256)},${ Math.floor(Math.random()*256)}`);
+    b.setAttribute("opacity", Math.random());
+    b.setAttribute("count", parseInt((Math.random() * 500) || 99));
+    c.appendChild(b)
+</script>
+<!--end canvas-nest-->
+
+</html>
