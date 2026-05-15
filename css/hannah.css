@@ -3442,6 +3442,8 @@ pre .javascript .function {
   max-width: 100%;
   height: auto;
   border-radius: 3%;
+  display: block;
+  margin: 0 auto;
 }
 
 .time-line {
