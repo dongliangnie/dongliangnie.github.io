@@ -10,7 +10,7 @@
 
 <title>
     
-    ONLY: One-Layer Intervention Sufficiently Mitigates Hallucinations in  Large Vision-Language Models |
+    Seeing Clearly by Layer Two: Enhancing Attention Heads to Alleviate  Hallucination in LVLMs |
     
     纸笔</title>
 <!--end title-->
@@ -230,7 +230,7 @@
             
             <i class="fh fh-newspaper-o" aria-hidden="true"></i>
             
-            ONLY: One-Layer Intervention Sufficiently Mitigates Hallucinations in  Large Vision-Language Models
+            Seeing Clearly by Layer Two: Enhancing Attention Heads to Alleviate  Hallucination in LVLMs
         </li>
         
     </ul>
@@ -240,7 +240,7 @@
     <input placeholder="Search ..." onkeyup="searchFunc(this,event,'/search.xml')"
            class="input-search animated fadeInRight"/>
     <div class="search-result animated fadeInRight">
-        <a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/paper_notes/VLM%20Hallucination/ClearSight/">ClearSight: Visual Signal Enhancement for Object Hallucination Mitigation in  Multimodal Large Language Models</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/paper_notes/VLM%20Hallucination/EAH/">ONLY: One-Layer Intervention Sufficiently Mitigates Hallucinations in  Large Vision-Language Models</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/paper_notes/VLM%20Hallucination/ONLY/">ONLY: One-Layer Intervention Sufficiently Mitigates Hallucinations in  Large Vision-Language Models</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/paper_notes/VLM%20Pruner/V2Drop/">Variation-aware Vision Token Dropping for Faster Large Vision-Language Models </a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/paper_notes/VLM%20Hallucination/Self-Aug/">Self-Aug: Query and Entropy Adaptive Decoding for Large Vision-Language Models</a><a class="animated tada col-lg-12 search-result-item result-link" href="/1970/01/01/paper_notes/VLM%20Hallucination/VACoDe/">paper_notes/VLM Hallucination/VACoDe</a>
+        <a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/paper_notes/VLM%20Hallucination/EAH/">Seeing Clearly by Layer Two: Enhancing Attention Heads to Alleviate  Hallucination in LVLMs</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/paper_notes/VLM%20Hallucination/ClearSight/">ClearSight: Visual Signal Enhancement for Object Hallucination Mitigation in  Multimodal Large Language Models</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/paper_notes/VLM%20Hallucination/ONLY/">ONLY: One-Layer Intervention Sufficiently Mitigates Hallucinations in  Large Vision-Language Models</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/paper_notes/VLM%20Hallucination/Self-Aug/">Self-Aug: Query and Entropy Adaptive Decoding for Large Vision-Language Models</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/paper_notes/VLM%20Pruner/V2Drop/">Variation-aware Vision Token Dropping for Faster Large Vision-Language Models </a><a class="animated tada col-lg-12 search-result-item result-link" href="/1970/01/01/paper_notes/VLM%20Hallucination/VACoDe/">paper_notes/VLM Hallucination/VACoDe</a>
     </div>
 </div>
     </div>
@@ -248,7 +248,7 @@
             <!--end breadcrumb-->
             <!--begin body-->
             <article class="post animated rollIn">
-    <h1 class="post-title">ONLY: One-Layer Intervention Sufficiently Mitigates Hallucinations in  Large Vision-Language Models</h1>
+    <h1 class="post-title">Seeing Clearly by Layer Two: Enhancing Attention Heads to Alleviate  Hallucination in LVLMs</h1>
     <div class="post-subtitle">
         
         <time datetime="2026-05-14T16:00:00.000Z" class="item">
@@ -284,42 +284,65 @@
     <blockquote>
 <ul>
 <li>
-<p>Seeing Clearly by Layer Two: Enhancing Attention Heads to Alleviate  Hallucination in LVLMs</p>
+<p>论文标题：Seeing Clearly by Layer Two: Enhancing Attention Heads to Alleviate  Hallucination in LVLMs</p>
 </li>
 <li>
-<p>github:<a target="_blank" rel="noopener" href="https://github.com/itsqyh/Shallow-Focus-Deep-Fixes">itsqyh/Shallow-Focus-Deep-Fixes: [EMNLP 2025 Oral] 🎉 Shallow Focus, Deep Fixes: Enhancing Shallow Layers Vision Attention Sinks to Alleviate Hallucination in LVLMs</a></p>
+<p>github仓库：<a target="_blank" rel="noopener" href="https://github.com/itsqyh/Shallow-Focus-Deep-Fixes">itsqyh/Shallow-Focus-Deep-Fixes: [EMNLP 2025 Oral] 🎉 Shallow Focus, Deep Fixes: Enhancing Shallow Layers Vision Attention Sinks to Alleviate Hallucination in LVLMs</a></p>
 </li>
 <li>
-<p>期刊/会议：EMNLP2025 oral</p>
+<p>发表：EMNLP2025 oral</p>
 </li>
 </ul>
 </blockquote>
+<h1 id="预备知识"><a class="markdownIt-Anchor" href="#预备知识"></a> 预备知识</h1>
+<h2 id="skewness"><a class="markdownIt-Anchor" href="#skewness"></a> Skewness</h2>
+<p>偏度（Skewness）用于衡量一个分布相对于均值的非对称程度。与均值和方差分别描述数据的中心位置与离散程度不同，偏度进一步刻画了分布尾部（tail）的方向与形状。</p>
+<p>对于随机变量 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">x</span></span></span></span>，其偏度定义为：</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mrow><mi mathvariant="normal">S</mi><mi mathvariant="normal">k</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">w</mi><mi mathvariant="normal">n</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">s</mi><mi mathvariant="normal">s</mi></mrow><mo>=</mo><mfrac><mrow><mi mathvariant="double-struck">E</mi><mo stretchy="false">[</mo><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><mi>μ</mi><msup><mo stretchy="false">)</mo><mn>3</mn></msup><mo stretchy="false">]</mo></mrow><msup><mi>σ</mi><mn>3</mn></msup></mfrac></mrow><annotation encoding="application/x-tex"> \mathrm{Skewness}=
+
+\frac{\mathbb{E}[(x-\mu)^3]}{\sigma^3}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord"><span class="mord mathrm">S</span><span class="mord mathrm">k</span><span class="mord mathrm">e</span><span class="mord mathrm" style="margin-right:0.01389em;">w</span><span class="mord mathrm">n</span><span class="mord mathrm">e</span><span class="mord mathrm">s</span><span class="mord mathrm">s</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.177108em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.491108em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.740108em;"><span style="top:-2.9890000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathbb">E</span></span><span class="mopen">[</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathnormal">μ</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span class="mclose">]</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p>其中：</p>
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>μ</mi><mo>=</mo><mi mathvariant="double-struck">E</mi><mo stretchy="false">[</mo><mi>x</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">\mu = \mathbb{E}[x]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathnormal">μ</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathbb">E</span></span><span class="mopen">[</span><span class="mord mathnormal">x</span><span class="mclose">]</span></span></span></span> 表示均值；</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>σ</mi></mrow><annotation encoding="application/x-tex">\sigma</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span></span></span></span> 表示标准差；</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="double-struck">E</mi><mo stretchy="false">[</mo><mo>⋅</mo><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">\mathbb{E}[\cdot]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathbb">E</span></span><span class="mopen">[</span><span class="mord">⋅</span><span class="mclose">]</span></span></span></span> 表示数学期望。</li>
+</ul>
+<p>其中三阶中心矩 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><mi>μ</mi><msup><mo stretchy="false">)</mo><mn>3</mn></msup></mrow><annotation encoding="application/x-tex">(x-\mu)^3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathnormal">μ</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span></span></span> 能够保留偏移方向的信息，因此偏度不仅能够衡量偏离程度，还能区分分布是“左偏”还是“右偏”。</p>
+<p>通常：</p>
+<ul>
+<li>当 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">S</mi><mi mathvariant="normal">k</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">w</mi><mi mathvariant="normal">n</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">s</mi><mi mathvariant="normal">s</mi></mrow><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\mathrm{Skewness} &gt; 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.73354em;vertical-align:-0.0391em;"></span><span class="mord"><span class="mord mathrm">S</span><span class="mord mathrm">k</span><span class="mord mathrm">e</span><span class="mord mathrm" style="margin-right:0.01389em;">w</span><span class="mord mathrm">n</span><span class="mord mathrm">e</span><span class="mord mathrm">s</span><span class="mord mathrm">s</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> 时，分布呈右偏（right-skewed），即大部分样本集中在较小值区域，而右侧存在长尾；</li>
+<li>当 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">S</mi><mi mathvariant="normal">k</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">w</mi><mi mathvariant="normal">n</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">s</mi><mi mathvariant="normal">s</mi></mrow><mo>&lt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\mathrm{Skewness} &lt; 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.73354em;vertical-align:-0.0391em;"></span><span class="mord"><span class="mord mathrm">S</span><span class="mord mathrm">k</span><span class="mord mathrm">e</span><span class="mord mathrm" style="margin-right:0.01389em;">w</span><span class="mord mathrm">n</span><span class="mord mathrm">e</span><span class="mord mathrm">s</span><span class="mord mathrm">s</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> 时，分布呈左偏（left-skewed），即大部分样本集中在较大值区域，而左侧存在长尾；</li>
+<li>当 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">S</mi><mi mathvariant="normal">k</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">w</mi><mi mathvariant="normal">n</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">s</mi><mi mathvariant="normal">s</mi></mrow><mo>≈</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\mathrm{Skewness} \approx 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord"><span class="mord mathrm">S</span><span class="mord mathrm">k</span><span class="mord mathrm">e</span><span class="mord mathrm" style="margin-right:0.01389em;">w</span><span class="mord mathrm">n</span><span class="mord mathrm">e</span><span class="mord mathrm">s</span><span class="mord mathrm">s</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> 时，分布近似对称。</li>
+</ul>
+<h1 id="动机"><a class="markdownIt-Anchor" href="#动机"></a> 动机</h1>
+<p>作者首先定义了sink head：sink head 指的是一种大量注意力集中在少数token上的attention head，作者观察到幻觉发生常常伴随着浅层出现</p>
+<h1 id="与其他工作的关系"><a class="markdownIt-Anchor" href="#与其他工作的关系"></a> 与其他工作的关系</h1>
+<ul>
+<li>ClearSight：EAH不涉及到文本token和图像token之间的attention分配问题，只是关注image toke之间的attention分配</li>
+</ul>
 
 </article>
-
+<ol class="animated rollIn hannah-toc"><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-1"><a class="animated rollIn hannah-toc-link" href="#%E9%A2%84%E5%A4%87%E7%9F%A5%E8%AF%86"><span class="animated rollIn hannah-toc-text"> 预备知识</span></a><ol class="animated rollIn hannah-toc-child"><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-2"><a class="animated rollIn hannah-toc-link" href="#skewness"><span class="animated rollIn hannah-toc-text"> Skewness</span></a></li></ol></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-1"><a class="animated rollIn hannah-toc-link" href="#%E5%8A%A8%E6%9C%BA"><span class="animated rollIn hannah-toc-text"> 动机</span></a></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-1"><a class="animated rollIn hannah-toc-link" href="#%E4%B8%8E%E5%85%B6%E4%BB%96%E5%B7%A5%E4%BD%9C%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="animated rollIn hannah-toc-text"> 与其他工作的关系</span></a></li></ol>
 <div class="animated bounceInDown paginations">
     <div class="col-md-8 col-md-push-2 col-xs-12">
         <nav>
             
-            <a href="/2026/05/15/paper_notes/VLM%20Hallucination/ClearSight/" class="prev col-md-2 col-xs-4 text-left">&larr; Prev</a>
-            
             <span
-                class="page-content col-md-8  col-xs-4 text-center">
+                class="page-content col-md-8 col-md-offset-2 col-xs-offset-4 col-xs-4 text-center">
                 
             </span>
             
-            <a href="/2026/05/15/paper_notes/VLM%20Hallucination/ONLY/" class="next col-md-2 col-xs-4 text-right">Next &rarr;</a>
+            <a href="/2026/05/15/paper_notes/VLM%20Hallucination/ClearSight/" class="next col-md-2 col-xs-4 text-right">Next &rarr;</a>
             
         </nav>
         <div>
             <div class="col-md-6 col-xs-6 text-left">
                 
-                ClearSight: Visual Signal Enhancement for Object Hallucination Mitigation in  Multimodal Large Language Models
-                
             </div>
             <div class="col-md-6 col-xs-6 text-right">
                 
-                ONLY: One-Layer Intervention Sufficiently Mitigates Hallucinations in  Large Vision-Language Models
+                ClearSight: Visual Signal Enhancement for Object Hallucination Mitigation in  Multimodal Large Language Models
                 
             </div>
         </div>
