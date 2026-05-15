@@ -196,7 +196,7 @@
                         <i class="fh fh-cubes" aria-hidden="true"></i> Category
                     </dt>
                     <dd class="menu-content-content animated zoomIn">
-                        <ul class="menu-cate-list"><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/paper-notes/"><i class="fh fh-cube" aria-hidden="true"></i> paper_notes</a><span class="menu-cate-list-count">4</span><ul class="menu-cate-list-child"><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/paper-notes/vlm-llm/"><i class="fh fh-cube" aria-hidden="true"></i> VLM/LLM</a><span class="menu-cate-list-count">4</span></li></ul></li></ul>
+                        <ul class="menu-cate-list"><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/paper-notes/"><i class="fh fh-cube" aria-hidden="true"></i> paper_notes</a><span class="menu-cate-list-count">5</span><ul class="menu-cate-list-child"><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/paper-notes/vlm-llm/"><i class="fh fh-cube" aria-hidden="true"></i> VLM/LLM</a><span class="menu-cate-list-count">5</span></li></ul></li></ul>
                     </dd>
                 </dl>
                 <dl class="col-md-6 col-xs-6 menu-content-item">
@@ -204,7 +204,7 @@
                         <i class="fh fh-tag" aria-hidden="true"></i> Tags
                     </dt>
                     <dd class="menu-content-content animated zoomIn">
-                        <ul class="menu-tag-list" itemprop="keywords"><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/vlm-hallucination/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> VLM Hallucination</a><span class="menu-tag-list-count">3</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/vlm-pruner/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> VLM Pruner</a><span class="menu-tag-list-count">1</span></li></ul>
+                        <ul class="menu-tag-list" itemprop="keywords"><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/vlm-hallucination/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> VLM Hallucination</a><span class="menu-tag-list-count">4</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/vlm-pruner/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> VLM Pruner</a><span class="menu-tag-list-count">1</span></li></ul>
                     </dd>
                 </dl>
             </div>
@@ -240,7 +240,7 @@
     <input placeholder="Search ..." onkeyup="searchFunc(this,event,'/search.xml')"
            class="input-search animated fadeInRight"/>
     <div class="search-result animated fadeInRight">
-        <a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/paper_notes/VLM%20Hallucination/Self-Aug/">Self-Aug: Query and Entropy Adaptive Decoding for Large Vision-Language Models</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/paper_notes/VLM%20Hallucination/ONLY/">ONLY: One-Layer Intervention Sufficiently Mitigates Hallucinations in  Large Vision-Language Models</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/paper_notes/VLM%20Hallucination/ClearSight/">ClearSight: Visual Signal Enhancement for Object Hallucination Mitigation in  Multimodal Large Language Models</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/paper_notes/VLM%20Pruner/V2Drop/">Variation-aware Vision Token Dropping for Faster Large Vision-Language Models </a><a class="animated tada col-lg-12 search-result-item result-link" href="/1970/01/01/paper_notes/VLM%20Hallucination/VACoDe/">paper_notes/VLM Hallucination/VACoDe</a>
+        <a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/paper_notes/VLM%20Hallucination/ClearSight/">ClearSight: Visual Signal Enhancement for Object Hallucination Mitigation in  Multimodal Large Language Models</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/paper_notes/VLM%20Hallucination/EAH/">ONLY: One-Layer Intervention Sufficiently Mitigates Hallucinations in  Large Vision-Language Models</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/paper_notes/VLM%20Hallucination/ONLY/">ONLY: One-Layer Intervention Sufficiently Mitigates Hallucinations in  Large Vision-Language Models</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/paper_notes/VLM%20Pruner/V2Drop/">Variation-aware Vision Token Dropping for Faster Large Vision-Language Models </a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/paper_notes/VLM%20Hallucination/Self-Aug/">Self-Aug: Query and Entropy Adaptive Decoding for Large Vision-Language Models</a><a class="animated tada col-lg-12 search-result-item result-link" href="/1970/01/01/paper_notes/VLM%20Hallucination/VACoDe/">paper_notes/VLM Hallucination/VACoDe</a>
     </div>
 </div>
     </div>
@@ -290,17 +290,42 @@
 </blockquote>
 <h1 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h1>
 <p>该研究指出，现有用于缓解对象幻觉的对比解码方法虽然能够通过削弱语言先验来提升生成内容对视觉输入的依赖，但也存在两个明显问题：一是容易牺牲生成内容的连贯性与准确性，二是需要额外处理对比输入，显著拖慢推理速度。为此，作者提出了一种无需额外训练、可即插即用的推理阶段方法Visual Amplification Fusion（VAF）。不同于直接压制语言先验，VAF从多模态融合机制出发，发现幻觉的根源并非语言信号过强，而是模型在中间融合层对视觉信息关注不足，因此通过在中间层增强视觉信号，引导模型更充分地捕捉关键视觉特征，从而减少错误描述。实验结果表明，VAF能在多个对象幻觉评测基准上显著降低幻觉，同时基本不影响推理速度，并保持生成内容的连贯性和准确性，展现出较强的实用价值与推广潜力。</p>
-<h2 id="现有方法的问题"><a class="markdownIt-Anchor" href="#现有方法的问题"></a> 现有方法的问题</h2>
+<h1 id="现有方法的问题"><a class="markdownIt-Anchor" href="#现有方法的问题"></a> 现有方法的问题</h1>
 <p>现有用于缓解对象幻觉的对比解码方法(VCD,ICD)虽然能够通过削弱语言先验来提升生成内容对视觉输入的依赖，但也存在两个明显问题：</p>
-<ul>
-<li>是容易牺牲生成内容的连贯性与准确性</li>
-<li>是需要额外处理对比输入，显著拖慢推理速度</li>
-</ul>
+<h2 id="牺牲生成内容的连贯性与准确性"><a class="markdownIt-Anchor" href="#牺牲生成内容的连贯性与准确性"></a> 牺牲生成内容的连贯性与准确性</h2>
+<p><img src="https://cdn.jsdelivr.net/gh/dongliangnie/image/image/202605151121547.png" alt="image-20260515112151437" /></p>
+<h2 id="额外处理对比输入显著拖慢推理速度"><a class="markdownIt-Anchor" href="#额外处理对比输入显著拖慢推理速度"></a> 额外处理对比输入，显著拖慢推理速度</h2>
+<p><img src="https://cdn.jsdelivr.net/gh/dongliangnie/image/image/202605151121037.png" alt="image-20260515112127928" /></p>
 <h1 id="动机"><a class="markdownIt-Anchor" href="#动机"></a> 动机</h1>
 <ul>
 <li>模型在中间层执行视觉和文本模态的关键融合，创建驱动最终预测的跨模态语义表示。</li>
+</ul>
+<blockquote>
+<p>基于Saliency分析，Saliency定义为：</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>I</mi><mi>l</mi></msub><mo>=</mo><mrow><mo fence="true">∥</mo><munder><mo>∑</mo><mi>h</mi></munder><msub><mi>A</mi><mrow><mi>h</mi><mo separator="true">,</mo><mi>l</mi></mrow></msub><mo>⊙</mo><mfrac><mrow><mi mathvariant="normal">∂</mi><mi>L</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mrow><mi mathvariant="normal">∂</mi><msub><mi>A</mi><mrow><mi>h</mi><mo separator="true">,</mo><mi>l</mi></mrow></msub></mrow></mfrac><mo fence="true">∥</mo></mrow></mrow><annotation encoding="application/x-tex">I_l =
+\left\|
+\sum_h
+A_{h,l}
+\odot
+\frac{\partial L(x)}{\partial A_{h,l}}
+\right\|
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.07847em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:3.088078em;vertical-align:-1.3021129999999999em;"></span><span class="minner"><span class="mopen"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.785965em;"><span style="top:-1.355975em;"><span class="pstrut" style="height:2.606em;"></span><span class="delimsizinginner delim-size1"><span>∥</span></span></span><span style="top:-1.956975em;"><span class="pstrut" style="height:2.606em;"></span><span class="delimsizinginner delim-size1"><span>∥</span></span></span><span style="top:-2.557975em;"><span class="pstrut" style="height:2.606em;"></span><span class="delimsizinginner delim-size1"><span>∥</span></span></span><span style="top:-3.158975em;"><span class="pstrut" style="height:2.606em;"></span><span class="delimsizinginner delim-size1"><span>∥</span></span></span><span style="top:-3.184965em;"><span class="pstrut" style="height:2.606em;"></span><span class="delimsizinginner delim-size1"><span>∥</span></span></span><span style="top:-3.785965em;"><span class="pstrut" style="height:2.606em;"></span><span class="delimsizinginner delim-size1"><span>∥</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.250025em;"><span></span></span></span></span></span></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0500050000000005em;"><span style="top:-1.847887em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">h</span></span></span><span style="top:-3.050005em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.3021129999999999em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">h</span><span class="mpunct mtight">,</span><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⊙</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="margin-right:0.05556em;">∂</span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">h</span><span class="mpunct mtight">,</span><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="margin-right:0.05556em;">∂</span><span class="mord mathnormal">L</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.972108em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.785965em;"><span style="top:-1.355975em;"><span class="pstrut" style="height:2.606em;"></span><span class="delimsizinginner delim-size1"><span>∥</span></span></span><span style="top:-1.956975em;"><span class="pstrut" style="height:2.606em;"></span><span class="delimsizinginner delim-size1"><span>∥</span></span></span><span style="top:-2.557975em;"><span class="pstrut" style="height:2.606em;"></span><span class="delimsizinginner delim-size1"><span>∥</span></span></span><span style="top:-3.158975em;"><span class="pstrut" style="height:2.606em;"></span><span class="delimsizinginner delim-size1"><span>∥</span></span></span><span style="top:-3.184965em;"><span class="pstrut" style="height:2.606em;"></span><span class="delimsizinginner delim-size1"><span>∥</span></span></span><span style="top:-3.785965em;"><span class="pstrut" style="height:2.606em;"></span><span class="delimsizinginner delim-size1"><span>∥</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.250025em;"><span></span></span></span></span></span></span></span></span></span></span></span></p>
+<img src="https://cdn.jsdelivr.net/gh/dongliangnie/image/image/202605151122314.png" alt="image-20260515112255157" style="zoom:50%;" />
+<ul>
+<li>Intra-Visual Flow表示视觉token内部信息流</li>
+</ul>
+</blockquote>
+<ul>
 <li>在这一关键融合过程中，模型对视觉模态的关注不足。这些发现表明，模型未能充分利用视觉信息，导致过度依赖语言先验，从而产生幻觉现象。</li>
 </ul>
+<blockquote>
+<img src="https://cdn.jsdelivr.net/gh/dongliangnie/image/image/202605151129985.png" alt="image-20260515112949837" style="zoom:50%;" />
+</blockquote>
+<h1 id="方法"><a class="markdownIt-Anchor" href="#方法"></a> 方法</h1>
+<h2 id="注意力重分配"><a class="markdownIt-Anchor" href="#注意力重分配"></a> 注意力重分配</h2>
+<p><img src="https://cdn.jsdelivr.net/gh/dongliangnie/image/image/202605151132753.png" alt="image-20260515113207573" /></p>
+<h2 id="视觉感知约束"><a class="markdownIt-Anchor" href="#视觉感知约束"></a> 视觉感知约束</h2>
+<p><img src="https://cdn.jsdelivr.net/gh/dongliangnie/image/image/202605151133987.png" alt="image-20260515113334851" /></p>
 <h1 id="qa"><a class="markdownIt-Anchor" href="#qa"></a> QA</h1>
 <blockquote>
 <p>Attention map和Saliency map在数学上的区别是显而易见的，但是Saliency真正的内涵是什么呢?为什么Saliency不直接是Loss Function对注意力矩阵的导数，而是还要乘上一个Attention Matrix?</p>
@@ -348,32 +373,31 @@ Saliency 的内涵就是：<strong>在当前模型状态下，每个注意力连
 </ul>
 <p>为什么第一个结论的得出用saliency分析，第二个用的attention分析?</p>
 </blockquote>
+<h1 id="与其他工作的关系"><a class="markdownIt-Anchor" href="#与其他工作的关系"></a> 与其他工作的关系</h1>
+<h1 id="reference"><a class="markdownIt-Anchor" href="#reference"></a> Reference</h1>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/O6HH2zCGM0u1ohnVZEwHSA">基于视觉信号增强缓解多模态大语言模型幻觉</a></p>
 
 </article>
-<ol class="animated rollIn hannah-toc"><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-1"><a class="animated rollIn hannah-toc-link" href="#%E6%80%BB%E7%BB%93"><span class="animated rollIn hannah-toc-text"> 总结</span></a><ol class="animated rollIn hannah-toc-child"><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-2"><a class="animated rollIn hannah-toc-link" href="#%E7%8E%B0%E6%9C%89%E6%96%B9%E6%B3%95%E7%9A%84%E9%97%AE%E9%A2%98"><span class="animated rollIn hannah-toc-text"> 现有方法的问题</span></a></li></ol></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-1"><a class="animated rollIn hannah-toc-link" href="#%E5%8A%A8%E6%9C%BA"><span class="animated rollIn hannah-toc-text"> 动机</span></a></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-1"><a class="animated rollIn hannah-toc-link" href="#qa"><span class="animated rollIn hannah-toc-text"> QA</span></a></li></ol>
+<ol class="animated rollIn hannah-toc"><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-1"><a class="animated rollIn hannah-toc-link" href="#%E6%80%BB%E7%BB%93"><span class="animated rollIn hannah-toc-text"> 总结</span></a></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-1"><a class="animated rollIn hannah-toc-link" href="#%E7%8E%B0%E6%9C%89%E6%96%B9%E6%B3%95%E7%9A%84%E9%97%AE%E9%A2%98"><span class="animated rollIn hannah-toc-text"> 现有方法的问题</span></a><ol class="animated rollIn hannah-toc-child"><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-2"><a class="animated rollIn hannah-toc-link" href="#%E7%89%BA%E7%89%B2%E7%94%9F%E6%88%90%E5%86%85%E5%AE%B9%E7%9A%84%E8%BF%9E%E8%B4%AF%E6%80%A7%E4%B8%8E%E5%87%86%E7%A1%AE%E6%80%A7"><span class="animated rollIn hannah-toc-text"> 牺牲生成内容的连贯性与准确性</span></a></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-2"><a class="animated rollIn hannah-toc-link" href="#%E9%A2%9D%E5%A4%96%E5%A4%84%E7%90%86%E5%AF%B9%E6%AF%94%E8%BE%93%E5%85%A5%E6%98%BE%E8%91%97%E6%8B%96%E6%85%A2%E6%8E%A8%E7%90%86%E9%80%9F%E5%BA%A6"><span class="animated rollIn hannah-toc-text"> 额外处理对比输入，显著拖慢推理速度</span></a></li></ol></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-1"><a class="animated rollIn hannah-toc-link" href="#%E5%8A%A8%E6%9C%BA"><span class="animated rollIn hannah-toc-text"> 动机</span></a></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-1"><a class="animated rollIn hannah-toc-link" href="#%E6%96%B9%E6%B3%95"><span class="animated rollIn hannah-toc-text"> 方法</span></a><ol class="animated rollIn hannah-toc-child"><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-2"><a class="animated rollIn hannah-toc-link" href="#%E6%B3%A8%E6%84%8F%E5%8A%9B%E9%87%8D%E5%88%86%E9%85%8D"><span class="animated rollIn hannah-toc-text"> 注意力重分配</span></a></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-2"><a class="animated rollIn hannah-toc-link" href="#%E8%A7%86%E8%A7%89%E6%84%9F%E7%9F%A5%E7%BA%A6%E6%9D%9F"><span class="animated rollIn hannah-toc-text"> 视觉感知约束</span></a></li></ol></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-1"><a class="animated rollIn hannah-toc-link" href="#qa"><span class="animated rollIn hannah-toc-text"> QA</span></a></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-1"><a class="animated rollIn hannah-toc-link" href="#%E4%B8%8E%E5%85%B6%E4%BB%96%E5%B7%A5%E4%BD%9C%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="animated rollIn hannah-toc-text"> 与其他工作的关系</span></a></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-1"><a class="animated rollIn hannah-toc-link" href="#reference"><span class="animated rollIn hannah-toc-text"> Reference</span></a></li></ol>
 <div class="animated bounceInDown paginations">
     <div class="col-md-8 col-md-push-2 col-xs-12">
         <nav>
             
-            <a href="/2026/05/15/paper_notes/VLM%20Hallucination/ONLY/" class="prev col-md-2 col-xs-4 text-left">&larr; Prev</a>
-            
             <span
-                class="page-content col-md-8  col-xs-4 text-center">
+                class="page-content col-md-8 col-md-offset-2 col-xs-offset-4 col-xs-4 text-center">
                 
             </span>
             
-            <a href="/2026/05/15/paper_notes/VLM%20Pruner/V2Drop/" class="next col-md-2 col-xs-4 text-right">Next &rarr;</a>
+            <a href="/2026/05/15/paper_notes/VLM%20Hallucination/EAH/" class="next col-md-2 col-xs-4 text-right">Next &rarr;</a>
             
         </nav>
         <div>
             <div class="col-md-6 col-xs-6 text-left">
                 
-                ONLY: One-Layer Intervention Sufficiently Mitigates Hallucinations in  Large Vision-Language Models
-                
             </div>
             <div class="col-md-6 col-xs-6 text-right">
                 
-                Variation-aware Vision Token Dropping for Faster Large Vision-Language Models 
+                ONLY: One-Layer Intervention Sufficiently Mitigates Hallucinations in  Large Vision-Language Models
                 
             </div>
         </div>
