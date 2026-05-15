@@ -3439,7 +3439,8 @@ pre .javascript .function {
   margin-right: 3px;
 }
 .post img {
-  width: 100%;
+  max-width: 100%;
+  height: auto;
   border-radius: 3%;
 }
 
