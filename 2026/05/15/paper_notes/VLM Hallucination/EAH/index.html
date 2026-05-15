@@ -240,7 +240,7 @@
     <input placeholder="Search ..." onkeyup="searchFunc(this,event,'/search.xml')"
            class="input-search animated fadeInRight"/>
     <div class="search-result animated fadeInRight">
-        <a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/paper_notes/VLM%20Hallucination/Self-Aug/">Self-Aug: Query and Entropy Adaptive Decoding for Large Vision-Language Models</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/paper_notes/VLM%20Hallucination/ONLY/">ONLY: One-Layer Intervention Sufficiently Mitigates Hallucinations in  Large Vision-Language Models</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/paper_notes/VLM%20Hallucination/EAH/">Seeing Clearly by Layer Two: Enhancing Attention Heads to Alleviate  Hallucination in LVLMs</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/paper_notes/VLM%20Hallucination/ClearSight/">ClearSight: Visual Signal Enhancement for Object Hallucination Mitigation in  Multimodal Large Language Models</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/paper_notes/VLM%20Pruner/V2Drop/">Variation-aware Vision Token Dropping for Faster Large Vision-Language Models </a><a class="animated tada col-lg-12 search-result-item result-link" href="/1970/01/01/paper_notes/VLM%20Hallucination/VACoDe/">paper_notes/VLM Hallucination/VACoDe</a>
+        <a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/paper_notes/VLM%20Hallucination/ONLY/">ONLY: One-Layer Intervention Sufficiently Mitigates Hallucinations in  Large Vision-Language Models</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/paper_notes/VLM%20Hallucination/Self-Aug/">Self-Aug: Query and Entropy Adaptive Decoding for Large Vision-Language Models</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/paper_notes/VLM%20Hallucination/EAH/">Seeing Clearly by Layer Two: Enhancing Attention Heads to Alleviate  Hallucination in LVLMs</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/paper_notes/VLM%20Hallucination/ClearSight/">ClearSight: Visual Signal Enhancement for Object Hallucination Mitigation in  Multimodal Large Language Models</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/15/paper_notes/VLM%20Pruner/V2Drop/">Variation-aware Vision Token Dropping for Faster Large Vision-Language Models </a><a class="animated tada col-lg-12 search-result-item result-link" href="/1970/01/01/paper_notes/VLM%20Hallucination/VACoDe/">paper_notes/VLM Hallucination/VACoDe</a>
     </div>
 </div>
     </div>
@@ -358,6 +358,27 @@ r-k
 </ul>
 <p>在多个模型（LLaVA1.5、MiniGPT-4、MiniGemini、Intern-VL）上的分析表明：<strong>dense vision sink head 数量越少，越容易产生幻觉输出。</strong></p>
 <img src="https://cdn.jsdelivr.net/gh/dongliangnie/image/image/202605151219947.png" alt="image-20260515121909784" style="zoom:50%;" />
+<p>vision sink 密度较低以及 sink head 数量较少，会增加幻觉概率。</p>
+<p>然而，仅统计 dense vision sink head 的数量不足以反映每个 head 的具体贡献，因为不同 head 对幻觉的影响可能不同。正如 ITI [23] 所指出，在 Transformer 架构中，只有一部分 attention head 起关键作用。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/dongliangnie/image/image/202605151227505.png" alt="image-20260515122717374" /></p>
+<p>因此，我们对每个 head 进行了更细粒度分析。如图 4(a) 所示，在浅层（第 1–2 层）中，不同 head 的 vision sink 密度分布呈整体负偏态。在图 4(b) 中，对于图像描述任务，我们记录每次生成 token 时 layer1 和 layer2 中 vision sink 分布的偏度（skewness）。在生成完整输出后，计算 CHAIRI 指标，并统计所有 token 的平均偏度。在图 4© 中，对于 VQA 任务（单 token 输出），直接记录答案 token 的平均偏度。</p>
+<p>实验发现：</p>
+<ul>
+<li>偏度越低，幻觉率越低；</li>
+<li>更高的 vision sink 密度以及更多的 sink head 会降低幻觉概率。</li>
+</ul>
+<p>上述观察表明，attention head 与 vision sink 的分布在理解和缓解幻觉中起关键作用：</p>
+<ul>
+<li>当 vision sink 稀疏时，模型会过度关注图像中的局部区域，忽略其他信息；</li>
+<li>当 vision sink 密集时，模型能够保持全局视角，从而减少信息丢失。</li>
+</ul>
+<p>因此，我们的目标是：**在浅层中维持高密度的 vision sink。**为此，作者提出了一种无需训练的方法：<strong>Enhancing Attention Heads (EAH)</strong>。该方法是即插即用的，核心思想如下：</p>
+<ul>
+<li>在浅层中逐个分析 attention head；</li>
+<li>找到 vision sink 最密集的 head；</li>
+<li>将该 head 的 attention 分布广播到其他 head；</li>
+<li>使整个层的 attention 分布对齐到该最优 head。</li>
+</ul>
 <h1 id="与其他工作的关系"><a class="markdownIt-Anchor" href="#与其他工作的关系"></a> 与其他工作的关系</h1>
 <ul>
 <li>ClearSight：EAH不涉及到文本token和图像token之间的attention分配问题，只是关注image toke之间的attention分配</li>
@@ -369,7 +390,7 @@ r-k
     <div class="col-md-8 col-md-push-2 col-xs-12">
         <nav>
             
-            <a href="/2026/05/15/paper_notes/VLM%20Hallucination/ONLY/" class="prev col-md-2 col-xs-4 text-left">&larr; Prev</a>
+            <a href="/2026/05/15/paper_notes/VLM%20Hallucination/Self-Aug/" class="prev col-md-2 col-xs-4 text-left">&larr; Prev</a>
             
             <span
                 class="page-content col-md-8  col-xs-4 text-center">
@@ -382,7 +403,7 @@ r-k
         <div>
             <div class="col-md-6 col-xs-6 text-left">
                 
-                ONLY: One-Layer Intervention Sufficiently Mitigates Hallucinations in  Large Vision-Language Models
+                Self-Aug: Query and Entropy Adaptive Decoding for Large Vision-Language Models
                 
             </div>
             <div class="col-md-6 col-xs-6 text-right">
