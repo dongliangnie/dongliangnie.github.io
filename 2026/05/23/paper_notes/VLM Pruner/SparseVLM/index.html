@@ -1,0 +1,380 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!--begin head-->
+
+<head>
+    <meta charset="utf-8">
+<!--begin title-->
+
+<title>
+    
+    SparseVLM: Visual Token Sparsification for Efficient Vision-Language Model Inference |
+    
+    纸笔</title>
+<!--end title-->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<!--begin mete-->
+
+<meta name="description" content="个人学习笔记与思考"/>
+
+<meta name="author" content="dongliangnie"/>
+
+<!--end mete-->
+<!--begin keywords-->
+<meta name="keywords" content="Claude Code,Conda,Flow Model,Hexo,JEPA,KV Cache,LLM Hallucination,Paged Attention,Pytorch,Speculative Decoding,Tmux,VLM Hallucination,VLM Pruner,WSL,World Model,information theory"/>
+<!--end keywords-->
+<!--begin rss-->
+
+<link rel="alternate" href="/atom.xml" title="纸笔" type="application/atom+xml">
+
+<!--end rss-->
+<!--begin favicon-->
+
+<link rel="icon" href="/favicon.ico">
+
+<!--end favicon-->
+<!--begin style-->
+
+<!-- stylesheets list from config.yml -->
+
+<link rel="stylesheet" href="/css/hannah.css">
+
+
+<!--end style-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<meta name="generator" content="Hexo 8.1.2"></head>
+<!--end head-->
+<!--begin body-->
+
+<body class="container-fluid">
+
+    <!--begin menu-->
+    <div class="hannah-menu">
+    <i class="fh fh-ravelry fa-2x btn fixed-menu animated bounce" id="btn_menu" aria-hidden="true"></i>
+    <div class="menu-outer container-fluid hide animated" id="div_menu">
+        <div class="row" style="margin-bottom: 5px;">
+            
+            <div class="col-md-offset-2 col-md-3 col-xs-4 text-center left-social">
+                
+                <a target="_blank" href="https://github.com/dongliangnie" title="GitHub"><i class="fh fh-github"></i></a>
+                
+                <style>
+                    .left-social {
+                        height: 132px;
+                        line-height: 132px;
+                        font-size: 66px;
+                    }
+
+                    .left-social * {
+                        color: #f1ce8e;
+                    }
+
+                    @media (max-width: 767px) {
+                        .left-social {
+                            line-height: 132px;
+                            font-size: 33px;
+                        }
+                    }
+                </style>
+            </div>
+            <!--begin handImg-->
+            <div class="col-md-2 col-xs-4 text-center">
+                
+                <img src="/img/kapibala.jpg" alt="Head Image" class="img-circle">
+                
+            </div>
+            <!--end handImg-->
+            <div class="col-md-3 col-xs-4 text-center right-social">
+                
+                <style>
+                    .right-social {
+                        height: 132px;
+                        line-height: 132px;
+                        font-size: 66px;
+                    }
+
+                    @media (max-width: 767px) {
+                        .right-social {
+                            line-height: 132px;
+                            font-size: 33px;
+                        }
+                    }
+
+                    .right-social * {
+                        color: #f1ce8e;
+                    }
+                </style>
+            </div>
+        </div>
+        <div class="row">
+            <div class="menu-content col-md-8 col-md-push-2 col-xs-12 ">
+                <dl class="menu-content-item">
+                    <dt class="menu-content-title">
+                        <i class="fh fh-bars" aria-hidden="true"></i> Menu
+                    </dt>
+                    <dd class="menu-content-content">
+                        
+                        <div class="col-md-4 col-xs-6 col-sm-4 text-center animated tada">
+                            <a href="/" class="btn btn-block">
+                                
+                                <i class="fh fh-ravelry"></i>
+                                Home
+                            </a>
+                        </div>
+                        
+                        <div class="col-md-4 col-xs-6 col-sm-4 text-center animated tada">
+                            <a href="/categories" class="btn btn-block">
+                                
+                                <i class="fh fh-cubes"></i>
+                                Category
+                            </a>
+                        </div>
+                        
+                        <div class="col-md-4 col-xs-6 col-sm-4 text-center animated tada">
+                            <a href="/tags" class="btn btn-block">
+                                
+                                <i class="fh fh-tags"></i>
+                                Tag
+                            </a>
+                        </div>
+                        
+                        <div class="col-md-4 col-xs-6 col-sm-4 text-center animated tada">
+                            <a href="/archives" class="btn btn-block">
+                                
+                                <i class="fh fh-archive"></i>
+                                Archives
+                            </a>
+                        </div>
+                        
+                        <div class="col-md-4 col-xs-6 col-sm-4 text-center animated tada">
+                            <a href="/about" class="btn btn-block">
+                                
+                                <i class="fh fh-about"></i>
+                                About
+                            </a>
+                        </div>
+                        
+                        <div class="col-md-4 col-xs-6 col-sm-4 text-center animated tada">
+                            <a href="/doc" class="btn btn-block">
+                                
+                                <i class="fh fh-document"></i>
+                                Doc
+                            </a>
+                        </div>
+                        
+                        <div class="col-md-4 col-xs-6 col-sm-4 text-center animated tada">
+                            <a href="/plug" class="btn btn-block">
+                                
+                                <i class="fh fh-plug"></i>
+                                Plug
+                            </a>
+                        </div>
+                        
+                        <div class="col-md-4 col-xs-6 col-sm-4 text-center animated tada">
+                            <a href="/sitemap" class="btn btn-block">
+                                
+                                <i class="fh fh-sitemap"></i>
+                                SiteMap
+                            </a>
+                        </div>
+                        
+                        <div class="col-md-4 col-xs-6 col-sm-4 text-center animated tada">
+                            <a href="/atom.xml" class="btn btn-block">
+                                <i class="fh fh-rss" aria-hidden="true"></i> RSS
+                            </a>
+                        </div>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <div class="row">
+            <div class="menu-content col-md-8 col-md-offset-2 col-xs-12 ">
+                <dl class="col-md-6 col-xs-6 menu-content-item">
+                    <dt class="menu-content-title">
+                        <i class="fh fh-cubes" aria-hidden="true"></i> Category
+                    </dt>
+                    <dd class="menu-content-content animated zoomIn">
+                        <ul class="menu-cate-list"><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/algorithm/"><i class="fh fh-cube" aria-hidden="true"></i> algorithm</a><span class="menu-cate-list-count">1</span></li><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/math/"><i class="fh fh-cube" aria-hidden="true"></i> math</a><span class="menu-cate-list-count">1</span><ul class="menu-cate-list-child"><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/math/information-theory/"><i class="fh fh-cube" aria-hidden="true"></i> information theory</a><span class="menu-cate-list-count">1</span></li></ul></li><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/paper-notes/"><i class="fh fh-cube" aria-hidden="true"></i> paper_notes</a><span class="menu-cate-list-count">19</span><ul class="menu-cate-list-child"><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/paper-notes/Flow-Model/"><i class="fh fh-cube" aria-hidden="true"></i> Flow Model</a><span class="menu-cate-list-count">1</span></li><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/paper-notes/JEPA/"><i class="fh fh-cube" aria-hidden="true"></i> JEPA</a><span class="menu-cate-list-count">2</span></li><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/paper-notes/vlm-llm/"><i class="fh fh-cube" aria-hidden="true"></i> VLM/LLM</a><span class="menu-cate-list-count">16</span><ul class="menu-cate-list-child"><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/paper-notes/vlm-llm/Inference/"><i class="fh fh-cube" aria-hidden="true"></i> Inference</a><span class="menu-cate-list-count">3</span></li><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/paper-notes/vlm-llm/LLM-Hallucination/"><i class="fh fh-cube" aria-hidden="true"></i> LLM Hallucination</a><span class="menu-cate-list-count">1</span></li><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/paper-notes/vlm-llm/Prompt/"><i class="fh fh-cube" aria-hidden="true"></i> Prompt</a><span class="menu-cate-list-count">1</span></li><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/paper-notes/vlm-llm/VLM-Hallucination/"><i class="fh fh-cube" aria-hidden="true"></i> VLM Hallucination</a><span class="menu-cate-list-count">6</span></li><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/paper-notes/vlm-llm/VLM-Pruner/"><i class="fh fh-cube" aria-hidden="true"></i> VLM Pruner</a><span class="menu-cate-list-count">5</span></li></ul></li></ul></li><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/reproduce/"><i class="fh fh-cube" aria-hidden="true"></i> reproduce</a><span class="menu-cate-list-count">2</span><ul class="menu-cate-list-child"><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/reproduce/vlm-llm/"><i class="fh fh-cube" aria-hidden="true"></i> VLM/LLM</a><span class="menu-cate-list-count">2</span></li></ul></li><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/tools/"><i class="fh fh-cube" aria-hidden="true"></i> tools</a><span class="menu-cate-list-count">6</span></li></ul>
+                    </dd>
+                </dl>
+                <dl class="col-md-6 col-xs-6 menu-content-item">
+                    <dt class="menu-content-title">
+                        <i class="fh fh-tag" aria-hidden="true"></i> Tags
+                    </dt>
+                    <dd class="menu-content-content animated zoomIn">
+                        <ul class="menu-tag-list" itemprop="keywords"><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/Claude-Code/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> Claude Code</a><span class="menu-tag-list-count">1</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/Conda/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> Conda</a><span class="menu-tag-list-count">1</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/Flow-Model/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> Flow Model</a><span class="menu-tag-list-count">1</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/Hexo/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> Hexo</a><span class="menu-tag-list-count">1</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/JEPA/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> JEPA</a><span class="menu-tag-list-count">2</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/KV-Cache/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> KV Cache</a><span class="menu-tag-list-count">1</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/LLM-Hallucination/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> LLM Hallucination</a><span class="menu-tag-list-count">1</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/Paged-Attention/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> Paged Attention</a><span class="menu-tag-list-count">1</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/Pytorch/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> Pytorch</a><span class="menu-tag-list-count">1</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/Speculative-Decoding/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> Speculative Decoding</a><span class="menu-tag-list-count">1</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/Tmux/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> Tmux</a><span class="menu-tag-list-count">1</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/vlm-hallucination/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> VLM Hallucination</a><span class="menu-tag-list-count">8</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/vlm-pruner/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> VLM Pruner</a><span class="menu-tag-list-count">5</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/WSL/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> WSL</a><span class="menu-tag-list-count">1</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/World-Model/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> World Model</a><span class="menu-tag-list-count">1</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/information-theory/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> information theory</a><span class="menu-tag-list-count">1</span></li></ul>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
+    <!--end menu-->
+
+    <div class="row hannah-body">
+        <div class="col-md-8 col-md-push-2 col-xs-12">
+            <!--begin breadcrumb-->
+            <div class="bread-crumb">
+    <ul class="bread-crumb-menu animated rubberBand">
+        <li><a href="/"><i class="fh fh-ravelry" aria-hidden="true"></i> Home</a></li>
+        
+        <li><a href="/categories/paper-notes/"><i class="fh fh-cube" aria-hidden="true"></i> paper_notes</a>
+        </li>
+        
+        <li><a href="/categories/paper-notes/vlm-llm/"><i class="fh fh-cube" aria-hidden="true"></i> VLM/LLM</a>
+        </li>
+        
+        <li><a href="/categories/paper-notes/vlm-llm/VLM-Pruner/"><i class="fh fh-cube" aria-hidden="true"></i> VLM Pruner</a>
+        </li>
+        
+        <li>
+            
+            <i class="fh fh-newspaper-o" aria-hidden="true"></i>
+            
+            SparseVLM: Visual Token Sparsification for Efficient Vision-Language Model Inference
+        </li>
+        
+    </ul>
+    <div class="bread-crumb-search">
+        <div class="search">
+    <i class="fh fh-search icon-search"></i>
+    <input placeholder="Search ..." onkeyup="searchFunc(this,event,'/search.xml')"
+           class="input-search animated fadeInRight"/>
+    <div class="search-result animated fadeInRight">
+        <a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/27/tools/claude%20code/">Claude Code</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/27/paper_notes/LLM%20Foundation/CoOP/">CoOP</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/23/paper_notes/VLM%20Pruner/SparseVLM/">SparseVLM: Visual Token Sparsification for Efficient Vision-Language Model Inference</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/22/paper_notes/LLM%20Foundation/PagedAttention/">Paged Attention笔记</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/22/paper_notes/LLM%20Foundation/KV%20Cache/">KV Cache笔记</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/22/paper_notes/VLM%20Pruner/VTW/">Boosting Multimodal Large Language Models with Visual Tokens Withdrawal for Rapid Inference</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/21/paper_notes/JEPA/stable-worldmodel/">stable-worldmodel库使用</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/20/paper_notes/Flow/Flow/">Flow Notes</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/19/paper_notes/JEPA/LLM-JEPA/">LLM-JEPA: Large Language Models Meet Joint Embedding Predictive Architectures</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/18/paper_notes/Inference/speculative%20decoding/">Speculative Decoding笔记</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/17/math/%E4%BF%A1%E6%81%AF%E8%AE%BA%E5%9F%BA%E7%A1%80/">信息论基础</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/17/paper_notes/VLM%20Hallucination/FarSight/">Seeing Far and Clearly: Mitigating Hallucinations in MLLMs with Attention Causal Decoding</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/17/paper_notes/LLM%20Hallucination/TruthFlow/">TruthFlow: Truthful LLM Generation via Representation Flow Correction</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/16/paper_notes/VLM%20Hallucination/CD_Rethink/">The Mirage of Performance Gains:Why Contrastive Decoding Fails to Mitigate Object Hallucinations in MLLMs?</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/16/paper_notes/VLM%20Pruner/HiMAP/">Lifting the Veil on Visual Information Flow in MLLMs: Unlocking Pathways to Faster Inference</a>
+    </div>
+</div>
+    </div>
+</div>
+            <!--end breadcrumb-->
+            <!--begin body-->
+            <article class="post animated rollIn">
+    <h1 class="post-title">SparseVLM: Visual Token Sparsification for Efficient Vision-Language Model Inference</h1>
+    <div class="post-subtitle">
+        
+        <time datetime="2026-05-22T16:00:00.000Z" class="item">
+            <i class="fh fh-calendar" aria-hidden="true"></i>&nbsp;&nbsp;2026-05-23
+        </time>
+        
+        
+        <span class="item">
+      <i class="fh fh-cubes" aria-hidden="true"></i>&nbsp;
+            
+            <a class="label label-primary tags" href="/categories/paper-notes/">
+           <i class="fh fh-cube" aria-hidden="true"></i>&nbsp;paper_notes
+        </a>
+            
+            <a class="label label-primary tags" href="/categories/paper-notes/vlm-llm/">
+           <i class="fh fh-cube" aria-hidden="true"></i>&nbsp;VLM/LLM
+        </a>
+            
+            <a class="label label-primary tags" href="/categories/paper-notes/vlm-llm/VLM-Pruner/">
+           <i class="fh fh-cube" aria-hidden="true"></i>&nbsp;VLM Pruner
+        </a>
+            
+        </span>
+        
+        
+        <span class="item">
+        <i class="fh fh-tags" aria-hidden="true"></i>&nbsp;
+            
+            <a class="label label-info tags" href="/tags/vlm-pruner/">
+            <i class="fh fh-tag" aria-hidden="true"></i>&nbsp;VLM Pruner
+            </a>
+            
+        </span>
+        
+    </div>
+    
+    <blockquote>
+<ul>
+<li>论文标题：<strong>SparseVLM: Visual Token Sparsification for Efficient Vision-Language Model Inference</strong></li>
+<li>github链接：<a target="_blank" rel="noopener" href="https://github.com/Gumpest/SparseVLMs">ICML’25] Official implementation of paper “SparseVLM: Visual Token Sparsification for Efficient Vision-Language Model Inference” and “SparseVLM+: Visual Token Sparsification with Improved Text-Visual Attention Pattern”</a></li>
+<li>发表：ICML 2025</li>
+</ul>
+</blockquote>
+<p>虽然最近的一些工作进一步在解码过程中对视觉Token 进行稀疏化，但它们仍然忽略了语言 Token 的引导，这与多模态范式相矛盾。我们认为，视觉 Token应根据问题提示自适应地进行稀疏化，因为模型在处理不同问题时可能会关注图像的不同部分（例如前景或背景）</p>
+
+</article>
+
+<div class="animated bounceInDown paginations">
+    <div class="col-md-8 col-md-push-2 col-xs-12">
+        <nav>
+            
+            <a href="/2026/05/27/paper_notes/LLM%20Foundation/CoOP/" class="prev col-md-2 col-xs-4 text-left">&larr; Prev</a>
+            
+            <span
+                class="page-content col-md-8  col-xs-4 text-center">
+                
+            </span>
+            
+            <a href="/2026/05/22/paper_notes/LLM%20Foundation/PagedAttention/" class="next col-md-2 col-xs-4 text-right">Next &rarr;</a>
+            
+        </nav>
+        <div>
+            <div class="col-md-6 col-xs-6 text-left">
+                
+                CoOP
+                
+            </div>
+            <div class="col-md-6 col-xs-6 text-right">
+                
+                Paged Attention笔记
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!--end body-->
+            <!--begin comments-->
+            
+<div class="comments">
+    
+
+    
+    
+</div>
+
+
+            <!--end comments-->
+        </div>
+    </div>
+
+    <!--begin footer-->
+    <footer id="footer" class="footer animated fadeInUp hide">
+    <p><i class="copy">&copy;</i> 2026 <a href="https://dongliangnie.github.io">dongliangnie</a> All Right Reserved.</p>
+    <p>Powered by <a target="_blank" href="http://hexo.io" rel="external nofollow noopener">Hexo</a>. Theme by <a target="_blank" href="https://github.com/objectyan/hexo-theme-hannah" rel="external nofollow noopener">hannah</a></p>
+</footer>
+    <!--end footer-->
+
+    
+    <!-- scripts list from theme config.yml -->
+    
+    <script src="/js/hannah.js"></script>
+    
+    
+    <!--begin analytics-->
+    
+
+    <!--end analytics-->
+</body>
+<!--end body-->
+<!--begin canvas-nest-->
+<script>
+    var nesturl = "https://unpkg.com/canvas-nest.js/dist/canvas-nest.js";
+    var c = document.getElementsByTagName("body")[0] || document.body || document.documentElement;
+    var b = document.createElement("script");
+    b.setAttribute("type", "text/javascript");
+    b.setAttribute("src", nesturl);
+    b.setAttribute("color",
+        `${ Math.floor(Math.random()*256)},${ Math.floor(Math.random()*256)},${ Math.floor(Math.random()*256)}`);
+    b.setAttribute("opacity", Math.random());
+    b.setAttribute("count", parseInt((Math.random() * 500) || 99));
+    c.appendChild(b)
+</script>
+<!--end canvas-nest-->
+
+</html>
