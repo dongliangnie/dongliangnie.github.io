@@ -1,0 +1,406 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!--begin head-->
+
+<head>
+    <meta charset="utf-8">
+<!--begin title-->
+
+<title>
+    
+    Self-Supervised Learning from Images with a Joint-Embedding Predictive Architecture |
+    
+    纸笔</title>
+<!--end title-->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<!--begin mete-->
+
+<meta name="description" content="个人学习笔记与思考"/>
+
+<meta name="author" content="dongliangnie"/>
+
+<!--end mete-->
+<!--begin keywords-->
+<meta name="keywords" content="Claude Code,Conda,Flow Model,Hexo,JEPA,KV Cache,LLM Hallucination,Paged Attention,Pytorch,Speculative Decoding,Tmux,VLM Hallucination,VLM Pruner,Video Understanding,WSL,World Model,information theory"/>
+<!--end keywords-->
+<!--begin rss-->
+
+<link rel="alternate" href="/atom.xml" title="纸笔" type="application/atom+xml">
+
+<!--end rss-->
+<!--begin favicon-->
+
+<link rel="icon" href="/favicon.ico">
+
+<!--end favicon-->
+<!--begin style-->
+
+<!-- stylesheets list from config.yml -->
+
+<link rel="stylesheet" href="/css/hannah.css">
+
+
+<!--end style-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<meta name="generator" content="Hexo 8.1.2"></head>
+<!--end head-->
+<!--begin body-->
+
+<body class="container-fluid">
+
+    <!--begin menu-->
+    <div class="hannah-menu">
+    <i class="fh fh-ravelry fa-2x btn fixed-menu animated bounce" id="btn_menu" aria-hidden="true"></i>
+    <div class="menu-outer container-fluid hide animated" id="div_menu">
+        <div class="row" style="margin-bottom: 5px;">
+            
+            <div class="col-md-offset-2 col-md-3 col-xs-4 text-center left-social">
+                
+                <a target="_blank" href="https://github.com/dongliangnie" title="GitHub"><i class="fh fh-github"></i></a>
+                
+                <style>
+                    .left-social {
+                        height: 132px;
+                        line-height: 132px;
+                        font-size: 66px;
+                    }
+
+                    .left-social * {
+                        color: #f1ce8e;
+                    }
+
+                    @media (max-width: 767px) {
+                        .left-social {
+                            line-height: 132px;
+                            font-size: 33px;
+                        }
+                    }
+                </style>
+            </div>
+            <!--begin handImg-->
+            <div class="col-md-2 col-xs-4 text-center">
+                
+                <img src="/img/kapibala.jpg" alt="Head Image" class="img-circle">
+                
+            </div>
+            <!--end handImg-->
+            <div class="col-md-3 col-xs-4 text-center right-social">
+                
+                <style>
+                    .right-social {
+                        height: 132px;
+                        line-height: 132px;
+                        font-size: 66px;
+                    }
+
+                    @media (max-width: 767px) {
+                        .right-social {
+                            line-height: 132px;
+                            font-size: 33px;
+                        }
+                    }
+
+                    .right-social * {
+                        color: #f1ce8e;
+                    }
+                </style>
+            </div>
+        </div>
+        <div class="row">
+            <div class="menu-content col-md-8 col-md-push-2 col-xs-12 ">
+                <dl class="menu-content-item">
+                    <dt class="menu-content-title">
+                        <i class="fh fh-bars" aria-hidden="true"></i> Menu
+                    </dt>
+                    <dd class="menu-content-content">
+                        
+                        <div class="col-md-4 col-xs-6 col-sm-4 text-center animated tada">
+                            <a href="/" class="btn btn-block">
+                                
+                                <i class="fh fh-ravelry"></i>
+                                Home
+                            </a>
+                        </div>
+                        
+                        <div class="col-md-4 col-xs-6 col-sm-4 text-center animated tada">
+                            <a href="/categories" class="btn btn-block">
+                                
+                                <i class="fh fh-cubes"></i>
+                                Category
+                            </a>
+                        </div>
+                        
+                        <div class="col-md-4 col-xs-6 col-sm-4 text-center animated tada">
+                            <a href="/tags" class="btn btn-block">
+                                
+                                <i class="fh fh-tags"></i>
+                                Tag
+                            </a>
+                        </div>
+                        
+                        <div class="col-md-4 col-xs-6 col-sm-4 text-center animated tada">
+                            <a href="/archives" class="btn btn-block">
+                                
+                                <i class="fh fh-archive"></i>
+                                Archives
+                            </a>
+                        </div>
+                        
+                        <div class="col-md-4 col-xs-6 col-sm-4 text-center animated tada">
+                            <a href="/about" class="btn btn-block">
+                                
+                                <i class="fh fh-about"></i>
+                                About
+                            </a>
+                        </div>
+                        
+                        <div class="col-md-4 col-xs-6 col-sm-4 text-center animated tada">
+                            <a href="/doc" class="btn btn-block">
+                                
+                                <i class="fh fh-document"></i>
+                                Doc
+                            </a>
+                        </div>
+                        
+                        <div class="col-md-4 col-xs-6 col-sm-4 text-center animated tada">
+                            <a href="/plug" class="btn btn-block">
+                                
+                                <i class="fh fh-plug"></i>
+                                Plug
+                            </a>
+                        </div>
+                        
+                        <div class="col-md-4 col-xs-6 col-sm-4 text-center animated tada">
+                            <a href="/sitemap" class="btn btn-block">
+                                
+                                <i class="fh fh-sitemap"></i>
+                                SiteMap
+                            </a>
+                        </div>
+                        
+                        <div class="col-md-4 col-xs-6 col-sm-4 text-center animated tada">
+                            <a href="/atom.xml" class="btn btn-block">
+                                <i class="fh fh-rss" aria-hidden="true"></i> RSS
+                            </a>
+                        </div>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <div class="row">
+            <div class="menu-content col-md-8 col-md-offset-2 col-xs-12 ">
+                <dl class="col-md-6 col-xs-6 menu-content-item">
+                    <dt class="menu-content-title">
+                        <i class="fh fh-cubes" aria-hidden="true"></i> Category
+                    </dt>
+                    <dd class="menu-content-content animated zoomIn">
+                        <ul class="menu-cate-list"><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/algorithm/"><i class="fh fh-cube" aria-hidden="true"></i> algorithm</a><span class="menu-cate-list-count">1</span></li><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/math/"><i class="fh fh-cube" aria-hidden="true"></i> math</a><span class="menu-cate-list-count">1</span><ul class="menu-cate-list-child"><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/math/information-theory/"><i class="fh fh-cube" aria-hidden="true"></i> information theory</a><span class="menu-cate-list-count">1</span></li></ul></li><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/paper-notes/"><i class="fh fh-cube" aria-hidden="true"></i> paper_notes</a><span class="menu-cate-list-count">22</span><ul class="menu-cate-list-child"><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/paper-notes/Flow-Model/"><i class="fh fh-cube" aria-hidden="true"></i> Flow Model</a><span class="menu-cate-list-count">1</span></li><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/paper-notes/JEPA/"><i class="fh fh-cube" aria-hidden="true"></i> JEPA</a><span class="menu-cate-list-count">3</span></li><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/paper-notes/vlm-llm/"><i class="fh fh-cube" aria-hidden="true"></i> VLM/LLM</a><span class="menu-cate-list-count">17</span><ul class="menu-cate-list-child"><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/paper-notes/vlm-llm/Inference/"><i class="fh fh-cube" aria-hidden="true"></i> Inference</a><span class="menu-cate-list-count">3</span></li><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/paper-notes/vlm-llm/LLM-Hallucination/"><i class="fh fh-cube" aria-hidden="true"></i> LLM Hallucination</a><span class="menu-cate-list-count">1</span></li><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/paper-notes/vlm-llm/Prompt/"><i class="fh fh-cube" aria-hidden="true"></i> Prompt</a><span class="menu-cate-list-count">1</span></li><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/paper-notes/vlm-llm/VLM-Hallucination/"><i class="fh fh-cube" aria-hidden="true"></i> VLM Hallucination</a><span class="menu-cate-list-count">6</span></li><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/paper-notes/vlm-llm/VLM-Pruner/"><i class="fh fh-cube" aria-hidden="true"></i> VLM Pruner</a><span class="menu-cate-list-count">6</span></li></ul></li><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/paper-notes/Video-Understanding/"><i class="fh fh-cube" aria-hidden="true"></i> Video Understanding</a><span class="menu-cate-list-count">1</span></li></ul></li><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/reproduce/"><i class="fh fh-cube" aria-hidden="true"></i> reproduce</a><span class="menu-cate-list-count">2</span><ul class="menu-cate-list-child"><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/reproduce/vlm-llm/"><i class="fh fh-cube" aria-hidden="true"></i> VLM/LLM</a><span class="menu-cate-list-count">2</span></li></ul></li><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/tools/"><i class="fh fh-cube" aria-hidden="true"></i> tools</a><span class="menu-cate-list-count">9</span></li></ul>
+                    </dd>
+                </dl>
+                <dl class="col-md-6 col-xs-6 menu-content-item">
+                    <dt class="menu-content-title">
+                        <i class="fh fh-tag" aria-hidden="true"></i> Tags
+                    </dt>
+                    <dd class="menu-content-content animated zoomIn">
+                        <ul class="menu-tag-list" itemprop="keywords"><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/Claude-Code/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> Claude Code</a><span class="menu-tag-list-count">1</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/Conda/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> Conda</a><span class="menu-tag-list-count">1</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/Flow-Model/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> Flow Model</a><span class="menu-tag-list-count">1</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/Hexo/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> Hexo</a><span class="menu-tag-list-count">1</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/JEPA/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> JEPA</a><span class="menu-tag-list-count">3</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/KV-Cache/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> KV Cache</a><span class="menu-tag-list-count">1</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/LLM-Hallucination/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> LLM Hallucination</a><span class="menu-tag-list-count">1</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/Paged-Attention/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> Paged Attention</a><span class="menu-tag-list-count">1</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/Pytorch/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> Pytorch</a><span class="menu-tag-list-count">1</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/Speculative-Decoding/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> Speculative Decoding</a><span class="menu-tag-list-count">1</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/Tmux/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> Tmux</a><span class="menu-tag-list-count">1</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/vlm-hallucination/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> VLM Hallucination</a><span class="menu-tag-list-count">8</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/vlm-pruner/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> VLM Pruner</a><span class="menu-tag-list-count">6</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/Video-Understanding/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> Video Understanding</a><span class="menu-tag-list-count">1</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/WSL/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> WSL</a><span class="menu-tag-list-count">1</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/World-Model/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> World Model</a><span class="menu-tag-list-count">1</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/information-theory/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> information theory</a><span class="menu-tag-list-count">1</span></li></ul>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
+    <!--end menu-->
+
+    <div class="row hannah-body">
+        <div class="col-md-8 col-md-push-2 col-xs-12">
+            <!--begin breadcrumb-->
+            <div class="bread-crumb">
+    <ul class="bread-crumb-menu animated rubberBand">
+        <li><a href="/"><i class="fh fh-ravelry" aria-hidden="true"></i> Home</a></li>
+        
+        <li><a href="/categories/paper-notes/"><i class="fh fh-cube" aria-hidden="true"></i> paper_notes</a>
+        </li>
+        
+        <li><a href="/categories/paper-notes/JEPA/"><i class="fh fh-cube" aria-hidden="true"></i> JEPA</a>
+        </li>
+        
+        <li>
+            
+            <i class="fh fh-newspaper-o" aria-hidden="true"></i>
+            
+            Self-Supervised Learning from Images with a Joint-Embedding Predictive Architecture
+        </li>
+        
+    </ul>
+    <div class="bread-crumb-search">
+        <div class="search">
+    <i class="fh fh-search icon-search"></i>
+    <input placeholder="Search ..." onkeyup="searchFunc(this,event,'/search.xml')"
+           class="input-search animated fadeInRight"/>
+    <div class="search-result animated fadeInRight">
+        <a class="animated tada col-lg-12 search-result-item result-link" href="/2026/06/05/tools/claude%20code%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%90%86/">claude code远程代理</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/31/tools/ccx/">Ubuntu上快速切换claude code api</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/31/tools/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/31/paper_notes/JEPA/I-JEPA/">Self-Supervised Learning from Images with a Joint-Embedding Predictive Architecture</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/29/paper_notes/VLM%20Pruner/VisionSelector/">VisionSelector: End-to-End Learnable Visual Token Compression for Efficient Multimodal LLMs</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/27/tools/claude%20code/">Claude Code</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/27/paper_notes/LLM%20Foundation/CoOP/">CoOP</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/27/paper_notes/Video%20Understanding/I3D/">Quo Vadis, Action Recognition? A New Model and the Kinetics Dataset</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/23/paper_notes/VLM%20Pruner/SparseVLM/">SparseVLM: Visual Token Sparsification for Efficient Vision-Language Model Inference</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/22/paper_notes/LLM%20Foundation/KV%20Cache/">KV Cache笔记</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/22/paper_notes/LLM%20Foundation/PagedAttention/">Paged Attention笔记</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/22/paper_notes/VLM%20Pruner/VTW/">Boosting Multimodal Large Language Models with Visual Tokens Withdrawal for Rapid Inference</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/21/paper_notes/JEPA/stable-worldmodel/">stable-worldmodel库使用</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/20/paper_notes/Flow/Flow/">Flow Notes</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/19/paper_notes/JEPA/LLM-JEPA/">LLM-JEPA: Large Language Models Meet Joint Embedding Predictive Architectures</a>
+    </div>
+</div>
+    </div>
+</div>
+            <!--end breadcrumb-->
+            <!--begin body-->
+            <article class="post animated rollIn">
+    <h1 class="post-title">Self-Supervised Learning from Images with a Joint-Embedding Predictive Architecture</h1>
+    <div class="post-subtitle">
+        
+        <time datetime="2026-05-30T16:00:00.000Z" class="item">
+            <i class="fh fh-calendar" aria-hidden="true"></i>&nbsp;&nbsp;2026-05-31
+        </time>
+        
+        
+        <span class="item">
+      <i class="fh fh-cubes" aria-hidden="true"></i>&nbsp;
+            
+            <a class="label label-primary tags" href="/categories/paper-notes/">
+           <i class="fh fh-cube" aria-hidden="true"></i>&nbsp;paper_notes
+        </a>
+            
+            <a class="label label-primary tags" href="/categories/paper-notes/JEPA/">
+           <i class="fh fh-cube" aria-hidden="true"></i>&nbsp;JEPA
+        </a>
+            
+        </span>
+        
+        
+        <span class="item">
+        <i class="fh fh-tags" aria-hidden="true"></i>&nbsp;
+            
+            <a class="label label-info tags" href="/tags/JEPA/">
+            <i class="fh fh-tag" aria-hidden="true"></i>&nbsp;JEPA
+            </a>
+            
+        </span>
+        
+    </div>
+    
+    <blockquote>
+<p>标题：Self-Supervised Learning from Images with a Joint-Embedding Predictive Architecture</p>
+<p>作者：Assran, Mahmoud and Duval, Quentin and Misra, Ishan and Bojanowski, Piotr and Vincent, Pascal and Rabbat, Michael and LeCun, Yann and Ballas, Nicolas</p>
+<p>github仓库：<a target="_blank" rel="noopener" href="https://github.com/facebookresearch/ijepa">facebookresearch/ijepa: Official codebase for I-JEPA, the Image-based Joint-Embedding Predictive Architecture. First outlined in the CVPR paper, “Self-supervised learning from images with a joint-embedding predictive architecture.”</a></p>
+<p>出版：CVPR2023</p>
+</blockquote>
+<h2 id="方法"><a class="markdownIt-Anchor" href="#方法"></a> 方法</h2>
+<h3 id="损失函数与训练过程"><a class="markdownIt-Anchor" href="#损失函数与训练过程"></a> 损失函数与训练过程</h3>
+<p><code>I-JEPA</code> 的训练目标是最小化预测特征与目标特征之间的 L2 距离。</p>
+<p>设第 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathnormal">i</span></span></span></span> 个目标块的预测特征为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mover accent="true"><mi>s</mi><mo>^</mo></mover><mi>y</mi><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></msubsup></mrow><annotation encoding="application/x-tex">\hat{s}_y^{(i)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2974999999999999em;vertical-align:-0.2526999999999999em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">s</span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.19444em;"><span class="mord">^</span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0448em;"><span style="top:-2.5834080000000004em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">y</span></span></span><span style="top:-3.2198em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight">i</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2526999999999999em;"><span></span></span></span></span></span></span></span></span></span>，目标编码器生成的真值特征为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>s</mi><mi>y</mi><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></msubsup></mrow><annotation encoding="application/x-tex">s_y^{(i)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2974999999999999em;vertical-align:-0.2526999999999999em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0448em;"><span style="top:-2.5834080000000004em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">y</span></span></span><span style="top:-3.2198em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight">i</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2526999999999999em;"><span></span></span></span></span></span></span></span></span></span>，则损失函数定义为：</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi mathvariant="script">L</mi><mo>=</mo><mfrac><mn>1</mn><mi>M</mi></mfrac><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>M</mi></munderover><msubsup><mrow><mo fence="true">∣</mo><msubsup><mover accent="true"><mi>s</mi><mo>^</mo></mover><mi>y</mi><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></msubsup><mo>−</mo><msubsup><mi>s</mi><mi>y</mi><mrow><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow></msubsup><mo fence="true">∣</mo></mrow><mn>2</mn><mn>2</mn></msubsup></mrow><annotation encoding="application/x-tex">\mathcal{L} = \frac{1}{M} \sum_{i=1}^{M} \left| \hat{s}_y^{(i)} - s_y^{(i)} \right|_2^2
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathcal">L</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:3.106005em;vertical-align:-1.277669em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10903em;">M</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.8283360000000002em;"><span style="top:-1.872331em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.050005em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3000050000000005em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">M</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.277669em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="minner"><span class="mopen"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.173975em;"><span style="top:-1.955985em;"><span class="pstrut" style="height:2.606em;"></span><span class="delimsizinginner delim-size1"><span>∣</span></span></span><span style="top:-2.556985em;"><span class="pstrut" style="height:2.606em;"></span><span class="delimsizinginner delim-size1"><span>∣</span></span></span><span style="top:-2.572975em;"><span class="pstrut" style="height:2.606em;"></span><span class="delimsizinginner delim-size1"><span>∣</span></span></span><span style="top:-3.173975em;"><span class="pstrut" style="height:2.606em;"></span><span class="delimsizinginner delim-size1"><span>∣</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.6500149999999999em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">s</span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.19444em;"><span class="mord">^</span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.938em;"><span style="top:-2.4530000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">y</span></span></span><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight">i</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.383108em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.938em;"><span style="top:-2.4530000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">y</span></span></span><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight">i</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.383108em;"><span></span></span></span></span></span></span><span class="mclose"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.173975em;"><span style="top:-1.955985em;"><span class="pstrut" style="height:2.606em;"></span><span class="delimsizinginner delim-size1"><span>∣</span></span></span><span style="top:-2.556985em;"><span class="pstrut" style="height:2.606em;"></span><span class="delimsizinginner delim-size1"><span>∣</span></span></span><span style="top:-2.572975em;"><span class="pstrut" style="height:2.606em;"></span><span class="delimsizinginner delim-size1"><span>∣</span></span></span><span style="top:-3.173975em;"><span class="pstrut" style="height:2.606em;"></span><span class="delimsizinginner delim-size1"><span>∣</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.6500149999999999em;"><span></span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3779829999999997em;"><span style="top:-2.0002850000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span><span style="top:-3.626875em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.6997149999999999em;"><span></span></span></span></span></span></span></span></span></span></span></p>
+<p>其中：</p>
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi></mrow><annotation encoding="application/x-tex">M</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">M</span></span></span></span> 表示目标块（target blocks）的数量（通常为 4）</li>
+</ul>
+<h3 id="参数更新机制"><a class="markdownIt-Anchor" href="#参数更新机制"></a> 参数更新机制</h3>
+<p>在训练过程中：</p>
+<ul>
+<li><strong>上下文编码器（context encoder）</strong> 和 <strong>预测器（predictor）</strong> 的参数通过标准梯度下降方法（如 AdamW）进行更新；</li>
+<li><strong>目标编码器（target encoder）</strong> 的参数通过指数滑动平均（EMA）更新：</li>
+</ul>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>θ</mi><mtext>target</mtext></msub><mo>←</mo><mi>α</mi><mo>⋅</mo><msub><mi>θ</mi><mtext>target</mtext></msub><mo>+</mo><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>α</mi><mo stretchy="false">)</mo><mo>⋅</mo><msub><mi>θ</mi><mtext>context</mtext></msub></mrow><annotation encoding="application/x-tex">\theta_{\text{target}} \leftarrow \alpha \cdot \theta_{\text{target}} + (1 - \alpha) \cdot \theta_{\text{context}}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.980548em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.28055599999999997em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">target</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">←</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.44445em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.980548em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.28055599999999997em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">target</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">context</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span></p>
+<p>其中：</p>
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span></span></span></span> 为动量系数（通常接近 1，如 0.99 或 0.996）</li>
+</ul>
+<img src="d79592d4889143639498d2cfb16a57c5.png" alt="在这里插入图片描述" style="zoom:50%;" />
+<h2 id="源代码解析"><a class="markdownIt-Anchor" href="#源代码解析"></a> 源代码解析</h2>
+<h3 id="multiblockpy"><a class="markdownIt-Anchor" href="#multiblockpy"></a> <code>multiblock.py</code></h3>
+<ul>
+<li>先随机生成几个预测区域</li>
+<li>记录这些区域的补集</li>
+<li>encoder 只能在补集里再选一块（mask_e）</li>
+<li>保证 encoder 看不到 predictor</li>
+</ul>
+<p><img src="3b749d0ecb8d459a9e6eda7b3c3fc9ce.png" alt="在这里插入图片描述" /></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Value  <span class="comment"># 多进程共享变量（用于seed计数）</span></span><br><span class="line"><span class="keyword">from</span> logging <span class="keyword">import</span> getLogger</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line">_GLOBAL_SEED = <span class="number">0</span></span><br><span class="line">logger = getLogger()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MaskCollator</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    作用：</span></span><br><span class="line"><span class="string">    在 DataLoader 的 collate 阶段，为每张图生成：</span></span><br><span class="line"><span class="string">    - encoder 使用的 mask（可见区域）</span></span><br><span class="line"><span class="string">    - predictor 使用的 mask（需要预测的区域）</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    核心思想：</span></span><br><span class="line"><span class="string">    1. 先随机选一些“预测区域”（pred mask）</span></span><br><span class="line"><span class="string">    2. 再在“剩余区域”里选“编码区域”（enc mask）</span></span><br><span class="line"><span class="string">    3. 保证 enc 和 pred 不重叠</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params"></span></span><br><span class="line"><span class="params">        self,</span></span><br><span class="line"><span class="params">        input_size=(<span class="params"><span class="number">224</span>, <span class="number">224</span></span>),</span></span><br><span class="line"><span class="params">        patch_size=<span class="number">16</span>,</span></span><br><span class="line"><span class="params">        enc_mask_scale=(<span class="params"><span class="number">0.2</span>, <span class="number">0.8</span></span>),   <span class="comment"># encoder mask 占总patch比例</span></span></span><br><span class="line"><span class="params">        pred_mask_scale=(<span class="params"><span class="number">0.2</span>, <span class="number">0.8</span></span>),  <span class="comment"># predictor mask 占总patch比例</span></span></span><br><span class="line"><span class="params">        aspect_ratio=(<span class="params"><span class="number">0.3</span>, <span class="number">3.0</span></span>),     <span class="comment"># block形状范围（高宽比）</span></span></span><br><span class="line"><span class="params">        nenc=<span class="number">1</span>,                      <span class="comment"># 每张图 encoder mask 数量</span></span></span><br><span class="line"><span class="params">        npred=<span class="number">2</span>,                     <span class="comment"># 每张图 predictor mask 数量</span></span></span><br><span class="line"><span class="params">        min_keep=<span class="number">4</span>,                  <span class="comment"># 最少patch数量（防止太小）</span></span></span><br><span class="line"><span class="params">        allow_overlap=<span class="literal">False</span>          <span class="comment"># 是否允许 enc 和 pred 重叠</span></span></span><br><span class="line"><span class="params">    </span>):</span><br><span class="line">        <span class="built_in">super</span>(MaskCollator, <span class="variable language_">self</span>).__init__()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 如果输入不是 tuple，就转成 (x, x)</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">isinstance</span>(input_size, <span class="built_in">tuple</span>):</span><br><span class="line">            input_size = (input_size, ) * <span class="number">2</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># patch尺寸（比如16×16）</span></span><br><span class="line">        <span class="variable language_">self</span>.patch_size = patch_size</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 图像被划分成 patch grid，比如 224/16 = 14</span></span><br><span class="line">        <span class="variable language_">self</span>.height = input_size[<span class="number">0</span>] // patch_size</span><br><span class="line">        <span class="variable language_">self</span>.width = input_size[<span class="number">1</span>] // patch_size</span><br><span class="line"></span><br><span class="line">        <span class="comment"># mask面积比例范围</span></span><br><span class="line">        <span class="variable language_">self</span>.enc_mask_scale = enc_mask_scale</span><br><span class="line">        <span class="variable language_">self</span>.pred_mask_scale = pred_mask_scale</span><br><span class="line"></span><br><span class="line">        <span class="comment"># block形状范围</span></span><br><span class="line">        <span class="variable language_">self</span>.aspect_ratio = aspect_ratio</span><br><span class="line"></span><br><span class="line">        <span class="comment"># mask数量</span></span><br><span class="line">        <span class="variable language_">self</span>.nenc = nenc</span><br><span class="line">        <span class="variable language_">self</span>.npred = npred</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 最小patch数限制</span></span><br><span class="line">        <span class="variable language_">self</span>.min_keep = min_keep</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 是否允许 encoder 和 predictor mask 重叠</span></span><br><span class="line">        <span class="variable language_">self</span>.allow_overlap = allow_overlap</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 多进程共享计数器（用于生成不同seed）</span></span><br><span class="line">        <span class="variable language_">self</span>._itr_counter = Value(<span class="string">&#x27;i&#x27;</span>, -<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">step</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        每调用一次 +1，返回当前值</span></span><br><span class="line"><span class="string">        用于生成不同随机种子</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        i = <span class="variable language_">self</span>._itr_counter</span><br><span class="line">        <span class="keyword">with</span> i.get_lock():  <span class="comment"># 防止多进程冲突</span></span><br><span class="line">            i.value += <span class="number">1</span></span><br><span class="line">            v = i.value</span><br><span class="line">        <span class="keyword">return</span> v</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_sample_block_size</span>(<span class="params">self, generator, scale, aspect_ratio_scale</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        随机生成一个block的尺寸(h, w)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        过程：</span></span><br><span class="line"><span class="string">        1. 随机决定mask面积（占总patch比例）</span></span><br><span class="line"><span class="string">        2. 随机决定长宽比</span></span><br><span class="line"><span class="string">        3. 根据面积 + 长宽比 解出 h, w</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">        _rand = torch.rand(<span class="number">1</span>, generator=generator).item()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># ---- Step1: 采样面积 ----</span></span><br><span class="line">        min_s, max_s = scale</span><br><span class="line">        mask_scale = min_s + _rand * (max_s - min_s)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 最大patch数量</span></span><br><span class="line">        max_keep = <span class="built_in">int</span>(<span class="variable language_">self</span>.height * <span class="variable language_">self</span>.width * mask_scale)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># ---- Step2: 采样长宽比 ----</span></span><br><span class="line">        min_ar, max_ar = aspect_ratio_scale</span><br><span class="line">        aspect_ratio = min_ar + _rand * (max_ar - min_ar)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># ---- Step3: 根据面积+比例算h,w ----</span></span><br><span class="line">        h = <span class="built_in">int</span>(<span class="built_in">round</span>(math.sqrt(max_keep * aspect_ratio)))</span><br><span class="line">        w = <span class="built_in">int</span>(<span class="built_in">round</span>(math.sqrt(max_keep / aspect_ratio)))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 防止越界（block不能比图大）</span></span><br><span class="line">        <span class="keyword">while</span> h &gt;= <span class="variable language_">self</span>.height:</span><br><span class="line">            h -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> w &gt;= <span class="variable language_">self</span>.width:</span><br><span class="line">            w -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> (h, w)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_sample_block_mask</span>(<span class="params">self, b_size, acceptable_regions=<span class="literal">None</span></span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        根据给定 block 大小，在图上随机生成一个mask</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        参数：</span></span><br><span class="line"><span class="string">        b_size: (h, w)</span></span><br><span class="line"><span class="string">        acceptable_regions:</span></span><br><span class="line"><span class="string">            限制mask只能出现在某些区域（用于避免和pred重叠）</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">        h, w = b_size</span><br><span class="line"></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">constrain_mask</span>(<span class="params">mask, tries=<span class="number">0</span></span>):</span><br><span class="line">            <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">            将mask限制在acceptable_regions中</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">            原理：</span></span><br><span class="line"><span class="string">            mask = mask AND acceptable_region</span></span><br><span class="line"><span class="string">            tries越大，限制越弱（逐渐放宽）</span></span><br><span class="line"><span class="string">            &quot;&quot;&quot;</span></span><br><span class="line">            N = <span class="built_in">max</span>(<span class="built_in">int</span>(<span class="built_in">len</span>(acceptable_regions)-tries), <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(N):</span><br><span class="line">                mask *= acceptable_regions[k]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 初始化</span></span><br><span class="line">        tries = <span class="number">0</span></span><br><span class="line">        timeout = og_timeout = <span class="number">20</span></span><br><span class="line">        valid_mask = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># ---- 循环采样直到满足条件 ----</span></span><br><span class="line">        <span class="keyword">while</span> <span class="keyword">not</span> valid_mask:</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 随机选左上角位置</span></span><br><span class="line">            top = torch.randint(<span class="number">0</span>, <span class="variable language_">self</span>.height - h, (<span class="number">1</span>,))</span><br><span class="line">            left = torch.randint(<span class="number">0</span>, <span class="variable language_">self</span>.width - w, (<span class="number">1</span>,))</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 创建mask（全0）</span></span><br><span class="line">            mask = torch.zeros((<span class="variable language_">self</span>.height, <span class="variable language_">self</span>.width), dtype=torch.int32)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 填1：表示这个block区域</span></span><br><span class="line">            mask[top:top+h, left:left+w] = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># 如果有区域限制，就裁剪mask</span></span><br><span class="line">            <span class="keyword">if</span> acceptable_regions <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">                constrain_mask(mask, tries)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 转为一维index</span></span><br><span class="line">            mask = torch.nonzero(mask.flatten())</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 判断mask是否足够大</span></span><br><span class="line">            valid_mask = <span class="built_in">len</span>(mask) &gt; <span class="variable language_">self</span>.min_keep</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 如果太小，重试</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> valid_mask:</span><br><span class="line">                timeout -= <span class="number">1</span></span><br><span class="line">                <span class="keyword">if</span> timeout == <span class="number">0</span>:</span><br><span class="line">                    tries += <span class="number">1</span></span><br><span class="line">                    timeout = og_timeout</span><br><span class="line">                    logger.warning(</span><br><span class="line">                        <span class="string">f&#x27;Mask generator says: &quot;Valid mask not found, decreasing acceptable-regions [<span class="subst">&#123;tries&#125;</span>]&quot;&#x27;</span></span><br><span class="line">                    )</span><br><span class="line"></span><br><span class="line">        mask = mask.squeeze()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># ---- 生成补集（complement）----</span></span><br><span class="line">        mask_complement = torch.ones((<span class="variable language_">self</span>.height, <span class="variable language_">self</span>.width), dtype=torch.int32)</span><br><span class="line">        mask_complement[top:top+h, left:left+w] = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> mask, mask_complement</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__call__</span>(<span class="params">self, batch</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        主函数：生成mask</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        返回：</span></span><br><span class="line"><span class="string">        collated_batch,</span></span><br><span class="line"><span class="string">        collated_masks_enc,</span></span><br><span class="line"><span class="string">        collated_masks_pred</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">        B = <span class="built_in">len</span>(batch)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 把batch拼成tensor</span></span><br><span class="line">        collated_batch = torch.utils.data.default_collate(batch)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># ---- 设置随机种子 ----</span></span><br><span class="line">        seed = <span class="variable language_">self</span>.step()</span><br><span class="line">        g = torch.Generator()</span><br><span class="line">        g.manual_seed(seed)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># ---- 先确定block尺寸 ----</span></span><br><span class="line">        p_size = <span class="variable language_">self</span>._sample_block_size(</span><br><span class="line">            generator=g,</span><br><span class="line">            scale=<span class="variable language_">self</span>.pred_mask_scale,</span><br><span class="line">            aspect_ratio_scale=<span class="variable language_">self</span>.aspect_ratio)</span><br><span class="line"></span><br><span class="line">        e_size = <span class="variable language_">self</span>._sample_block_size(</span><br><span class="line">            generator=g,</span><br><span class="line">            scale=<span class="variable language_">self</span>.enc_mask_scale,</span><br><span class="line">            aspect_ratio_scale=(<span class="number">1.</span>, <span class="number">1.</span>))  <span class="comment"># encoder用正方形</span></span><br><span class="line"></span><br><span class="line">        collated_masks_pred, collated_masks_enc = [], []</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 用于统一长度</span></span><br><span class="line">        min_keep_pred = <span class="variable language_">self</span>.height * <span class="variable language_">self</span>.width</span><br><span class="line">        min_keep_enc = <span class="variable language_">self</span>.height * <span class="variable language_">self</span>.width</span><br><span class="line"></span><br><span class="line">        <span class="comment"># ---- 对每张图生成mask ----</span></span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(B):</span><br><span class="line"></span><br><span class="line">            masks_p, masks_C = [], []</span><br><span class="line"></span><br><span class="line">            <span class="comment"># ===== 1. 生成 predictor mask =====</span></span><br><span class="line">            <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="variable language_">self</span>.npred):</span><br><span class="line">                mask, mask_C = <span class="variable language_">self</span>._sample_block_mask(p_size)</span><br><span class="line"></span><br><span class="line">                masks_p.append(mask)      <span class="comment"># 保存预测区域</span></span><br><span class="line">                masks_C.append(mask_C)   <span class="comment"># 保存补集</span></span><br><span class="line"></span><br><span class="line">                <span class="comment"># 更新最小长度（后面要统一）</span></span><br><span class="line">                min_keep_pred = <span class="built_in">min</span>(min_keep_pred, <span class="built_in">len</span>(mask))</span><br><span class="line"></span><br><span class="line">            collated_masks_pred.append(masks_p)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># ===== 2. 设置encoder可用区域 =====</span></span><br><span class="line">            acceptable_regions = masks_C</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 如果允许重叠，就不限制</span></span><br><span class="line">            <span class="keyword">if</span> <span class="variable language_">self</span>.allow_overlap:</span><br><span class="line">                acceptable_regions = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># ===== 3. 生成 encoder mask =====</span></span><br><span class="line">            masks_e = []</span><br><span class="line">            <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="variable language_">self</span>.nenc):</span><br><span class="line">                mask, _ = <span class="variable language_">self</span>._sample_block_mask(</span><br><span class="line">                    e_size,</span><br><span class="line">                    acceptable_regions=acceptable_regions</span><br><span class="line">                )</span><br><span class="line">                masks_e.append(mask)</span><br><span class="line"></span><br><span class="line">                min_keep_enc = <span class="built_in">min</span>(min_keep_enc, <span class="built_in">len</span>(mask))</span><br><span class="line"></span><br><span class="line">            collated_masks_enc.append(masks_e)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># ---- 统一长度（因为mask大小不同）----</span></span><br><span class="line">        collated_masks_pred = [</span><br><span class="line">            [cm[:min_keep_pred] <span class="keyword">for</span> cm <span class="keyword">in</span> cm_list]</span><br><span class="line">            <span class="keyword">for</span> cm_list <span class="keyword">in</span> collated_masks_pred</span><br><span class="line">        ]</span><br><span class="line">        collated_masks_pred = torch.utils.data.default_collate(collated_masks_pred)</span><br><span class="line"></span><br><span class="line">        collated_masks_enc = [</span><br><span class="line">            [cm[:min_keep_enc] <span class="keyword">for</span> cm <span class="keyword">in</span> cm_list]</span><br><span class="line">            <span class="keyword">for</span> cm_list <span class="keyword">in</span> collated_masks_enc</span><br><span class="line">        ]</span><br><span class="line">        collated_masks_enc = torch.utils.data.default_collate(collated_masks_enc)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> collated_batch, collated_masks_enc, collated_masks_pred</span><br></pre></td></tr></table></figure>
+<h2 id="参考"><a class="markdownIt-Anchor" href="#参考"></a> 参考</h2>
+<p><a target="_blank" rel="noopener" href="https://www.guyuehome.com/detail?id=2013613725476483074">联合嵌入预测架构（JEPA）：从理论构想到世界模型的实践之路</a></p>
+
+</article>
+<ol class="animated rollIn hannah-toc"><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-2"><a class="animated rollIn hannah-toc-link" href="#%E6%96%B9%E6%B3%95"><span class="animated rollIn hannah-toc-text"> 方法</span></a><ol class="animated rollIn hannah-toc-child"><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-3"><a class="animated rollIn hannah-toc-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E4%B8%8E%E8%AE%AD%E7%BB%83%E8%BF%87%E7%A8%8B"><span class="animated rollIn hannah-toc-text"> 损失函数与训练过程</span></a></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-3"><a class="animated rollIn hannah-toc-link" href="#%E5%8F%82%E6%95%B0%E6%9B%B4%E6%96%B0%E6%9C%BA%E5%88%B6"><span class="animated rollIn hannah-toc-text"> 参数更新机制</span></a></li></ol></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-2"><a class="animated rollIn hannah-toc-link" href="#%E6%BA%90%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90"><span class="animated rollIn hannah-toc-text"> 源代码解析</span></a><ol class="animated rollIn hannah-toc-child"><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-3"><a class="animated rollIn hannah-toc-link" href="#multiblockpy"><span class="animated rollIn hannah-toc-text"> multiblock.py</span></a></li></ol></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-2"><a class="animated rollIn hannah-toc-link" href="#%E5%8F%82%E8%80%83"><span class="animated rollIn hannah-toc-text"> 参考</span></a></li></ol>
+<div class="animated bounceInDown paginations">
+    <div class="col-md-8 col-md-push-2 col-xs-12">
+        <nav>
+            
+            <a href="/2026/05/31/tools/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="prev col-md-2 col-xs-4 text-left">&larr; Prev</a>
+            
+            <span
+                class="page-content col-md-8  col-xs-4 text-center">
+                
+            </span>
+            
+            <a href="/2026/05/29/paper_notes/VLM%20Pruner/VisionSelector/" class="next col-md-2 col-xs-4 text-right">Next &rarr;</a>
+            
+        </nav>
+        <div>
+            <div class="col-md-6 col-xs-6 text-left">
+                
+                环境配置
+                
+            </div>
+            <div class="col-md-6 col-xs-6 text-right">
+                
+                VisionSelector: End-to-End Learnable Visual Token Compression for Efficient Multimodal LLMs
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!--end body-->
+            <!--begin comments-->
+            
+<div class="comments">
+    
+
+    
+    
+</div>
+
+
+            <!--end comments-->
+        </div>
+    </div>
+
+    <!--begin footer-->
+    <footer id="footer" class="footer animated fadeInUp hide">
+    <p><i class="copy">&copy;</i> 2026 <a href="https://dongliangnie.github.io">dongliangnie</a> All Right Reserved.</p>
+    <p>Powered by <a target="_blank" href="http://hexo.io" rel="external nofollow noopener">Hexo</a>. Theme by <a target="_blank" href="https://github.com/objectyan/hexo-theme-hannah" rel="external nofollow noopener">hannah</a></p>
+</footer>
+    <!--end footer-->
+
+    
+    <!-- scripts list from theme config.yml -->
+    
+    <script src="/js/hannah.js"></script>
+    
+    
+    <!--begin analytics-->
+    
+
+    <!--end analytics-->
+</body>
+<!--end body-->
+<!--begin canvas-nest-->
+<script>
+    var nesturl = "https://unpkg.com/canvas-nest.js/dist/canvas-nest.js";
+    var c = document.getElementsByTagName("body")[0] || document.body || document.documentElement;
+    var b = document.createElement("script");
+    b.setAttribute("type", "text/javascript");
+    b.setAttribute("src", nesturl);
+    b.setAttribute("color",
+        `${ Math.floor(Math.random()*256)},${ Math.floor(Math.random()*256)},${ Math.floor(Math.random()*256)}`);
+    b.setAttribute("opacity", Math.random());
+    b.setAttribute("count", parseInt((Math.random() * 500) || 99));
+    c.appendChild(b)
+</script>
+<!--end canvas-nest-->
+
+</html>

@@ -1,0 +1,674 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!--begin head-->
+
+<head>
+    <meta charset="utf-8">
+<!--begin title-->
+
+<title>
+    
+    claude code远程代理 |
+    
+    纸笔</title>
+<!--end title-->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<!--begin mete-->
+
+<meta name="description" content="个人学习笔记与思考"/>
+
+<meta name="author" content="dongliangnie"/>
+
+<!--end mete-->
+<!--begin keywords-->
+<meta name="keywords" content="Claude Code,Conda,Flow Model,Hexo,JEPA,KV Cache,LLM Hallucination,Paged Attention,Pytorch,Speculative Decoding,Tmux,VLM Hallucination,VLM Pruner,Video Understanding,WSL,World Model,information theory"/>
+<!--end keywords-->
+<!--begin rss-->
+
+<link rel="alternate" href="/atom.xml" title="纸笔" type="application/atom+xml">
+
+<!--end rss-->
+<!--begin favicon-->
+
+<link rel="icon" href="/favicon.ico">
+
+<!--end favicon-->
+<!--begin style-->
+
+<!-- stylesheets list from config.yml -->
+
+<link rel="stylesheet" href="/css/hannah.css">
+
+
+<!--end style-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<meta name="generator" content="Hexo 8.1.2"></head>
+<!--end head-->
+<!--begin body-->
+
+<body class="container-fluid">
+
+    <!--begin menu-->
+    <div class="hannah-menu">
+    <i class="fh fh-ravelry fa-2x btn fixed-menu animated bounce" id="btn_menu" aria-hidden="true"></i>
+    <div class="menu-outer container-fluid hide animated" id="div_menu">
+        <div class="row" style="margin-bottom: 5px;">
+            
+            <div class="col-md-offset-2 col-md-3 col-xs-4 text-center left-social">
+                
+                <a target="_blank" href="https://github.com/dongliangnie" title="GitHub"><i class="fh fh-github"></i></a>
+                
+                <style>
+                    .left-social {
+                        height: 132px;
+                        line-height: 132px;
+                        font-size: 66px;
+                    }
+
+                    .left-social * {
+                        color: #f1ce8e;
+                    }
+
+                    @media (max-width: 767px) {
+                        .left-social {
+                            line-height: 132px;
+                            font-size: 33px;
+                        }
+                    }
+                </style>
+            </div>
+            <!--begin handImg-->
+            <div class="col-md-2 col-xs-4 text-center">
+                
+                <img src="/img/kapibala.jpg" alt="Head Image" class="img-circle">
+                
+            </div>
+            <!--end handImg-->
+            <div class="col-md-3 col-xs-4 text-center right-social">
+                
+                <style>
+                    .right-social {
+                        height: 132px;
+                        line-height: 132px;
+                        font-size: 66px;
+                    }
+
+                    @media (max-width: 767px) {
+                        .right-social {
+                            line-height: 132px;
+                            font-size: 33px;
+                        }
+                    }
+
+                    .right-social * {
+                        color: #f1ce8e;
+                    }
+                </style>
+            </div>
+        </div>
+        <div class="row">
+            <div class="menu-content col-md-8 col-md-push-2 col-xs-12 ">
+                <dl class="menu-content-item">
+                    <dt class="menu-content-title">
+                        <i class="fh fh-bars" aria-hidden="true"></i> Menu
+                    </dt>
+                    <dd class="menu-content-content">
+                        
+                        <div class="col-md-4 col-xs-6 col-sm-4 text-center animated tada">
+                            <a href="/" class="btn btn-block">
+                                
+                                <i class="fh fh-ravelry"></i>
+                                Home
+                            </a>
+                        </div>
+                        
+                        <div class="col-md-4 col-xs-6 col-sm-4 text-center animated tada">
+                            <a href="/categories" class="btn btn-block">
+                                
+                                <i class="fh fh-cubes"></i>
+                                Category
+                            </a>
+                        </div>
+                        
+                        <div class="col-md-4 col-xs-6 col-sm-4 text-center animated tada">
+                            <a href="/tags" class="btn btn-block">
+                                
+                                <i class="fh fh-tags"></i>
+                                Tag
+                            </a>
+                        </div>
+                        
+                        <div class="col-md-4 col-xs-6 col-sm-4 text-center animated tada">
+                            <a href="/archives" class="btn btn-block">
+                                
+                                <i class="fh fh-archive"></i>
+                                Archives
+                            </a>
+                        </div>
+                        
+                        <div class="col-md-4 col-xs-6 col-sm-4 text-center animated tada">
+                            <a href="/about" class="btn btn-block">
+                                
+                                <i class="fh fh-about"></i>
+                                About
+                            </a>
+                        </div>
+                        
+                        <div class="col-md-4 col-xs-6 col-sm-4 text-center animated tada">
+                            <a href="/doc" class="btn btn-block">
+                                
+                                <i class="fh fh-document"></i>
+                                Doc
+                            </a>
+                        </div>
+                        
+                        <div class="col-md-4 col-xs-6 col-sm-4 text-center animated tada">
+                            <a href="/plug" class="btn btn-block">
+                                
+                                <i class="fh fh-plug"></i>
+                                Plug
+                            </a>
+                        </div>
+                        
+                        <div class="col-md-4 col-xs-6 col-sm-4 text-center animated tada">
+                            <a href="/sitemap" class="btn btn-block">
+                                
+                                <i class="fh fh-sitemap"></i>
+                                SiteMap
+                            </a>
+                        </div>
+                        
+                        <div class="col-md-4 col-xs-6 col-sm-4 text-center animated tada">
+                            <a href="/atom.xml" class="btn btn-block">
+                                <i class="fh fh-rss" aria-hidden="true"></i> RSS
+                            </a>
+                        </div>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <div class="row">
+            <div class="menu-content col-md-8 col-md-offset-2 col-xs-12 ">
+                <dl class="col-md-6 col-xs-6 menu-content-item">
+                    <dt class="menu-content-title">
+                        <i class="fh fh-cubes" aria-hidden="true"></i> Category
+                    </dt>
+                    <dd class="menu-content-content animated zoomIn">
+                        <ul class="menu-cate-list"><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/algorithm/"><i class="fh fh-cube" aria-hidden="true"></i> algorithm</a><span class="menu-cate-list-count">1</span></li><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/math/"><i class="fh fh-cube" aria-hidden="true"></i> math</a><span class="menu-cate-list-count">1</span><ul class="menu-cate-list-child"><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/math/information-theory/"><i class="fh fh-cube" aria-hidden="true"></i> information theory</a><span class="menu-cate-list-count">1</span></li></ul></li><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/paper-notes/"><i class="fh fh-cube" aria-hidden="true"></i> paper_notes</a><span class="menu-cate-list-count">22</span><ul class="menu-cate-list-child"><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/paper-notes/Flow-Model/"><i class="fh fh-cube" aria-hidden="true"></i> Flow Model</a><span class="menu-cate-list-count">1</span></li><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/paper-notes/JEPA/"><i class="fh fh-cube" aria-hidden="true"></i> JEPA</a><span class="menu-cate-list-count">3</span></li><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/paper-notes/vlm-llm/"><i class="fh fh-cube" aria-hidden="true"></i> VLM/LLM</a><span class="menu-cate-list-count">17</span><ul class="menu-cate-list-child"><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/paper-notes/vlm-llm/Inference/"><i class="fh fh-cube" aria-hidden="true"></i> Inference</a><span class="menu-cate-list-count">3</span></li><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/paper-notes/vlm-llm/LLM-Hallucination/"><i class="fh fh-cube" aria-hidden="true"></i> LLM Hallucination</a><span class="menu-cate-list-count">1</span></li><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/paper-notes/vlm-llm/Prompt/"><i class="fh fh-cube" aria-hidden="true"></i> Prompt</a><span class="menu-cate-list-count">1</span></li><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/paper-notes/vlm-llm/VLM-Hallucination/"><i class="fh fh-cube" aria-hidden="true"></i> VLM Hallucination</a><span class="menu-cate-list-count">6</span></li><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/paper-notes/vlm-llm/VLM-Pruner/"><i class="fh fh-cube" aria-hidden="true"></i> VLM Pruner</a><span class="menu-cate-list-count">6</span></li></ul></li><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/paper-notes/Video-Understanding/"><i class="fh fh-cube" aria-hidden="true"></i> Video Understanding</a><span class="menu-cate-list-count">1</span></li></ul></li><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/reproduce/"><i class="fh fh-cube" aria-hidden="true"></i> reproduce</a><span class="menu-cate-list-count">2</span><ul class="menu-cate-list-child"><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/reproduce/vlm-llm/"><i class="fh fh-cube" aria-hidden="true"></i> VLM/LLM</a><span class="menu-cate-list-count">2</span></li></ul></li><li class="menu-cate-list-item"><a class="menu-cate-list-link" href="/categories/tools/"><i class="fh fh-cube" aria-hidden="true"></i> tools</a><span class="menu-cate-list-count">9</span></li></ul>
+                    </dd>
+                </dl>
+                <dl class="col-md-6 col-xs-6 menu-content-item">
+                    <dt class="menu-content-title">
+                        <i class="fh fh-tag" aria-hidden="true"></i> Tags
+                    </dt>
+                    <dd class="menu-content-content animated zoomIn">
+                        <ul class="menu-tag-list" itemprop="keywords"><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/Claude-Code/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> Claude Code</a><span class="menu-tag-list-count">1</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/Conda/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> Conda</a><span class="menu-tag-list-count">1</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/Flow-Model/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> Flow Model</a><span class="menu-tag-list-count">1</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/Hexo/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> Hexo</a><span class="menu-tag-list-count">1</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/JEPA/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> JEPA</a><span class="menu-tag-list-count">3</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/KV-Cache/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> KV Cache</a><span class="menu-tag-list-count">1</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/LLM-Hallucination/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> LLM Hallucination</a><span class="menu-tag-list-count">1</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/Paged-Attention/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> Paged Attention</a><span class="menu-tag-list-count">1</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/Pytorch/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> Pytorch</a><span class="menu-tag-list-count">1</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/Speculative-Decoding/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> Speculative Decoding</a><span class="menu-tag-list-count">1</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/Tmux/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> Tmux</a><span class="menu-tag-list-count">1</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/vlm-hallucination/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> VLM Hallucination</a><span class="menu-tag-list-count">8</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/vlm-pruner/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> VLM Pruner</a><span class="menu-tag-list-count">6</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/Video-Understanding/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> Video Understanding</a><span class="menu-tag-list-count">1</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/WSL/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> WSL</a><span class="menu-tag-list-count">1</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/World-Model/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> World Model</a><span class="menu-tag-list-count">1</span></li><li class="menu-tag-list-item"><a class="menu-tag-list-link" href="/tags/information-theory/" rel="tag"><i class="fh fh-tag" aria-hidden="true"></i> information theory</a><span class="menu-tag-list-count">1</span></li></ul>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
+    <!--end menu-->
+
+    <div class="row hannah-body">
+        <div class="col-md-8 col-md-push-2 col-xs-12">
+            <!--begin breadcrumb-->
+            <div class="bread-crumb">
+    <ul class="bread-crumb-menu animated rubberBand">
+        <li><a href="/"><i class="fh fh-ravelry" aria-hidden="true"></i> Home</a></li>
+        
+        <li><a href="/categories/tools/"><i class="fh fh-cube" aria-hidden="true"></i> tools</a>
+        </li>
+        
+        <li>
+            
+            <i class="fh fh-newspaper-o" aria-hidden="true"></i>
+            
+            claude code远程代理
+        </li>
+        
+    </ul>
+    <div class="bread-crumb-search">
+        <div class="search">
+    <i class="fh fh-search icon-search"></i>
+    <input placeholder="Search ..." onkeyup="searchFunc(this,event,'/search.xml')"
+           class="input-search animated fadeInRight"/>
+    <div class="search-result animated fadeInRight">
+        <a class="animated tada col-lg-12 search-result-item result-link" href="/2026/06/05/tools/claude%20code%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%90%86/">claude code远程代理</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/31/tools/ccx/">Ubuntu上快速切换claude code api</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/31/tools/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/31/paper_notes/JEPA/I-JEPA/">Self-Supervised Learning from Images with a Joint-Embedding Predictive Architecture</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/29/paper_notes/VLM%20Pruner/VisionSelector/">VisionSelector: End-to-End Learnable Visual Token Compression for Efficient Multimodal LLMs</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/27/tools/claude%20code/">Claude Code</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/27/paper_notes/LLM%20Foundation/CoOP/">CoOP</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/27/paper_notes/Video%20Understanding/I3D/">Quo Vadis, Action Recognition? A New Model and the Kinetics Dataset</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/23/paper_notes/VLM%20Pruner/SparseVLM/">SparseVLM: Visual Token Sparsification for Efficient Vision-Language Model Inference</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/22/paper_notes/LLM%20Foundation/KV%20Cache/">KV Cache笔记</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/22/paper_notes/LLM%20Foundation/PagedAttention/">Paged Attention笔记</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/22/paper_notes/VLM%20Pruner/VTW/">Boosting Multimodal Large Language Models with Visual Tokens Withdrawal for Rapid Inference</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/21/paper_notes/JEPA/stable-worldmodel/">stable-worldmodel库使用</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/20/paper_notes/Flow/Flow/">Flow Notes</a><a class="animated tada col-lg-12 search-result-item result-link" href="/2026/05/19/paper_notes/JEPA/LLM-JEPA/">LLM-JEPA: Large Language Models Meet Joint Embedding Predictive Architectures</a>
+    </div>
+</div>
+    </div>
+</div>
+            <!--end breadcrumb-->
+            <!--begin body-->
+            <article class="post animated rollIn">
+    <h1 class="post-title">claude code远程代理</h1>
+    <div class="post-subtitle">
+        
+        <time datetime="2026-06-04T16:00:00.000Z" class="item">
+            <i class="fh fh-calendar" aria-hidden="true"></i>&nbsp;&nbsp;2026-06-05
+        </time>
+        
+        
+        <span class="item">
+      <i class="fh fh-cubes" aria-hidden="true"></i>&nbsp;
+            
+            <a class="label label-primary tags" href="/categories/tools/">
+           <i class="fh fh-cube" aria-hidden="true"></i>&nbsp;tools
+        </a>
+            
+        </span>
+        
+        
+    </div>
+    
+    <h1 id="预备知识"><a class="markdownIt-Anchor" href="#预备知识"></a> 预备知识</h1>
+<h2 id="npm"><a class="markdownIt-Anchor" href="#npm"></a> <code>npm</code></h2>
+<p><strong>npm</strong> 是 <strong>Node Package Manager</strong>（Node.js 包管理器）的缩写，它是 JavaScript 世界中最主要的包管理和分发工具。</p>
+<h3 id="核心功能"><a class="markdownIt-Anchor" href="#核心功能"></a> 核心功能</h3>
+<h4 id="1-管理依赖包"><a class="markdownIt-Anchor" href="#1-管理依赖包"></a> 1. <strong>管理依赖包</strong></h4>
+<ul>
+<li>安装、更新、卸载第三方库和工具</li>
+<li>例如你之前尝试的 <code>@anthropic-ai/claude-code</code> 就是一个 npm 包</li>
+</ul>
+<h4 id="2-版本管理"><a class="markdownIt-Anchor" href="#2-版本管理"></a> 2. <strong>版本管理</strong></h4>
+<ul>
+<li>精确控制项目依赖的版本</li>
+<li>自动处理包之间的版本依赖关系</li>
+</ul>
+<h4 id="3-共享代码"><a class="markdownIt-Anchor" href="#3-共享代码"></a> 3. <strong>共享代码</strong></h4>
+<ul>
+<li>开发者可以发布自己的包到 npm 仓库</li>
+<li>其他人可以通过 npm 安装使用</li>
+</ul>
+<h3 id="主要组成部分"><a class="markdownIt-Anchor" href="#主要组成部分"></a> 主要组成部分</h3>
+<table>
+<thead>
+<tr>
+<th>组件</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>npm 官网</strong></td>
+<td><a target="_blank" rel="noopener" href="https://www.npmjs.com">https://www.npmjs.com</a> - 查找和浏览包的网站</td>
+</tr>
+<tr>
+<td><strong>npm registry</strong></td>
+<td>存储所有包的服务器（如 <a target="_blank" rel="noopener" href="http://registry.npmjs.org">registry.npmjs.org</a>）</td>
+</tr>
+<tr>
+<td><strong>npm CLI</strong></td>
+<td>命令行工具，就是你使用的 <code>npm</code> 命令</td>
+</tr>
+</tbody>
+</table>
+<h3 id="常用命令示例"><a class="markdownIt-Anchor" href="#常用命令示例"></a> 常用命令示例</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">npm install &lt;包名&gt;      <span class="comment"># 安装包</span></span><br><span class="line">npm install -g &lt;包名&gt;    <span class="comment"># 全局安装（你刚才用的）</span></span><br><span class="line">npm uninstall &lt;包名&gt;     <span class="comment"># 卸载包</span></span><br><span class="line">npm update &lt;包名&gt;        <span class="comment"># 更新包</span></span><br><span class="line">npm search &lt;关键词&gt;      <span class="comment"># 搜索包</span></span><br><span class="line">npm config <span class="built_in">set</span> &lt;key&gt; &lt;value&gt;  <span class="comment"># 配置 npm（如切换镜像源）</span></span><br></pre></td></tr></table></figure>
+<h3 id="类似概念类比"><a class="markdownIt-Anchor" href="#类似概念类比"></a> 类似概念类比</h3>
+<p>可以把 npm 理解为：</p>
+<ul>
+<li><strong>JavaScript 的 App Store</strong>：开发者的应用商店，只是安装的是代码包而不是手机 App</li>
+<li><strong>类似于</strong>：Python 的 pip、Java 的 Maven、Linux 的 apt-get</li>
+</ul>
+<h2 id="ssh-反向隧道"><a class="markdownIt-Anchor" href="#ssh-反向隧道"></a> SSH 反向隧道</h2>
+<p>SSH 反向隧道命令的作用是<strong>将你本地（客户端）的端口暴露到远程云服务器上</strong>，让云服务器可以通过本地隧道访问你本地的服务。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ssh -N -f \</span><br><span class="line">  -R 7890:本地IP:7899 \</span><br><span class="line">  -R 9999:本地IP:12345 \</span><br><span class="line">  root@你的云服务器IP</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-N</code></td>
+<td>不执行远程命令，只建立隧道</td>
+</tr>
+<tr>
+<td><code>-f</code></td>
+<td>后台运行 SSH 连接</td>
+</tr>
+<tr>
+<td><code>-R</code></td>
+<td>反向隧道（Remote forward）</td>
+</tr>
+<tr>
+<td><code>本地IP</code></td>
+<td>通常填 <code>localhost</code> 或 <code>127.0.0.1</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="工作原理"><a class="markdownIt-Anchor" href="#工作原理"></a> 工作原理</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">云服务器:7890  →  通过隧道  →  你本地电脑:7899</span><br><span class="line">云服务器:9999  →  通过隧道  →  你本地电脑:12345</span><br></pre></td></tr></table></figure>
+<p><strong>关键理解</strong>：</p>
+<ul>
+<li>云服务器上的程序连接到 <code>localhost:7890</code>，实际访问的是你本地的 <code>7899</code> 端口</li>
+<li>云服务器上的程序连接到 <code>localhost:9999</code>，实际访问的是你本地的 <code>12345</code> 端口</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ssh -N -f \</span><br><span class="line">  -R 7890:172.27.230.190:7890 \</span><br><span class="line">  -R 7891:172.27.230.190:7891 \</span><br><span class="line">  root@服务器ip</span><br></pre></td></tr></table></figure>
+<p>这个命令用于<strong>检查本地端口 <code>9999</code> 和 <code>7890</code> 的监听状态</strong>，是验证你的代理或隧道服务是否正常运行的常用方法。</p>
+<h2 id="socket-statistics"><a class="markdownIt-Anchor" href="#socket-statistics"></a> Socket Statistics</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ss -tlnp | grep -E <span class="string">&#x27;9999|7890&#x27;</span></span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ss</code></td>
+<td>Socket Statistics，比 <code>netstat</code> 更现代的网络工具</td>
+</tr>
+<tr>
+<td><code>-t</code></td>
+<td>只显示 TCP 端口</td>
+</tr>
+<tr>
+<td><code>-l</code></td>
+<td>只显示正在<strong>监听</strong>（LISTEN）的端口</td>
+</tr>
+<tr>
+<td><code>-n</code></td>
+<td>不解析服务名称，直接显示端口号（如显示 <code>7890</code> 而不是 <code>http-alt</code>）</td>
+</tr>
+<tr>
+<td><code>-p</code></td>
+<td>显示占用该端口的<strong>进程名称和 PID</strong></td>
+</tr>
+<tr>
+<td><code>grep -E</code></td>
+<td>扩展正则匹配，筛选包含 9999 或 7890 的行</td>
+</tr>
+</tbody>
+</table>
+<h3 id="输出解读"><a class="markdownIt-Anchor" href="#输出解读"></a> 输出解读</h3>
+<p>正常情况下（端口已启用）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 示例输出</span></span><br><span class="line">LISTEN 0      4096         0.0.0.0:7890       0.0.0.0:*    <span class="built_in">users</span>:((&quot;clash&quot;,pid=<span class="number">12345</span>,fd=<span class="number">9</span>))</span><br><span class="line">LISTEN 0      128          127.0.0.1:9999     0.0.0.0:*    <span class="built_in">users</span>:((&quot;sshd&quot;,pid=<span class="number">12347</span>,fd=<span class="number">10</span>))</span><br></pre></td></tr></table></figure>
+<p><strong>解读</strong>：</p>
+<ul>
+<li><code>0.0.0.0:7890</code> - 监听所有网络接口，允许外部连接</li>
+<li><code>127.0.0.1:9999</code> - 只监听本地回环地址，仅本机可访问</li>
+<li><code>clash</code> - 进程名，说明 7890 是 Clash 代理</li>
+<li><code>sshd</code> - 进程名，说明 9999 是 SSH 隧道转发的端口</li>
+</ul>
+<p>无输出（端口未启用）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 没有任何输出，表示：</span></span><br><span class="line"><span class="comment"># 1. 端口没有被任何进程监听</span></span><br><span class="line"><span class="comment"># 2. 或者端口被防火墙阻止了</span></span><br></pre></td></tr></table></figure>
+<h2 id="curl"><a class="markdownIt-Anchor" href="#curl"></a> <code>curl</code></h2>
+<p>检查是否可以正常访问外网</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl google.com</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/dongliangnie/image@master/image/202606022124086.png" alt="image-20260601193659093" /></p>
+<h3 id="综合使用"><a class="markdownIt-Anchor" href="#综合使用"></a> 综合使用</h3>
+<h4 id="举例1"><a class="markdownIt-Anchor" href="#举例1"></a> 举例1</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">timeout</span> 10 curl -x http://127.0.0.1:7890 -s -o /dev/null -w <span class="string">&#x27;HTTP:%&#123;http_code&#125; TIME:%&#123;time_total&#125;s&#x27;</span> https://api.anthropic.com 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>部分</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>timeout 10</code></td>
+<td>整个命令最多执行 10 秒，防止卡住</td>
+</tr>
+<tr>
+<td><code>curl</code></td>
+<td>HTTP 请求工具</td>
+</tr>
+<tr>
+<td><code>-x http://127.0.0.1:7890</code></td>
+<td>使用代理（你的 Clash HTTP 代理）</td>
+</tr>
+<tr>
+<td><code>-s</code></td>
+<td>静默模式，不显示进度条和错误信息</td>
+</tr>
+<tr>
+<td><code>-o /dev/null</code></td>
+<td>丢弃响应内容，只关心响应头</td>
+</tr>
+<tr>
+<td><code>-w</code></td>
+<td>自定义输出格式</td>
+</tr>
+<tr>
+<td><code>'HTTP:%{http_code} TIME:%{time_total}s'</code></td>
+<td>输出 HTTP 状态码和总耗时</td>
+</tr>
+<tr>
+<td><code>https://api.anthropic.com</code></td>
+<td>目标地址（Anthropic API）</td>
+</tr>
+<tr>
+<td><code>2&gt;&amp;1</code></td>
+<td>将错误输出重定向到标准输出（便于统一捕获）</td>
+</tr>
+</tbody>
+</table>
+<p>✅ 成功情况</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HTTP:200 TIME:0.523s</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>HTTP:200</code>：代理工作正常，成功连接到 Anthropic API</li>
+<li><code>TIME:0.523s</code>：总耗时 0.5 秒，速度正常</li>
+</ul>
+<p>❌ 失败情况及诊断</p>
+<table>
+<thead>
+<tr>
+<th>输出</th>
+<th>含义</th>
+<th>解决方案</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>HTTP:000</code> + 无 TIME</td>
+<td>代理完全连不通</td>
+<td>Clash 没启动或端口不对</td>
+</tr>
+<tr>
+<td><code>HTTP:407</code></td>
+<td>需要代理认证</td>
+<td>在代理 URL 中添加用户名密码</td>
+</tr>
+<tr>
+<td><code>HTTP:502/504</code></td>
+<td>代理服务器无法连接目标</td>
+<td>Clash 节点有问题，换一个节点</td>
+</tr>
+<tr>
+<td><code>timeout:10</code> 命令超时</td>
+<td>代理响应太慢</td>
+<td>网络不稳定，增加 timeout 值</td>
+</tr>
+<tr>
+<td><code>curl: (7) Failed to connect</code></td>
+<td>本地 7890 端口没有监听</td>
+<td>先启动 Clash</td>
+</tr>
+</tbody>
+</table>
+<p>对比有无代理的差异</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 不使用代理（直连）</span></span><br><span class="line"><span class="built_in">timeout</span> 10 curl -s -o /dev/null -w <span class="string">&#x27;直连: %&#123;http_code&#125;\n&#x27;</span> https://registry.npmmirror.com</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用代理</span></span><br><span class="line"><span class="built_in">timeout</span> 10 curl -x http://127.0.0.1:7890 -s -o /dev/null -w <span class="string">&#x27;代理: %&#123;http_code&#125;\n&#x27;</span> https://registry.npmmirror.com</span><br></pre></td></tr></table></figure>
+<h1 id="claude-code-远程代理部署指南"><a class="markdownIt-Anchor" href="#claude-code-远程代理部署指南"></a> Claude Code 远程代理部署指南</h1>
+<p>通过 SSH 反向隧道，在云服务器上运行 Claude Code，实际调用本地 DeepSeek API。</p>
+<h2 id="架构总览"><a class="markdownIt-Anchor" href="#架构总览"></a> 架构总览</h2>
+<p><img src="https://cdn.jsdelivr.net/gh/dongliangnie/image@master/image/202606022124557.png" alt="image-20260601173208181" /></p>
+<h2 id="前置条件"><a class="markdownIt-Anchor" href="#前置条件"></a> 前置条件</h2>
+<table>
+<thead>
+<tr>
+<th>组件</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>云服务器</td>
+<td>能 SSH 登录，装好 Claude Code</td>
+</tr>
+<tr>
+<td>本地机器</td>
+<td>WSL2 / Linux / macOS，能访问 <a target="_blank" rel="noopener" href="http://packyapi.com">packyapi.com</a></td>
+</tr>
+<tr>
+<td>API Key</td>
+<td><a target="_blank" rel="noopener" href="http://packyapi.com">packyapi.com</a> 的 API Key</td>
+</tr>
+<tr>
+<td>代理工具</td>
+<td>clawgate 或 Python 代理脚本</td>
+</tr>
+</tbody>
+</table>
+<h2 id="步骤-1本地启动代理"><a class="markdownIt-Anchor" href="#步骤-1本地启动代理"></a> 步骤 1：本地启动代理</h2>
+<h3 id="方案-a使用-python-代理推荐更可控"><a class="markdownIt-Anchor" href="#方案-a使用-python-代理推荐更可控"></a> 方案 A：使用 Python 代理（推荐，更可控）</h3>
+<p>创建 <code>/home/niedongliang/workspace/claude_proxy.py</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json, urllib.request, http.server, sys</span><br><span class="line"></span><br><span class="line">API_KEY = <span class="string">&quot;你的 packyapi API Key&quot;</span></span><br><span class="line">BASE_URL = <span class="string">&quot;https://www.packyapi.com&quot;</span></span><br><span class="line">MODEL = <span class="string">&quot;deepseek-v4-flash&quot;</span>  <span class="comment"># 改成你的模型名</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Handler</span>(http.server.BaseHTTPRequestHandler):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">do_GET</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="variable language_">self</span>.send_response(<span class="number">200</span>)</span><br><span class="line">        <span class="variable language_">self</span>.send_header(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;application/json&quot;</span>)</span><br><span class="line">        <span class="variable language_">self</span>.end_headers()</span><br><span class="line">        <span class="variable language_">self</span>.wfile.write(<span class="string">b&#x27;&#123;&quot;ok&quot;:true&#125;&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">do_POST</span>(<span class="params">self</span>):</span><br><span class="line">        base_path = <span class="variable language_">self</span>.path.split(<span class="string">&quot;?&quot;</span>)[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">if</span> base_path <span class="keyword">not</span> <span class="keyword">in</span> (<span class="string">&quot;/v1/messages&quot;</span>, <span class="string">&quot;/v1/messages/batch&quot;</span>):</span><br><span class="line">            <span class="variable language_">self</span>.send_error(<span class="number">404</span>)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        clen = <span class="built_in">int</span>(<span class="variable language_">self</span>.headers.get(<span class="string">&quot;Content-Length&quot;</span>, <span class="number">0</span>))</span><br><span class="line">        body = json.loads(<span class="variable language_">self</span>.rfile.read(clen))</span><br><span class="line">        msgs = []</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&quot;system&quot;</span> <span class="keyword">in</span> body:</span><br><span class="line">            sys_text = body[<span class="string">&quot;system&quot;</span>] <span class="keyword">if</span> <span class="built_in">isinstance</span>(body[<span class="string">&quot;system&quot;</span>], <span class="built_in">str</span>) <span class="keyword">else</span> <span class="string">&quot;\n&quot;</span>.join(</span><br><span class="line">                b.get(<span class="string">&quot;text&quot;</span>,<span class="string">&quot;&quot;</span>) <span class="keyword">for</span> b <span class="keyword">in</span> body[<span class="string">&quot;system&quot;</span>] <span class="keyword">if</span> b.get(<span class="string">&quot;type&quot;</span>)==<span class="string">&quot;text&quot;</span></span><br><span class="line">            )</span><br><span class="line">            msgs.append(&#123;<span class="string">&quot;role&quot;</span>: <span class="string">&quot;system&quot;</span>, <span class="string">&quot;content&quot;</span>: sys_text&#125;)</span><br><span class="line">        <span class="keyword">for</span> r <span class="keyword">in</span> body.get(<span class="string">&quot;messages&quot;</span>, []):</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">isinstance</span>(r.get(<span class="string">&quot;content&quot;</span>), <span class="built_in">list</span>):</span><br><span class="line">                text = <span class="string">&quot;\n&quot;</span>.join(c.get(<span class="string">&quot;text&quot;</span>,<span class="string">&quot;&quot;</span>) <span class="keyword">for</span> c <span class="keyword">in</span> r[<span class="string">&quot;content&quot;</span>] <span class="keyword">if</span> c.get(<span class="string">&quot;type&quot;</span>)==<span class="string">&quot;text&quot;</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                text = r.get(<span class="string">&quot;content&quot;</span>,<span class="string">&quot;&quot;</span>)</span><br><span class="line">            msgs.append(&#123;<span class="string">&quot;role&quot;</span>: r[<span class="string">&quot;role&quot;</span>], <span class="string">&quot;content&quot;</span>: text&#125;)</span><br><span class="line">        max_tok = body.get(<span class="string">&quot;max_tokens&quot;</span>, <span class="number">8192</span>)</span><br><span class="line">        oaibody = json.dumps(&#123;</span><br><span class="line">            <span class="string">&quot;model&quot;</span>: MODEL, <span class="string">&quot;messages&quot;</span>: msgs,</span><br><span class="line">            <span class="string">&quot;max_tokens&quot;</span>: <span class="built_in">max</span>(max_tok, <span class="number">2048</span>)</span><br><span class="line">        &#125;).encode()</span><br><span class="line">        req = urllib.request.Request(</span><br><span class="line">            <span class="string">f&quot;<span class="subst">&#123;BASE_URL&#125;</span>/v1/chat/completions&quot;</span>, data=oaibody,</span><br><span class="line">            headers=&#123;<span class="string">&quot;Authorization&quot;</span>: <span class="string">f&quot;Bearer <span class="subst">&#123;API_KEY&#125;</span>&quot;</span>, <span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;application/json&quot;</span>&#125;,</span><br><span class="line">        )</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            resp = urllib.request.urlopen(req, timeout=<span class="number">120</span>)</span><br><span class="line">            data = json.loads(resp.read())</span><br><span class="line">            choice = data[<span class="string">&quot;choices&quot;</span>][<span class="number">0</span>]</span><br><span class="line">            msg = choice[<span class="string">&quot;message&quot;</span>]</span><br><span class="line">            text = msg.get(<span class="string">&quot;content&quot;</span>) <span class="keyword">or</span> msg.get(<span class="string">&quot;reasoning_content&quot;</span>, <span class="string">&quot;&quot;</span>)</span><br><span class="line">            anthresp = &#123;</span><br><span class="line">                <span class="string">&quot;id&quot;</span>: data[<span class="string">&quot;id&quot;</span>], <span class="string">&quot;type&quot;</span>: <span class="string">&quot;message&quot;</span>, <span class="string">&quot;role&quot;</span>: <span class="string">&quot;assistant&quot;</span>,</span><br><span class="line">                <span class="string">&quot;content&quot;</span>: [&#123;<span class="string">&quot;type&quot;</span>: <span class="string">&quot;text&quot;</span>, <span class="string">&quot;text&quot;</span>: text&#125;], <span class="string">&quot;model&quot;</span>: MODEL,</span><br><span class="line">                <span class="string">&quot;stop_reason&quot;</span>: <span class="string">&quot;end_turn&quot;</span> <span class="keyword">if</span> choice.get(<span class="string">&quot;finish_reason&quot;</span>) == <span class="string">&quot;stop&quot;</span> <span class="keyword">else</span> <span class="string">&quot;max_tokens&quot;</span>,</span><br><span class="line">                <span class="string">&quot;usage&quot;</span>: &#123;<span class="string">&quot;input_tokens&quot;</span>: data[<span class="string">&quot;usage&quot;</span>][<span class="string">&quot;prompt_tokens&quot;</span>],</span><br><span class="line">                          <span class="string">&quot;output_tokens&quot;</span>: data[<span class="string">&quot;usage&quot;</span>][<span class="string">&quot;completion_tokens&quot;</span>]&#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="variable language_">self</span>.send_response(<span class="number">200</span>)</span><br><span class="line">            <span class="variable language_">self</span>.send_header(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;application/json&quot;</span>)</span><br><span class="line">            <span class="variable language_">self</span>.end_headers()</span><br><span class="line">            <span class="variable language_">self</span>.wfile.write(json.dumps(anthresp).encode())</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            <span class="variable language_">self</span>.send_response(<span class="number">502</span>)</span><br><span class="line">            <span class="variable language_">self</span>.send_header(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;application/json&quot;</span>)</span><br><span class="line">            <span class="variable language_">self</span>.end_headers()</span><br><span class="line">            <span class="variable language_">self</span>.wfile.write(json.dumps(&#123;<span class="string">&quot;error&quot;</span>: &#123;<span class="string">&quot;type&quot;</span>: <span class="string">&quot;api_error&quot;</span>, <span class="string">&quot;message&quot;</span>: <span class="built_in">str</span>(e)&#125;&#125;).encode())</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">log_message</span>(<span class="params">self, <span class="built_in">format</span>, *args</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;[LOG] <span class="subst">&#123;args&#125;</span>&quot;</span>, file=sys.stderr, flush=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    port = <span class="built_in">int</span>(sys.argv[<span class="number">1</span>]) <span class="keyword">if</span> <span class="built_in">len</span>(sys.argv) &gt; <span class="number">1</span> <span class="keyword">else</span> <span class="number">12345</span></span><br><span class="line">    httpd = http.server.HTTPServer((<span class="string">&quot;0.0.0.0&quot;</span>, port), Handler)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;Proxy listening on :<span class="subst">&#123;port&#125;</span> -&gt; <span class="subst">&#123;BASE_URL&#125;</span> (<span class="subst">&#123;MODEL&#125;</span>)&quot;</span>, flush=<span class="literal">True</span>)</span><br><span class="line">    httpd.serve_forever()</span><br></pre></td></tr></table></figure>
+<p>启动代理：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 claude_proxy.py 12345</span><br></pre></td></tr></table></figure>
+<h3 id="方案-b使用-clawgate"><a class="markdownIt-Anchor" href="#方案-b使用-clawgate"></a> 方案 B：使用 clawgate</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">clawgate --mode=api \</span><br><span class="line">  --apiKey=你的_packyapi_Key \</span><br><span class="line">  --baseUrl=https://www.packyapi.com \</span><br><span class="line">  --port=12345 \</span><br><span class="line">  --host=0.0.0.0 \</span><br><span class="line">  --bigModel=deepseek-v4-flash \</span><br><span class="line">  --midModel=deepseek-v4-flash \</span><br><span class="line">  --smallModel=deepseek-v4-flash</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>⚠️ <strong>坑</strong>：clawgate 是 Go 二进制，会自动读取 <code>http_proxy</code> 环境变量走代理。<br />
+如果本地有 Clash 等代理，需用 <code>env -u http_proxy -u https_proxy ...</code> 清除变量再启动，<br />
+或在 <code>NO_PROXY</code> 中加入 <code>packyapi.com</code>。</p>
+</blockquote>
+<h2 id="步骤-2建立-ssh-反向隧道"><a class="markdownIt-Anchor" href="#步骤-2建立-ssh-反向隧道"></a> 步骤 2：建立 SSH 反向隧道</h2>
+<p>在<strong>本地机器</strong>上执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 先查本地 IP</span></span><br><span class="line">ip addr show eth0 | grep inet</span><br><span class="line"><span class="comment"># 输出示例: inet 172.27.230.190/20 ...</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 建立隧道</span></span><br><span class="line">ssh -N -f \</span><br><span class="line">  -R 7890:本地IP:7899 \        <span class="comment"># Clash 代理端口（可选）</span></span><br><span class="line">  -R 9999:本地IP:12345 \       <span class="comment"># 代理端口</span></span><br><span class="line">  root@你的云服务器IP</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>-N</code>: 不执行远程命令，只做端口转发</li>
+<li><code>-f</code>: 后台运行</li>
+<li><code>-R</code>: 反向端口转发（远程端口 → 本地地址）</li>
+</ul>
+<p>验证隧道状态（在云服务器上）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ss -tlnp | grep -E <span class="string">&#x27;9999|7890&#x27;</span></span><br></pre></td></tr></table></figure>
+<h2 id="步骤-3在云服务器上测试隧道"><a class="markdownIt-Anchor" href="#步骤-3在云服务器上测试隧道"></a> 步骤 3：在云服务器上测试隧道</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">curl -v --noproxy <span class="string">&#x27;*&#x27;</span> --max-time 20 \</span><br><span class="line">  http://127.0.0.1:9999/v1/messages \</span><br><span class="line">  -H <span class="string">&quot;x-api-key: test&quot;</span> \</span><br><span class="line">  -H <span class="string">&quot;anthropic-version: 2023-06-01&quot;</span> \</span><br><span class="line">  -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">  -d <span class="string">&#x27;&#123;&quot;model&quot;:&quot;deepseek-v4-flash&quot;,&quot;max_tokens&quot;:100,&quot;messages&quot;:[&#123;&quot;role&quot;:&quot;user&quot;,&quot;content&quot;:&quot;say hello&quot;&#125;]&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>成功应返回 Anthropic 格式的 JSON 响应。</p>
+<h2 id="步骤-4配置并启动-claude-code"><a class="markdownIt-Anchor" href="#步骤-4配置并启动-claude-code"></a> 步骤 4：配置并启动 Claude Code</h2>
+<h3 id="写入-~bashrc持久化"><a class="markdownIt-Anchor" href="#写入-~bashrc持久化"></a> 写入 ~/.bashrc（持久化）</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> &gt;&gt; ~/.bashrc &lt;&lt; <span class="string">&#x27;EOF&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># --- Claude Code Remote Proxy ---</span></span><br><span class="line"><span class="built_in">export</span> ANTHROPIC_API_KEY=<span class="string">&quot;sk-placeholder&quot;</span></span><br><span class="line"><span class="built_in">export</span> ANTHROPIC_BASE_URL=<span class="string">&quot;http://127.0.0.1:9999&quot;</span></span><br><span class="line"><span class="built_in">export</span> ANTHROPIC_MODEL=<span class="string">&quot;deepseek-v4-flash&quot;</span></span><br><span class="line"><span class="built_in">export</span> ANTHROPIC_DEFAULT_HAIKU_MODEL=<span class="string">&quot;deepseek-v4-flash&quot;</span></span><br><span class="line"><span class="built_in">export</span> ANTHROPIC_DEFAULT_SONNET_MODEL=<span class="string">&quot;deepseek-v4-flash&quot;</span></span><br><span class="line"><span class="built_in">export</span> ANTHROPIC_DEFAULT_OPUS_MODEL=<span class="string">&quot;deepseek-v4-flash&quot;</span></span><br><span class="line"><span class="built_in">export</span> ANTHROPIC_REASONING_MODEL=<span class="string">&quot;deepseek-v4-flash&quot;</span></span><br><span class="line"><span class="built_in">export</span> http_proxy=http://127.0.0.1:7890</span><br><span class="line"><span class="built_in">export</span> https_proxy=http://127.0.0.1:7890</span><br><span class="line"><span class="built_in">export</span> NO_PROXY=127.0.0.1,localhost,::1</span><br><span class="line"><span class="built_in">export</span> no_proxy=127.0.0.1,localhost,::1</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br><span class="line">claude</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>ANTHROPIC_API_KEY</code> 设为占位符即可，实际 key 在本地代理中配置。</p>
+</blockquote>
+<hr />
+<h2 id="步骤-5常见问题排查"><a class="markdownIt-Anchor" href="#步骤-5常见问题排查"></a> 步骤 5：常见问题排查</h2>
+<h3 id="51-connection-reset-by-peer"><a class="markdownIt-Anchor" href="#51-connection-reset-by-peer"></a> 5.1 Connection reset by peer</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl: (56) Recv failure: Connection reset by peer</span><br></pre></td></tr></table></figure>
+<p><strong>原因</strong>：SSH 隧道指向的本地 IP 过期（WSL2 重启后 IP 会变）。</p>
+<p><strong>解决</strong>：在本地机器重新查 IP，重建隧道：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ip addr show eth0 | grep inet</span><br><span class="line"><span class="comment"># 杀死旧隧道</span></span><br><span class="line">pkill -f <span class="string">&quot;ssh -N -f -R 7890&quot;</span></span><br><span class="line"><span class="comment"># 建新隧道</span></span><br><span class="line">ssh -N -f -R 9999:新IP:12345 root@云服务器IP</span><br></pre></td></tr></table></figure>
+<h3 id="52-502-bad-gateway-html-响应"><a class="markdownIt-Anchor" href="#52-502-bad-gateway-html-响应"></a> 5.2 502 Bad Gateway / HTML 响应</h3>
+<p><strong>原因</strong>：代理程序通过 Clash 访问 <a target="_blank" rel="noopener" href="http://packyapi.com">packyapi.com</a>，Clash 返回了拦截页。</p>
+<p><strong>解决</strong>：清除代理环境变量后重启：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">env</span> -u http_proxy -u https_proxy -u HTTP_PROXY -u HTTPS_PROXY -u all_proxy \</span><br><span class="line">  clawgate --mode=api ...</span><br></pre></td></tr></table></figure>
+<p>或使用 Python 代理（urllib 默认不走代理）。</p>
+<h3 id="53-404-not-found"><a class="markdownIt-Anchor" href="#53-404-not-found"></a> 5.3 404 Not Found</h3>
+<p><strong>原因</strong>：Claude Code 发送请求到 <code>/v1/messages?beta=true</code>（带 query 参数）。</p>
+<p><strong>解决</strong>：代理中 strip query string：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">base_path = <span class="variable language_">self</span>.path.split(<span class="string">&quot;?&quot;</span>)[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="54-模型不存在"><a class="markdownIt-Anchor" href="#54-模型不存在"></a> 5.4 模型不存在</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">There&#x27;s an issue with the selected model (xxx). It may not exist or you may not have access to it.</span><br></pre></td></tr></table></figure>
+<p><strong>原因</strong>：</p>
+<ul>
+<li><code>deepseek-chat</code> 在 packyapi 上不存在（正确的模型名是 <code>deepseek-v4-flash</code>）</li>
+<li>或云服务器上缺少 <code>ANTHROPIC_MODEL</code> 等环境变量，Claude Code 发送了标准 Anthropic 模型名（如 <code>claude-sonnet-4-20250514</code>）</li>
+</ul>
+<p><strong>解决</strong>：检查 packyapi 可用模型：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -s https://www.packyapi.com/v1/models \</span><br><span class="line">  -H <span class="string">&quot;Authorization: Bearer 你的Key&quot;</span></span><br></pre></td></tr></table></figure>
+<p>然后在云服务器上设置正确的模型环境变量。</p>
+<h3 id="55-ssh-隧道密码交互"><a class="markdownIt-Anchor" href="#55-ssh-隧道密码交互"></a> 5.5 SSH 隧道密码交互</h3>
+<p><strong>解决</strong>：安装 sshpass 或用 pexpect 脚本：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pexpect</span><br><span class="line">child = pexpect.spawn(<span class="string">&#x27;ssh -N -R 9999:本地IP:12345 root@云服务器IP&#x27;</span>, timeout=<span class="number">30</span>)</span><br><span class="line">child.expect(<span class="string">&#x27;password:&#x27;</span>)</span><br><span class="line">child.sendline(<span class="string">&#x27;你的密码&#x27;</span>)</span><br><span class="line">child.expect(pexpect.EOF)</span><br></pre></td></tr></table></figure>
+<h2 id="迁移到其他服务器"><a class="markdownIt-Anchor" href="#迁移到其他服务器"></a> 迁移到其他服务器</h2>
+<h3 id="在新服务器上的完整安装流程"><a class="markdownIt-Anchor" href="#在新服务器上的完整安装流程"></a> 在新服务器上的完整安装流程</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">apt install npm</span><br><span class="line"><span class="comment"># 1. 安装 Claude Code</span></span><br><span class="line">npm install -g @anthropic-ai/claude-code</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 配置环境变量</span></span><br><span class="line"><span class="built_in">cat</span> &gt;&gt; ~/.bashrc &lt;&lt; <span class="string">&#x27;EOF&#x27;</span></span><br><span class="line"><span class="built_in">export</span> ANTHROPIC_API_KEY=<span class="string">&quot;sk-placeholder&quot;</span></span><br><span class="line"><span class="built_in">export</span> ANTHROPIC_BASE_URL=<span class="string">&quot;http://127.0.0.1:9999&quot;</span></span><br><span class="line"><span class="built_in">export</span> ANTHROPIC_MODEL=<span class="string">&quot;deepseek-v4-flash&quot;</span></span><br><span class="line"><span class="built_in">export</span> ANTHROPIC_DEFAULT_HAIKU_MODEL=<span class="string">&quot;deepseek-v4-flash&quot;</span></span><br><span class="line"><span class="built_in">export</span> ANTHROPIC_DEFAULT_SONNET_MODEL=<span class="string">&quot;deepseek-v4-flash&quot;</span></span><br><span class="line"><span class="built_in">export</span> ANTHROPIC_DEFAULT_OPUS_MODEL=<span class="string">&quot;deepseek-v4-flash&quot;</span></span><br><span class="line"><span class="built_in">export</span> ANTHROPIC_REASONING_MODEL=<span class="string">&quot;deepseek-v4-flash&quot;</span></span><br><span class="line"><span class="built_in">export</span> http_proxy=http://127.0.0.1:7890</span><br><span class="line"><span class="built_in">export</span> https_proxy=http://127.0.0.1:7890</span><br><span class="line"><span class="built_in">export</span> NO_PROXY=127.0.0.1,localhost,::1</span><br><span class="line"><span class="built_in">export</span> no_proxy=127.0.0.1,localhost,::1</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 在本地机器建立 SSH 隧道（端口映射不变）</span></span><br><span class="line"><span class="comment"># 本地IP 换成新环境的 IP</span></span><br><span class="line">ssh -N -f \</span><br><span class="line">  -R 7890:172.27.230.190:7899 \</span><br><span class="line">  -R 9999:172.27.230.190:12345 \</span><br><span class="line">  root@slave</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 验证</span></span><br><span class="line">curl -s --noproxy <span class="string">&#x27;*&#x27;</span> http://127.0.0.1:9999/v1/messages \</span><br><span class="line">  -H <span class="string">&quot;x-api-key: x&quot;</span> \</span><br><span class="line">  -H <span class="string">&quot;anthropic-version: 2023-06-01&quot;</span> \</span><br><span class="line">  -H <span class="string">&quot;Content-Type: application/json&quot;</span> \</span><br><span class="line">  -d <span class="string">&#x27;&#123;&quot;model&quot;:&quot;deepseek-v4-flash&quot;,&quot;max_tokens&quot;:50,&quot;messages&quot;:[&#123;&quot;role&quot;:&quot;user&quot;,&quot;content&quot;:&quot;hi&quot;&#125;]&#125;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 5. 启动</span></span><br><span class="line">claude</span><br></pre></td></tr></table></figure>
+
+</article>
+<ol class="animated rollIn hannah-toc"><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-1"><a class="animated rollIn hannah-toc-link" href="#%E9%A2%84%E5%A4%87%E7%9F%A5%E8%AF%86"><span class="animated rollIn hannah-toc-text"> 预备知识</span></a><ol class="animated rollIn hannah-toc-child"><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-2"><a class="animated rollIn hannah-toc-link" href="#npm"><span class="animated rollIn hannah-toc-text"> npm</span></a><ol class="animated rollIn hannah-toc-child"><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-3"><a class="animated rollIn hannah-toc-link" href="#%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD"><span class="animated rollIn hannah-toc-text"> 核心功能</span></a><ol class="animated rollIn hannah-toc-child"><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-4"><a class="animated rollIn hannah-toc-link" href="#1-%E7%AE%A1%E7%90%86%E4%BE%9D%E8%B5%96%E5%8C%85"><span class="animated rollIn hannah-toc-text"> 1. 管理依赖包</span></a></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-4"><a class="animated rollIn hannah-toc-link" href="#2-%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86"><span class="animated rollIn hannah-toc-text"> 2. 版本管理</span></a></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-4"><a class="animated rollIn hannah-toc-link" href="#3-%E5%85%B1%E4%BA%AB%E4%BB%A3%E7%A0%81"><span class="animated rollIn hannah-toc-text"> 3. 共享代码</span></a></li></ol></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-3"><a class="animated rollIn hannah-toc-link" href="#%E4%B8%BB%E8%A6%81%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86"><span class="animated rollIn hannah-toc-text"> 主要组成部分</span></a></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-3"><a class="animated rollIn hannah-toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E7%A4%BA%E4%BE%8B"><span class="animated rollIn hannah-toc-text"> 常用命令示例</span></a></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-3"><a class="animated rollIn hannah-toc-link" href="#%E7%B1%BB%E4%BC%BC%E6%A6%82%E5%BF%B5%E7%B1%BB%E6%AF%94"><span class="animated rollIn hannah-toc-text"> 类似概念类比</span></a></li></ol></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-2"><a class="animated rollIn hannah-toc-link" href="#ssh-%E5%8F%8D%E5%90%91%E9%9A%A7%E9%81%93"><span class="animated rollIn hannah-toc-text"> SSH 反向隧道</span></a><ol class="animated rollIn hannah-toc-child"><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-3"><a class="animated rollIn hannah-toc-link" href="#%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="animated rollIn hannah-toc-text"> 工作原理</span></a></li></ol></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-2"><a class="animated rollIn hannah-toc-link" href="#socket-statistics"><span class="animated rollIn hannah-toc-text"> Socket Statistics</span></a><ol class="animated rollIn hannah-toc-child"><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-3"><a class="animated rollIn hannah-toc-link" href="#%E8%BE%93%E5%87%BA%E8%A7%A3%E8%AF%BB"><span class="animated rollIn hannah-toc-text"> 输出解读</span></a></li></ol></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-2"><a class="animated rollIn hannah-toc-link" href="#curl"><span class="animated rollIn hannah-toc-text"> curl</span></a><ol class="animated rollIn hannah-toc-child"><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-3"><a class="animated rollIn hannah-toc-link" href="#%E7%BB%BC%E5%90%88%E4%BD%BF%E7%94%A8"><span class="animated rollIn hannah-toc-text"> 综合使用</span></a><ol class="animated rollIn hannah-toc-child"><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-4"><a class="animated rollIn hannah-toc-link" href="#%E4%B8%BE%E4%BE%8B1"><span class="animated rollIn hannah-toc-text"> 举例1</span></a></li></ol></li></ol></li></ol></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-1"><a class="animated rollIn hannah-toc-link" href="#claude-code-%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%90%86%E9%83%A8%E7%BD%B2%E6%8C%87%E5%8D%97"><span class="animated rollIn hannah-toc-text"> Claude Code 远程代理部署指南</span></a><ol class="animated rollIn hannah-toc-child"><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-2"><a class="animated rollIn hannah-toc-link" href="#%E6%9E%B6%E6%9E%84%E6%80%BB%E8%A7%88"><span class="animated rollIn hannah-toc-text"> 架构总览</span></a></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-2"><a class="animated rollIn hannah-toc-link" href="#%E5%89%8D%E7%BD%AE%E6%9D%A1%E4%BB%B6"><span class="animated rollIn hannah-toc-text"> 前置条件</span></a></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-2"><a class="animated rollIn hannah-toc-link" href="#%E6%AD%A5%E9%AA%A4-1%E6%9C%AC%E5%9C%B0%E5%90%AF%E5%8A%A8%E4%BB%A3%E7%90%86"><span class="animated rollIn hannah-toc-text"> 步骤 1：本地启动代理</span></a><ol class="animated rollIn hannah-toc-child"><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-3"><a class="animated rollIn hannah-toc-link" href="#%E6%96%B9%E6%A1%88-a%E4%BD%BF%E7%94%A8-python-%E4%BB%A3%E7%90%86%E6%8E%A8%E8%8D%90%E6%9B%B4%E5%8F%AF%E6%8E%A7"><span class="animated rollIn hannah-toc-text"> 方案 A：使用 Python 代理（推荐，更可控）</span></a></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-3"><a class="animated rollIn hannah-toc-link" href="#%E6%96%B9%E6%A1%88-b%E4%BD%BF%E7%94%A8-clawgate"><span class="animated rollIn hannah-toc-text"> 方案 B：使用 clawgate</span></a></li></ol></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-2"><a class="animated rollIn hannah-toc-link" href="#%E6%AD%A5%E9%AA%A4-2%E5%BB%BA%E7%AB%8B-ssh-%E5%8F%8D%E5%90%91%E9%9A%A7%E9%81%93"><span class="animated rollIn hannah-toc-text"> 步骤 2：建立 SSH 反向隧道</span></a></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-2"><a class="animated rollIn hannah-toc-link" href="#%E6%AD%A5%E9%AA%A4-3%E5%9C%A8%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E6%B5%8B%E8%AF%95%E9%9A%A7%E9%81%93"><span class="animated rollIn hannah-toc-text"> 步骤 3：在云服务器上测试隧道</span></a></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-2"><a class="animated rollIn hannah-toc-link" href="#%E6%AD%A5%E9%AA%A4-4%E9%85%8D%E7%BD%AE%E5%B9%B6%E5%90%AF%E5%8A%A8-claude-code"><span class="animated rollIn hannah-toc-text"> 步骤 4：配置并启动 Claude Code</span></a><ol class="animated rollIn hannah-toc-child"><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-3"><a class="animated rollIn hannah-toc-link" href="#%E5%86%99%E5%85%A5-~bashrc%E6%8C%81%E4%B9%85%E5%8C%96"><span class="animated rollIn hannah-toc-text"> 写入 ~&#x2F;.bashrc（持久化）</span></a></li></ol></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-2"><a class="animated rollIn hannah-toc-link" href="#%E6%AD%A5%E9%AA%A4-5%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5"><span class="animated rollIn hannah-toc-text"> 步骤 5：常见问题排查</span></a><ol class="animated rollIn hannah-toc-child"><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-3"><a class="animated rollIn hannah-toc-link" href="#51-connection-reset-by-peer"><span class="animated rollIn hannah-toc-text"> 5.1 Connection reset by peer</span></a></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-3"><a class="animated rollIn hannah-toc-link" href="#52-502-bad-gateway-html-%E5%93%8D%E5%BA%94"><span class="animated rollIn hannah-toc-text"> 5.2 502 Bad Gateway &#x2F; HTML 响应</span></a></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-3"><a class="animated rollIn hannah-toc-link" href="#53-404-not-found"><span class="animated rollIn hannah-toc-text"> 5.3 404 Not Found</span></a></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-3"><a class="animated rollIn hannah-toc-link" href="#54-%E6%A8%A1%E5%9E%8B%E4%B8%8D%E5%AD%98%E5%9C%A8"><span class="animated rollIn hannah-toc-text"> 5.4 模型不存在</span></a></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-3"><a class="animated rollIn hannah-toc-link" href="#55-ssh-%E9%9A%A7%E9%81%93%E5%AF%86%E7%A0%81%E4%BA%A4%E4%BA%92"><span class="animated rollIn hannah-toc-text"> 5.5 SSH 隧道密码交互</span></a></li></ol></li><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-2"><a class="animated rollIn hannah-toc-link" href="#%E8%BF%81%E7%A7%BB%E5%88%B0%E5%85%B6%E4%BB%96%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="animated rollIn hannah-toc-text"> 迁移到其他服务器</span></a><ol class="animated rollIn hannah-toc-child"><li class="animated rollIn hannah-toc-item animated rollIn hannah-toc-level-3"><a class="animated rollIn hannah-toc-link" href="#%E5%9C%A8%E6%96%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84%E5%AE%8C%E6%95%B4%E5%AE%89%E8%A3%85%E6%B5%81%E7%A8%8B"><span class="animated rollIn hannah-toc-text"> 在新服务器上的完整安装流程</span></a></li></ol></li></ol></li></ol>
+<div class="animated bounceInDown paginations">
+    <div class="col-md-8 col-md-push-2 col-xs-12">
+        <nav>
+            
+            <span
+                class="page-content col-md-8 col-md-offset-2 col-xs-offset-4 col-xs-4 text-center">
+                
+            </span>
+            
+            <a href="/2026/05/31/tools/ccx/" class="next col-md-2 col-xs-4 text-right">Next &rarr;</a>
+            
+        </nav>
+        <div>
+            <div class="col-md-6 col-xs-6 text-left">
+                
+            </div>
+            <div class="col-md-6 col-xs-6 text-right">
+                
+                Ubuntu上快速切换claude code api
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!--end body-->
+            <!--begin comments-->
+            
+<div class="comments">
+    
+
+    
+    
+</div>
+
+
+            <!--end comments-->
+        </div>
+    </div>
+
+    <!--begin footer-->
+    <footer id="footer" class="footer animated fadeInUp hide">
+    <p><i class="copy">&copy;</i> 2026 <a href="https://dongliangnie.github.io">dongliangnie</a> All Right Reserved.</p>
+    <p>Powered by <a target="_blank" href="http://hexo.io" rel="external nofollow noopener">Hexo</a>. Theme by <a target="_blank" href="https://github.com/objectyan/hexo-theme-hannah" rel="external nofollow noopener">hannah</a></p>
+</footer>
+    <!--end footer-->
+
+    
+    <!-- scripts list from theme config.yml -->
+    
+    <script src="/js/hannah.js"></script>
+    
+    
+    <!--begin analytics-->
+    
+
+    <!--end analytics-->
+</body>
+<!--end body-->
+<!--begin canvas-nest-->
+<script>
+    var nesturl = "https://unpkg.com/canvas-nest.js/dist/canvas-nest.js";
+    var c = document.getElementsByTagName("body")[0] || document.body || document.documentElement;
+    var b = document.createElement("script");
+    b.setAttribute("type", "text/javascript");
+    b.setAttribute("src", nesturl);
+    b.setAttribute("color",
+        `${ Math.floor(Math.random()*256)},${ Math.floor(Math.random()*256)},${ Math.floor(Math.random()*256)}`);
+    b.setAttribute("opacity", Math.random());
+    b.setAttribute("count", parseInt((Math.random() * 500) || 99));
+    c.appendChild(b)
+</script>
+<!--end canvas-nest-->
+
+</html>
