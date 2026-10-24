@@ -1,0 +1,32 @@
+{% include base_path %}
+
+<div class="pub-entry">
+  {% if post.teaser %}
+  <div class="pub-entry__figure">
+    {% if post.paperurl %}<a href="{{ post.paperurl }}">{% endif %}
+      <img src="{{ post.teaser | prepend: '/images/' | prepend: base_path }}" alt="{{ post.title }}">
+    {% if post.paperurl %}</a>{% endif %}
+  </div>
+  {% endif %}
+
+  <div class="pub-entry__body">
+    <h2 class="pub-entry__title">{{ post.title }}</h2>
+
+    {% if post.authors %}
+    {% capture highlighted_author %}<strong>{{ site.author.name }}</strong>{% endcapture %}
+    <p class="pub-entry__authors">{{ post.authors | replace: site.author.name, highlighted_author }}</p>
+    {% endif %}
+
+    <p class="pub-entry__venue">
+      {{ post.venue }}{% if post.date %}, {{ post.date | date: "%Y" }}{% endif %}
+    </p>
+
+    {% if post.paperurl or post.codeurl or post.websiteurl %}
+    <p class="pub-entry__links">
+      {% if post.paperurl %}<a href="{{ post.paperurl }}"><i class="ai ai-arxiv" aria-hidden="true"></i> arXiv</a>{% endif %}
+      {% if post.codeurl %}<a href="{{ post.codeurl }}"><i class="fab fa-github" aria-hidden="true"></i> Code</a>{% endif %}
+      {% if post.websiteurl %}<a href="{{ post.websiteurl }}"><i class="fas fa-globe" aria-hidden="true"></i> Website</a>{% endif %}
+    </p>
+    {% endif %}
+  </div>
+</div>

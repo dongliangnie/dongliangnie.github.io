@@ -5,6 +5,7 @@
 #main {
   @include container;
   @include clearfix;
+  position: relative;
   margin-top: 2em;
   padding-left: 1em;
   padding-right: 1em;
@@ -398,4 +399,193 @@
   margin-bottom: 10px;
   font-size: $type-size-6;
   text-transform: uppercase;
+}
+
+
+/*
+   Education list
+   ========================================================================== */
+
+.edu-list {
+  margin: 1em 0 1.5em;
+}
+
+.edu-item {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.9rem 1.1rem;
+  border: 1px solid var(--global-border-color);
+  border-radius: $border-radius;
+  background-color: var(--global-bg-color);
+
+  & + & {
+    margin-top: 0.75rem;
+  }
+
+  @include breakpoint(max-width $small) {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+}
+
+.edu-item__logo {
+  flex: 0 0 auto;
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.edu-item__logo--shu {
+  width: 58px;
+  height: 58px;
+}
+
+.edu-item__body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.edu-item__school {
+  font-family: $sans-serif-narrow;
+  font-size: $type-size-5;
+  font-weight: bold;
+  line-height: 1.3;
+  color: var(--global-text-color);
+}
+
+.edu-item__degree {
+  font-size: $type-size-6;
+  color: var(--global-text-color-light);
+}
+
+.edu-item__period {
+  flex: 0 0 auto;
+  margin-left: auto;
+  font-size: $type-size-6;
+  color: var(--global-text-color-light);
+  white-space: nowrap;
+
+  @include breakpoint(max-width $small) {
+    width: 100%;
+    margin-left: 0;
+    padding-left: calc(48px + 1rem);
+  }
+}
+
+/*
+   Seminar hero
+   ========================================================================== */
+
+.seminar-hero {
+  margin-bottom: 2em;
+  padding-bottom: 1.25em;
+  border-bottom: 1px solid var(--global-border-color);
+
+  .page__title {
+    margin: 0.4em 0 0.75em;
+    font-size: $type-size-3;
+    line-height: 1.35;
+  }
+}
+
+.seminar-hero__eyebrow {
+  display: inline-block;
+  margin: 0;
+  padding: 0.2em 0.8em;
+  border-radius: 999px;
+  background-color: var(--global-code-background-color);
+  color: var(--global-base-color);
+  font-size: $type-size-6;
+  font-weight: bold;
+  letter-spacing: 0.03em;
+}
+
+.seminar-hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  font-size: $type-size-6;
+  color: var(--global-text-color-light);
+
+  span {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  i {
+    margin-right: 0.4em;
+    color: var(--global-base-color);
+  }
+}
+
+
+/*
+   PDF preview
+   ========================================================================== */
+
+.pdf-preview {
+  margin: 1.5em 0;
+  overflow: hidden;
+  border: 1px solid var(--global-border-color);
+  border-radius: $border-radius;
+  background-color: var(--global-bg-color);
+  box-shadow: $box-shadow;
+}
+
+.pdf-preview__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.6rem 0.9rem;
+  border-bottom: 1px solid var(--global-border-color);
+  background-color: var(--global-code-background-color);
+  font-size: $type-size-6;
+}
+
+.pdf-preview__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-weight: bold;
+  color: var(--global-text-color);
+
+  i {
+    color: var(--global-base-color);
+  }
+}
+
+.pdf-preview__actions {
+  display: flex;
+  gap: 1rem;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35em;
+    text-decoration: none;
+    white-space: nowrap;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  @include breakpoint(max-width $small) {
+    gap: 0.75rem;
+
+    .pdf-preview__text {
+      display: none;
+    }
+  }
+}
+
+.pdf-preview iframe {
+  display: block;
+  width: 100%;
+  height: min(85vh, 900px);
+  min-height: 480px;
+  border: 0;
+  background-color: #fff;
 }

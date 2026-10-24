@@ -1,6 +1,60 @@
 <!-- start custom footer snippets -->
 
 <!-- Support for MathJax -->
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  };
+</script>
 <script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@4.0.0/tex-mml-chtml.js"></script>
+
+<!-- Floating table of contents for blog posts -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var menu = document.getElementById('toc-menu');
+    var content = document.querySelector('.page__content');
+    if (!menu || !content) return;
+
+    var headings = content.querySelectorAll('h2[id], h3[id]');
+    if (!headings.length) {
+      var aside = document.getElementById('toc-floating');
+      if (aside) aside.style.display = 'none';
+      return;
+    }
+
+    var items = [];
+    headings.forEach(function (heading) {
+      var li = document.createElement('li');
+      li.className = 'toc__item toc__item--' + heading.tagName.toLowerCase();
+
+      var link = document.createElement('a');
+      link.href = '#' + heading.id;
+      link.textContent = heading.textContent;
+      li.appendChild(link);
+
+      menu.appendChild(li);
+      items.push({ heading: heading, link: link });
+    });
+
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          items.forEach(function (item) {
+            item.link.classList.toggle('is-active', item.heading === entry.target);
+          });
+        });
+      }, { rootMargin: '-80px 0px -70% 0px' });
+      items.forEach(function (item) { observer.observe(item.heading); });
+    }
+  });
+</script>
 
 <!-- end custom footer snippets -->

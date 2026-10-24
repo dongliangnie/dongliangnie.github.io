@@ -1,0 +1,36 @@
+{% include base_path %}
+
+{% if post.id %}
+  {% assign title = post.title | markdownify | remove: "<p>" | remove: "</p>" %}
+{% else %}
+  {% assign title = post.title %}
+{% endif %}
+
+<div class="post-entry">
+  {% if post.date %}
+  <div class="post-entry__date">
+    <span class="post-entry__day">{{ post.date | date: "%d" }}</span>
+    <span class="post-entry__month">{{ post.date | date: "%b %Y" }}</span>
+  </div>
+  {% endif %}
+
+  <div class="post-entry__body">
+    <h2 class="post-entry__title">
+      <a href="{{ base_path }}{{ post.url }}" rel="permalink">{{ title }}</a>
+    </h2>
+
+    {% if post.categories or post.tags or post.read_time %}
+    <p class="post-entry__meta">
+      {% for category in post.categories %}<span class="post-entry__tag">{{ category }}</span>{% endfor %}
+      {% if post.tags %}<span><i class="fas fa-fw fa-tags" aria-hidden="true"></i>{{ post.tags | join: " · " }}</span>{% endif %}
+      {% if post.read_time %}<span><i class="fas fa-fw fa-clock" aria-hidden="true"></i>{% include read-time.html %}</span>{% endif %}
+    </p>
+    {% endif %}
+
+    {% if post.excerpt %}<p class="post-entry__excerpt">{{ post.excerpt | markdownify | strip_html | strip }}</p>{% endif %}
+
+    <a class="post-entry__more" href="{{ base_path }}{{ post.url }}" rel="permalink">
+      阅读全文 <i class="fas fa-arrow-right" aria-hidden="true"></i>
+    </a>
+  </div>
+</div>

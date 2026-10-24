@@ -137,6 +137,59 @@
 }
 
 /*
+   Floating table of contents (blog posts)
+   ========================================================================== */
+
+.toc-floating {
+  display: none;
+
+  @include breakpoint($large) {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 9rem;
+    z-index: 10;
+  }
+
+  @include breakpoint($x-large) {
+    width: 12rem;
+  }
+
+  .toc {
+    position: sticky;
+    top: 5rem;
+    max-height: calc(100vh - 6rem);
+    overflow-y: auto;
+    padding: 0.75em;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+
+  .toc__menu {
+    font-size: $type-size-7;
+
+    a {
+      padding: 0.25rem 0;
+      line-height: 1.4;
+      overflow-wrap: anywhere;
+
+      &.is-active {
+        color: var(--global-link-color);
+        font-weight: bold;
+      }
+    }
+
+    .toc__item--h3 a {
+      padding-left: 0.75rem;
+      font-weight: normal;
+    }
+  }
+}
+
+
+/*
    Author profile and links
    ========================================================================== */
 
