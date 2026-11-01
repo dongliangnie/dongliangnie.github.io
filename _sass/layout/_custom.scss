@@ -643,27 +643,94 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .edu-item {
-  padding: 1rem 1.15rem;
+  padding: 0.85rem 1.05rem;
+  gap: 1rem;
 }
 
+/* The two emblems have very different proportions: Fudan's is a dense round
+   seal that fills its canvas, SHU's a thin tall oval that only fills 78% of the
+   width. Sized to the same height the SHU mark therefore reads lighter, so both
+   sit on an identical tile and the marks are matched by optical area instead. */
 .edu-item__logo {
-  width: 50px;
-  height: 50px;
-  padding: 4px;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
   border: 1px solid var(--dln-border);
-  border-radius: 50%;
+  border-radius: var(--dln-radius-lg);
   background: #fff;
+  transition: border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.edu-item:hover .edu-item__logo {
+  border-color: var(--dln-border-strong);
+  box-shadow: var(--dln-shadow-xs);
+}
+
+/* `.page__content img` sets height:auto at a higher specificity, so the marks
+   have to be scoped under it to win. */
+.page__content .edu-item__mark {
+  display: block;
+  width: auto;
+  height: 42px;
+  max-width: 100%;
+  border-radius: 0;
+  box-shadow: none;
   object-fit: contain;
 }
 
-.edu-item__school {
-  font-size: 0.98rem;
-  letter-spacing: -0.008em;
+.page__content .edu-item__mark--shu {
+  height: 48px;
 }
 
-.edu-item__degree,
+.edu-item__school {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.012em;
+  line-height: 1.35;
+  color: var(--dln-heading);
+}
+
+.edu-item__degree {
+  margin-top: 0.1rem;
+  font-size: 0.8rem;
+  color: var(--dln-text-soft);
+}
+
 .edu-item__period {
-  font-size: 0.78rem;
+  flex: 0 0 auto;
+  margin-left: auto;
+  padding: 0.22em 0.7em;
+  border: 1px solid var(--dln-border);
+  border-radius: 999px;
+  background: var(--dln-surface-soft);
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.005em;
+  color: var(--dln-text-soft);
+  white-space: nowrap;
+}
+
+.edu-item__period-note {
+  margin-left: 0.3em;
+  font-size: 0.9em;
+  opacity: 0.7;
+}
+
+@include breakpoint(max-width $small) {
+  .edu-item {
+    row-gap: 0.2rem;
+  }
+
+  .edu-item__period {
+    width: 100%;
+    margin-left: 0;
+    padding: 0 0 0 calc(60px + 1rem);
+    border: 0;
+    background: transparent;
+  }
 }
 
 .pub-entry {

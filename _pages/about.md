@@ -33,7 +33,9 @@ redirect_from:
 
 <div class="edu-list">
   <div class="edu-item">
-    <img class="edu-item__logo" src="{{ '/images/shu-emblem.png' | relative_url }}" alt="Shanghai University emblem">
+    <div class="edu-item__logo">
+      <img class="edu-item__mark edu-item__mark--shu" src="{{ '/images/shu-emblem.png' | relative_url }}" alt="Shanghai University emblem">
+    </div>
     <div class="edu-item__body">
       <div class="edu-item__school">Shanghai University</div>
       <div class="edu-item__degree">B.Eng. in Computer Science and Technology</div>
@@ -42,12 +44,14 @@ redirect_from:
   </div>
 
   <div class="edu-item">
-    <img class="edu-item__logo" src="{{ '/images/fudan-emblem.png' | relative_url }}" alt="Fudan University emblem">
+    <div class="edu-item__logo">
+      <img class="edu-item__mark" src="{{ '/images/fudan-emblem.png' | relative_url }}" alt="Fudan University emblem">
+    </div>
     <div class="edu-item__body">
       <div class="edu-item__school">Fudan University</div>
-      <div class="edu-item__degree">Ph.D. in Computer Science</div>
+      <div class="edu-item__degree">Ph.D. in Computer Science and Technology</div>
     </div>
-    <div class="edu-item__period">2027 – 2032 (expected)</div>
+    <div class="edu-item__period">2027 – 2032 <span class="edu-item__period-note">expected</span></div>
   </div>
 </div>
 
