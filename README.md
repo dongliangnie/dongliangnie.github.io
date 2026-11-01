@@ -9,7 +9,7 @@ Personal academic website built with [Academic Pages](https://academicpages.gith
 在 `_posts/` 下新建文件，文件名格式为 `YYYY-MM-DD-slug.md`，例如：
 
 ```text
-_posts/2026-10-23-natural-gradient-descent-fisher-information.md
+_posts/2026-11-01-example-post.md
 ```
 
 ### 2. 添加 Front Matter
@@ -83,7 +83,7 @@ git push origin master
 https://dongliangnie.github.io/<category>/<slug>/
 ```
 
-### 参见问题
+### 常见问题
 执行以下命令启动 Jekyll 网站时，Docker 报错：
 ~~~bash
 docker compose run --rm --service-ports jekyll-site \
@@ -109,3 +109,22 @@ docker stop <容器ID>
 
 - 草稿可先放在 `_drafts/`，本地预览时加 `--drafts` 参数
 - 其他内容集合：`_publications/`、`_talks/`、`_teaching/`、`_portfolio/`
+
+## 样式定制
+
+站点的视觉样式分两层，改样式时按需选择文件：
+
+| 文件 | 作用 |
+| --- | --- |
+| `_sass/theme/_default_light.scss` | 亮色主题的调色板与全局 CSS 变量（`--global-*`） |
+| `_sass/theme/_default_dark.scss` | 暗色主题的调色板与全局 CSS 变量 |
+| `_sass/layout/_custom.scss` | 自定义视觉层，**最后加载**，负责排版、卡片、导航、hero 等细节 |
+
+`_sass/layout/_custom.scss` 顶部定义了一组 `--dln-*` 设计变量（强调色、圆角、阴影、字体栈），
+需要调整整体风格时优先改这些变量，而不是逐个选择器去改。
+
+首页顶部的大标题区块由 `_pages/about.md` 里的 `<div class="hero">` 提供，
+配合 front matter 的 `hide_title: true` 隐藏布局自动生成的标题，避免重复。
+
+> 注意：GitHub Pages 使用较老的 Sass 编译链，新增样式请避免 `@use`、`math.div()` 等新语法。
+
