@@ -187,13 +187,51 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: var(--dln-shadow-sm);
 }
 
+/* ==========================================================================
+   Two-column shell
+   --------------------------------------------------------------------------
+   The stock theme positions the author column with susy spans/floats and pads
+   the article with `prefix(0.5 of 12)`, which makes the gutter between the
+   sidebar and the text vary with the viewport (and get noticeably wide on
+   narrow desktops). Below 1024px we keep the stock stacked layout; from 1024px
+   up the pair becomes an explicit flex row with a fixed sidebar and a fixed
+   gutter, so the spacing is the same at every width.
+   ========================================================================== */
+
 @media screen and (min-width: 1024px) {
+  #main {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2.5rem;
+  }
+
   .sidebar.sticky {
+    position: sticky;
     top: calc(#{$masthead-height} + 1.5rem);
+    flex: 0 0 208px;
+    width: 208px;
+    max-width: 208px;
     height: auto;
     max-height: calc(100vh - #{$masthead-height} - 3rem);
-    padding-top: 1.15rem;
+    /* the theme's main.js writes an inline padding-top (masthead offset);
+       sticky positioning already handles that offset for us */
+    padding: 1.15rem 1.05rem 1.2rem !important;
     overflow-y: auto;
+    margin: 0;
+  }
+
+  .page,
+  .archive {
+    flex: 1 1 auto;
+    float: none;
+    width: auto;
+    min-width: 0;
+    max-width: 50rem;
+    margin: 0;
+    /* drop susy's prefix/suffix padding so the text aligns to the gutter */
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 
