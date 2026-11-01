@@ -33,7 +33,7 @@ redirect_from:
 
 <div class="edu-list">
   <div class="edu-item">
-    <img class="edu-item__logo edu-item__logo--shu" src="{{ '/images/shu-emblem.png' | relative_url }}" alt="Shanghai University emblem">
+    <img class="edu-item__logo" src="{{ '/images/shu-emblem.png' | relative_url }}" alt="Shanghai University emblem">
     <div class="edu-item__body">
       <div class="edu-item__school">Shanghai University</div>
       <div class="edu-item__degree">B.Eng. in Computer Science and Technology</div>

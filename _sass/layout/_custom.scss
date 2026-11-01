@@ -647,17 +647,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .edu-item__logo {
-  width: 44px;
-  height: 44px;
-  padding: 3px;
+  width: 50px;
+  height: 50px;
+  padding: 4px;
   border: 1px solid var(--dln-border);
   border-radius: 50%;
   background: #fff;
-}
-
-.edu-item__logo--shu {
-  width: 48px;
-  height: 48px;
+  object-fit: contain;
 }
 
 .edu-item__school {
